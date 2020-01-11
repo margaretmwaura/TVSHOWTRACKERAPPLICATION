@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 import VueRouter from 'vue-router';
-
+import Signup from "./components/Signup.vue";
 
 import Notifications from 'vue-notification'
 Vue.use(Notifications);
@@ -13,6 +13,12 @@ import axios from 'axios';
 
 
 const routes = [
+  {
+    name : 'Signup',
+    path: '/signup',
+    component: Signup,
+
+  },
 ];
 const router = new VueRouter({
   mode: 'history',
@@ -21,6 +27,7 @@ const router = new VueRouter({
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app');
 
