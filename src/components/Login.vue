@@ -4,11 +4,6 @@
             <div class="grid-container">
                 <div class="grid-x grid-padding-x">
                     <div class="cell medium-12 large-12 small-12">
-                        <label>Name
-                            <input type="text" v-model="firstname">
-                        </label>
-                    </div>
-                    <div class="cell medium-12 large-12 small-12">
                         <label>Email
                             <input type="text" v-model="email">
                         </label>
@@ -19,7 +14,7 @@
                         </label>
                     </div>
                     <div class="cell medium-12 large-12 small-12">
-                        <button>Create account</button>
+                        <button>Login user</button>
                     </div>
                 </div>
             </div>
@@ -33,7 +28,6 @@
     export default {
         data() {
             return {
-                firstname : " ",
                 email : " ",
                 password: " ",
             }
@@ -41,8 +35,8 @@
         computed : mapState(["token"]),
         methods: {
             create() {
-                console.log("The data i am passing : " + this.firstname + this.email + this.password);
-                this.$store.dispatch('signingupusers',[this.firstname, this.email,this.password]);
+                console.log("The data i am passing : " + this.email , this.password);
+                this.$store.dispatch('loginusers',[this.email,this.password]);
             }
         },
 

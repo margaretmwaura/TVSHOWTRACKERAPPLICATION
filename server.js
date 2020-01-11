@@ -15,7 +15,10 @@ const port = process.env.PORT || 4000;
 
 app.listen(port, () => console.log('Hello world app listening on port ${port}!'));
 
-let allusers = [];
+let fileread = userfile.readFileSync('userdata.json');
+let allusers = JSON.parse(fileread);
+
+console.log("This are all the users " + allusers);
 app.post('/signup', (req, res) =>
 {
     const userdits = req.body;
@@ -56,6 +59,54 @@ app.post('/signup', (req, res) =>
         res.status(400).send("unable to save to database");
 
     }
+});
+
+app.post('/login', (req, res) =>
+{
+    const userdits = req.body;
+    let userfromnet = userdits[1];
+    console.log(userfromnet[0]);
+    console.log(userfromnet[1]);
+
+    let flag = 0;
+    let user = ' ';
+   // allusers.forEach( function (item)
+
+   for(let i = 0 ; i<allusers.length ; i++)
+    {
+        let storedemail = allusers[i].email;
+        let email = userfromnet[0];
+        console.log("Within the loop " + email + "and the comparing one " + storedemail);
+        if(storedemail === email)
+        {
+            user = allusers[i];
+            console.log("User exists");
+            flag = 1;
+            break;
+        }
+        else
+        {
+            console.log("User doesnt exists");
+            console.log(email);
+        }
+
+
+    };
+    console.log("You exists value  and the value of the flag " + flag);
+
+   if(flag === 1)
+   {
+       jwt.sign({user},'secretkey' , (error,token)=> {
+           console.log("Key gotten");
+           console.log(token);
+           if(error)
+           {
+               console.log("There was an erro while trying to generate key " + error);
+           }
+           res.status(200).json({token: token});
+       });
+   }
+
 });
 function verifyToken(req,res,next)
 {

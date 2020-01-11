@@ -11,6 +11,8 @@ export default new Vuex.Store({
         token : ' ',
         signupresponse : ' ',
         signupfailure : ' ',
+        loginresponse : ' ',
+        loginfailure : ' ',
     },
     mutations: {
         createuser(firstname ,lastname ,password) {
@@ -29,6 +31,26 @@ export default new Vuex.Store({
                 })
 
         },
+        loginusermut(email , password) {
+            axios
+                .post('http://localhost:4000/login',[email,password])
+                .then(response => {
+                    var code = response.status;
+                    if(code === 200)
+                    {
+                        this.state.token = response.data.token;
+                        this.state.loginresponse = response.status;
+                    }
+                    else
+                    {
+                        this.state.loginfailure = "Error";
+                    }
+                })
+                .catch(error => {
+                    this.state.loginfailure = "error";
+                })
+
+        },
 
     },
         getters:
@@ -41,6 +63,9 @@ export default new Vuex.Store({
             {
                 signingupusers({commit}, firstname , lastname , password) {
                     commit('createuser',firstname,lastname,password);
+                },
+                loginusers({commit}, email, password) {
+                    commit('loginusermut',email,password);
                 },
             },
 
