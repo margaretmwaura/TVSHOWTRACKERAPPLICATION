@@ -108,6 +108,25 @@ app.post('/login', (req, res) =>
    }
 
 });
+app.post('/addmovie', (req, res) =>
+{
+    const movie = req.body;
+    let moviedata = movie[1];
+    console.log(moviedata[0]);
+    console.log(moviedata[1]);
+    console.log(moviedata[2]);
+    console.log(moviedata[3]);
+    console.log(moviedata[4]);
+
+
+    let userob = new user(userfromnet[0] , userfromnet[1] , userfromnet[2]);
+    allusers.push(userob);
+    console.log("This is the created user : " + userob.display());
+
+});
+
+
+
 function verifyToken(req,res,next)
 {
 
