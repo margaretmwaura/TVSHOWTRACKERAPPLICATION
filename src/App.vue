@@ -9,8 +9,8 @@
             </div>
 
         </div>
-<!--        <router-view></router-view>-->
-<!--        <notifications group="foo" />-->
+        <router-view></router-view>
+        <notifications group="foo" ></notifications>
     </div>
 </template>
 

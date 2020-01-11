@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 import VueRouter from 'vue-router';
+import store from "../store";
 import Signup from "./components/Signup.vue";
 
 import Notifications from 'vue-notification'
