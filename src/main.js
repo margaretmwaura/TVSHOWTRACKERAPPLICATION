@@ -15,8 +15,8 @@ import axios from 'axios';
 
 const routes = [
   {
-    name : 'Signup',
-    path: '/signup',
+    name : 'Sign',
+    path: '/sign',
     component: Signup,
 
   },

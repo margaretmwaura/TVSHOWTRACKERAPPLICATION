@@ -7,14 +7,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 
-    strict: true,
     state: {
         token : ' ',
         signupresponse : ' ',
         signupfailure : ' ',
     },
     mutations: {
-
         createuser(firstname ,lastname ,password) {
             axios
                 .post('http://localhost:4000/signup',[firstname,lastname,password])
@@ -42,7 +40,7 @@ export default new Vuex.Store({
         actions:
             {
                 signingupusers({commit}, firstname , lastname , password) {
-                    commit('createuser', firstname,lastname,password);
+                    commit('createuser',firstname,lastname,password);
                 },
             },
 

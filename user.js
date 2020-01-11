@@ -1,14 +1,13 @@
 module.exports = class user
 {
-    constructor(userId , id, title, body) {
-        this.userId = userId;
-        this.id = id;
-        this.title = title;
-        this.body = body;
+    constructor(name, email,password) {
+        this.name = name;
+        this.email = email;
+        this.password = password
 
     }
 
     display() {
-        console.log(this.userId + " " + this.id + " " + this.body + " " +  this.title);
+        console.log(this.email + " " + this.email + " " + this.password);
     }
 };

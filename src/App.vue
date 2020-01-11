@@ -4,7 +4,7 @@
             <div id="app_rou_inner">
                 <router-link to="/show" id="thing">Movies</router-link>
                 <router-link to="/create" id="thingt">Create</router-link>
-                <router-link to="/signup" id="thingtt">Signup</router-link>
+                <router-link to="/sign" id="thingtt">Signup</router-link>
                 <router-link to="/Login" id="thingttt">Login</router-link>
             </div>
 
