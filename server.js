@@ -181,8 +181,10 @@ app.post('/moviedits',verifyToken, (req, res) =>
                 }
                 else
                 {
-                    console.log("There was no error encountereed we are all set")
-                    res.status(200).json({movie : newmovie});
+                    console.log("There was no error encountereed we are all set");
+                    var myJson = JSON.stringify(allmovies);
+                    res.status(200).json({param : myJson});
+
                 }
             }
     //     }

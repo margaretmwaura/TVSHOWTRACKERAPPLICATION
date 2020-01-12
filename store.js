@@ -9,6 +9,7 @@ export default new Vuex.Store({
 
     state: {
         token : ' ',
+        movies : [],
         signupresponse : ' ',
         signupfailure : ' ',
         loginresponse : ' ',
@@ -65,11 +66,14 @@ export default new Vuex.Store({
                     var code = response.status;
                     if(code === 200)
                     {
-                        this.state.signupresponse = response.status;
+                        this.state.createresponse = response.status;
+                        console.log("Creating movies was a success + the response " + response.data.param);
+                        this.state.movies = [];
+                        this.state.movies.push(response.data.param);
                     }
                 })
                 .catch(error => {
-                    this.state.signupfailure = "error";
+                    this.state.createfailure = "error";
                 })
         }
 
