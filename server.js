@@ -7,8 +7,8 @@ const express = require('express'),
 
 const user = require('./user');
 const movie = require('./movie');
+const webpush = require('web-push');
 let userfile = require('fs');
-
 const app = express();
 
 app.use(express.static('public'));
@@ -49,6 +49,12 @@ var mailOptions = {
     subject: 'Publishing your movie',
     text: `Your are getting this email because you choose to publish your movie`
 };
+
+const publicVapidKey = 'BMtwc-UhhkFA3TnKpx64d5FS6mzBl74aMXi7pso8tXIzQOSkdrpbtIx5QNqCTgfJ_ek8TvgIqXeM2BMLA1mDwg8';
+const privateVapidKey = 'fOVBRtB538aA7zemMRK8sakAxYaYB0z1mf-jKsMQ5no';
+
+webpush.setVapidDetails('mailto:mwauramargaret1@gmail.com',publicVapidKey,privateVapidKey);
+
 app.listen(port, () => console.log('Hello world app listening on port ${port}!'));
 
 let fileread = userfile.readFileSync('userdata.json');
@@ -213,7 +219,16 @@ app.post('/moviedits',verifyToken, (req, res) =>
 
 });
 
+//subsribe route
+app.post('/subscribe' , (req,res) => {
 
+    const subscription = req.body;
+
+    //201 status
+    res.status(201).json({});
+    const payload = JSON.stringify({title : 'push tests'});
+    webpush.sendNotification(subscription,payload).catch(error => console.error());
+});
 
 function verifyToken(req,res,next)
 {
