@@ -234,6 +234,7 @@ app.get('/allmovies',(req,res) =>
 {
     if(allmovies !== null)
     {
+        console.log(allmovies);
         var myJson = JSON.stringify(allmovies);
         res.status(200).json({param : myJson});
     }

@@ -1,8 +1,10 @@
 <template>
     <div id="app">
-        <li v-for="item in movie" :key="item.id">
-            <Movie :movie="item"> </Movie>
-        </li>
+        <ol v-for="item in movies" :key="item.moviename">
+            <li v-for="sing in item":key="item.id">
+            <Movie :movie="sing">{{item}}</Movie>
+           </li>
+        </ol>
     </div>
 </template>
 
@@ -16,9 +18,10 @@
         },
         data() {
             return {
+
             }
         },
-        computed : mapState(["movie","token"]),
+        computed : mapState(["movies","token"]),
         mounted() {
             this.$store.dispatch('getAllMovies');
         }

@@ -86,9 +86,11 @@ export default new Vuex.Store({
                     var code = response.status;
                     if(code === 200)
                     {
-                        console.log("Creating movies was a success + the response " + response.data.param);
+                        console.log("Getting movies was a success + the response " + response.data.param);
+                        let passed = JSON.parse(response.data.param);
+                        console.log("This is the passed data " + passed);
                         this.state.movies = [];
-                        this.state.movies.push(response.data.param);
+                        this.state.movies.push(passed);
                     }
                 })
                 .catch(error =>
