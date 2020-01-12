@@ -53,25 +53,8 @@ export default new Vuex.Store({
                 })
 
         },
-        createmoviemut(movieimage, moviename ,moviecast , movieplot , moviegenre) {
-            axios
-                .post('http://localhost:4000/addmovie',[movieimage , moviename , moviecast , movieplot , moviegenre])
-                .then(response => {
-                    var code = response.status;
-                    if(code === 200)
-                    {
-                        this.state.createresponse = response.status;
-                    }
-                    else
-                    {
-                        this.state.createfailure = "Error";
-                    }
-                })
-                .catch(error => {
-                    this.state.createfailure = "error";
-                })
+        createmoviemut(movieimage) {}
 
-        },
 
     },
         getters:
@@ -88,8 +71,9 @@ export default new Vuex.Store({
                 loginusers({commit}, email, password) {
                     commit('loginusermut',email,password);
                 },
-                createmovie({commit}, movieimage, moviename ,moviecast , movieplot , moviegenre) {
-                    commit('createmoviemut',movieimage, moviename ,moviecast , movieplot , moviegenre);
+                createmovie({commit}, movieimage)
+                {
+                    commit('createmoviemut',movieimage);
                 },
             },
 

@@ -7,10 +7,31 @@ const express = require('express'),
 
 const user = require('./user');
 let userfile = require('fs');
+
 const app = express();
+
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(cors());
+
+
+const multer = require('multer');
+
+
+const storage = multer.diskStorage({
+
+    destination : function (req , file , cb) {
+
+        cb(null , './public/images');
+
+    },
+    filename : function (req , file , cb) {
+
+        cb(null , new Date().toISOString() + file.originalname )
+    }
+});
+
+const upload = multer({storage: storage});
 const port = process.env.PORT || 4000;
 
 app.listen(port, () => console.log('Hello world app listening on port ${port}!'));
@@ -65,6 +86,7 @@ app.post('/login', (req, res) =>
 {
     const userdits = req.body;
     let userfromnet = userdits[1];
+    console.log(userfromnet);
     console.log(userfromnet[0]);
     console.log(userfromnet[1]);
 
@@ -108,20 +130,17 @@ app.post('/login', (req, res) =>
    }
 
 });
-app.post('/addmovie', (req, res) =>
+app.post('/addmovie',upload.single('image'), (req, res) =>
 {
+    console.log(req.file);
     const movie = req.body;
-    let moviedata = movie[1];
-    console.log(moviedata[0]);
-    console.log(moviedata[1]);
-    console.log(moviedata[2]);
-    console.log(moviedata[3]);
-    console.log(moviedata[4]);
-
-
-    let userob = new user(userfromnet[0] , userfromnet[1] , userfromnet[2]);
-    allusers.push(userob);
-    console.log("This is the created user : " + userob.display());
+    // console.log(movie);
+    // let moviedata = movie[1];
+    // console.log(moviedata);
+    // console.log(moviedata[0]);
+    // console.log(moviedata[1]);
+    // console.log(moviedata[2]);
+    // console.log(moviedata[3]);
 
 });
 
