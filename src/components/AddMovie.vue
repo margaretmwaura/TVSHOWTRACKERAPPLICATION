@@ -6,6 +6,21 @@
                 <div class="grid-container">
                     <div class="grid-x grid-padding-x">
                         <div class="cell medium-12 large-12 small-12">
+                            <label>Movie Image
+                                <input type="file" @change="onFileSelected">
+                            </label>
+                        </div>
+                        <div class="cell medium-12 large-12 small-12">
+                            <button>Upload image</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <form v-on:submit.prevent="uploadMovie">
+                <div class="grid-container">
+                    <div class="grid-x grid-padding-x">
+                        <div class="cell medium-12 large-12 small-12">
                             <label>Movie Name
                                 <input type="text" v-model="moviename">
                             </label>
@@ -21,11 +36,6 @@
                             </label>
                         </div>
                         <div class="cell medium-12 large-12 small-12">
-                            <label>Movie Image
-                                <input type="file" @change="onFileSelected">
-                            </label>
-                        </div>
-                        <div class="cell medium-12 large-12 small-12">
                             <label>Movie Plot
                                 <input type="text" v-model="movieplot">
                             </label>
@@ -36,7 +46,6 @@
                     </div>
                 </div>
             </form>
-
 
         </div>
 
@@ -54,7 +63,8 @@
                 moviecast : " ",
                 movieplot : " ",
                 moviegenre : " ",
-                movieimage : " "
+                movieimage : " ",
+                movieimagesres : " "
             }
         },
         computed : mapState(["token"]),
@@ -74,7 +84,9 @@
                         var code = response.status;
                         if(code === 200)
                         {
-                            console.log("The response " + response.data)
+                            console.log("The response " + response.data);
+                            this.movieimagesres = response.data;
+                            console.log("This is the image name stored " + this.movieimagesres)
                         }
                         else
                         {
@@ -90,6 +102,11 @@
                 console.log(event);
                 this.movieimage = event.target.files[0];
                 console.log(this.movieimage)
+            },
+            uploadMovie()
+            {
+                this.$store.dispatch('createmovie',[this.moviename, this.moviecast,this.movieplot,this.moviegenre,this.movieimagesres]);
+
             }
         },
 

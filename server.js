@@ -6,6 +6,7 @@ const express = require('express'),
     jwt = require('jsonwebtoken');
 
 const user = require('./user');
+const movie = require('./movie');
 let userfile = require('fs');
 
 const app = express();
@@ -38,6 +39,9 @@ app.listen(port, () => console.log('Hello world app listening on port ${port}!')
 
 let fileread = userfile.readFileSync('userdata.json');
 let allusers = JSON.parse(fileread);
+
+let filemovie = userfile.readFileSync('moviedata.json');
+let allmovies = JSON.parse(filemovie);
 
 console.log("This are all the users " + allusers);
 app.post('/signup', (req, res) =>
@@ -143,6 +147,46 @@ app.post('/addmovie',upload.single('image'), (req, res) =>
     {
         req.status(403).json({error:error});
     }
+
+});
+app.post('/moviedits',verifyToken, (req, res) =>
+{
+    const moviedits = req.body;
+    let movied = moviedits[1];
+    console.log(movied[0]);
+    console.log(movied[1]);
+    console.log(movied[2]);
+    console.log(movied[3]);
+    console.log(movied[4].file);
+    let newmovie = new movie(movied[0] , movied[1] , movied[2] , movied[3] , movied[4].file);
+    allmovies.push(newmovie);
+
+    jwt.verify(req.token,'secretkey',(err,auth) =>
+    {
+        console.log("This is the token " + req.token);
+        if(err)
+        {
+            res.sendStatus(403);
+            console.log("There was an error");
+        }
+        else {
+            let datastr = JSON.stringify(allmovies , null , 2);
+            userfile.writeFile('moviedata.json' , datastr , finished);
+            function finished(error)
+            {
+                if(error)
+                {
+                    res.sendStatus(403);
+                    console.log("There was an error , no data added to the file");
+                }
+                else
+                {
+                    console.log("There was no error encountereed we are all set")
+                    res.status(200).json({movie : newmovie});
+                }
+            }
+        }
+    });
 
 });
 

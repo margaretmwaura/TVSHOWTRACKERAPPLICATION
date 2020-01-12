@@ -53,9 +53,24 @@ export default new Vuex.Store({
                 })
 
         },
-        createmoviemut(moviename, moviegenre,moviecast,movieplot)
+        createmoviemut(moviename, moviegenre,moviecast,movieplot,movieimage)
         {
-
+            axios
+                .post('http://localhost:4000/moviedits',[moviename, moviegenre,moviecast,movieplot,movieimage],{
+                    headers: {
+                        'Authorization': 'Bearer ' + this.state.name
+                    }
+                })
+                .then(response => {
+                    var code = response.status;
+                    if(code === 200)
+                    {
+                        this.state.signupresponse = response.status;
+                    }
+                })
+                .catch(error => {
+                    this.state.signupfailure = "error";
+                })
         }
 
 
@@ -74,9 +89,9 @@ export default new Vuex.Store({
                 loginusers({commit}, email, password) {
                     commit('loginusermut',email,password);
                 },
-                createmovie({commit}, moviename, moviegenre,moviecast,movieplot)
+                createmovie({commit}, moviename, moviegenre,moviecast,movieplot,movieimage)
                 {
-                    commit('createmoviemut',moviename, moviegenre,moviecast,movieplot);
+                    commit('createmoviemut',moviename, moviegenre,moviecast,movieplot,movieimage);
                 },
             },
 
