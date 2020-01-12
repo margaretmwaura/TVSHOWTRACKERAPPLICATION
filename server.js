@@ -15,10 +15,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(cors());
 
-
 const multer = require('multer');
-
-
 const storage = multer.diskStorage({
 
     destination : function (req , file , cb) {
@@ -35,6 +32,23 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage});
 const port = process.env.PORT || 4000;
 
+//Email configuration
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'mwauramargaret1@gmail.com',
+        pass: 'Aswift07'
+    }
+});
+
+var mailOptions = {
+    from: 'mwauramargaret1@gmail.com',
+    to: 'mwauramargaret1@gmail.com',
+    subject: 'Publishing your movie',
+    text: `Your are getting this email because you choose to publish your movie`
+};
 app.listen(port, () => console.log('Hello world app listening on port ${port}!'));
 
 let fileread = userfile.readFileSync('userdata.json');
@@ -181,6 +195,13 @@ app.post('/moviedits',verifyToken, (req, res) =>
                 }
                 else
                 {
+                    transporter.sendMail(mailOptions, function(error, info){
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log('Email sent: ' + info.response);
+                        }
+                    });
                     console.log("There was no error encountereed we are all set");
                     var myJson = JSON.stringify(allmovies);
                     res.status(200).json({param : myJson});
