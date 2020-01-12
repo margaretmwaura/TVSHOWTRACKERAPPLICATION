@@ -74,15 +74,14 @@
                         var code = response.status;
                         if(code === 200)
                         {
-                            this.state.createresponse = response.status;
+                            console.log("The response " + response.data)
                         }
                         else
                         {
-                            this.state.createfailure = "Error";
+                            console.log("The response " + response.data)
                         }
                     })
                     .catch(error => {
-                        this.state.createfailure = "error";
                     })
 
             },

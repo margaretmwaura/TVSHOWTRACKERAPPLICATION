@@ -53,7 +53,10 @@ export default new Vuex.Store({
                 })
 
         },
-        createmoviemut(movieimage) {}
+        createmoviemut(moviename, moviegenre,moviecast,movieplot)
+        {
+
+        }
 
 
     },
@@ -71,9 +74,9 @@ export default new Vuex.Store({
                 loginusers({commit}, email, password) {
                     commit('loginusermut',email,password);
                 },
-                createmovie({commit}, movieimage)
+                createmovie({commit}, moviename, moviegenre,moviecast,movieplot)
                 {
-                    commit('createmoviemut',movieimage);
+                    commit('createmoviemut',moviename, moviegenre,moviecast,movieplot);
                 },
             },
 

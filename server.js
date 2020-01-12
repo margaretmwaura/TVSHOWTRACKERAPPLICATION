@@ -133,14 +133,16 @@ app.post('/login', (req, res) =>
 app.post('/addmovie',upload.single('image'), (req, res) =>
 {
     console.log(req.file);
+    console.log(req.file.filename);
     const movie = req.body;
-    // console.log(movie);
-    // let moviedata = movie[1];
-    // console.log(moviedata);
-    // console.log(moviedata[0]);
-    // console.log(moviedata[1]);
-    // console.log(moviedata[2]);
-    // console.log(moviedata[3]);
+    if(movie != null)
+    {
+       res.status(200).json({file : req.file.filename});
+    }
+    else
+    {
+        req.status(403).json({error:error});
+    }
 
 });
 
