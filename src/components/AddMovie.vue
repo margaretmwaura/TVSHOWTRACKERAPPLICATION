@@ -56,6 +56,7 @@
 <script>
     import  {mapState} from 'vuex'
     import axios from "axios";
+    import firebase from "firebase";
     export default {
         data() {
             return {
@@ -105,6 +106,8 @@
             },
             uploadMovie()
             {
+                const analytics = firebase.analytics();
+                analytics.logEvent('create',"Event creation");
                 this.$store.dispatch('createmovie',[this.moviename, this.moviecast,this.movieplot,this.moviegenre,this.movieimagesres]);
 
             }

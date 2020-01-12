@@ -16,6 +16,7 @@ async function send()
     });
     console.log("Service worker registered");
 
+    askPermission();
     //Register push
     console.log('Registering push');
     const subscription = await  register.pushManager.subscribe({
@@ -26,6 +27,8 @@ async function send()
     console.log("Push registered");
     //Send push notification
     console.log("Sending push");
+
+    //This is the part where the user decides what the information will be displayed to the user on push notification
     await fetch("http://localhost:4000/subscribe", {
         method: "POST",
         body: JSON.stringify(subscription),
@@ -35,6 +38,29 @@ async function send()
     });
     console.log("Push Sent...");
 
+}
+
+function askPermission() {
+    return new Promise(function(resolve, reject) {
+        const permissionResult = Notification.requestPermission(function(result) {
+            resolve(result);
+        });
+        if (permissionResult) {
+            permissionResult.then(resolve, reject);
+        }
+    })
+        .then(function(permissionResult) {
+            if (permissionResult !== 'granted') {
+               console.log("We were never granted permission");
+            }
+            if (permissionResult === 'granted') {
+                console.log("We were grated permission");
+            }
+            if(permissionResult === 'default')
+            {
+                console.log("We were here initially");
+            }
+        });
 }
 
 function urlBase64ToUint8Array(base64String) {

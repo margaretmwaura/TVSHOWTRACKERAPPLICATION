@@ -226,7 +226,7 @@ app.post('/subscribe' , (req,res) => {
 
     //201 status
     res.status(201).json({});
-    const payload = JSON.stringify({title : 'push tests'});
+    const payload = JSON.stringify({title : 'push tests' , message : 'There are new movies you should go checkout'});
     webpush.sendNotification(subscription,payload).catch(error => console.error());
 });
 

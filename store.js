@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import axios from "axios";
 import componentNormalizer from "vue-loader/lib/runtime/componentNormalizer";
 
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -70,6 +71,7 @@ export default new Vuex.Store({
                         console.log("Creating movies was a success + the response " + response.data.param);
                         this.state.movies = [];
                         this.state.movies.push(response.data.param);
+                        analytics()
                     }
                 })
                 .catch(error => {
