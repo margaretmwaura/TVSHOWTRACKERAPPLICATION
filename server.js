@@ -230,6 +230,18 @@ app.post('/subscribe' , (req,res) => {
     webpush.sendNotification(subscription,payload).catch(error => console.error());
 });
 
+app.get('/allmovies',(req,res) =>
+{
+    if(allmovies !== null)
+    {
+        var myJson = JSON.stringify(allmovies);
+        res.status(200).json({param : myJson});
+    }
+    else {
+        res.status(403).json({error:"there was an error"})
+    }
+});
+
 function verifyToken(req,res,next)
 {
 

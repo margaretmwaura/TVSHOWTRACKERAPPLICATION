@@ -77,6 +77,23 @@ export default new Vuex.Store({
                 .catch(error => {
                     this.state.createfailure = "error";
                 })
+        },
+        getAllMoviesmut()
+        {
+            axios
+                .get('http://localhost:4000/allmovies')
+                .then(response => {
+                    var code = response.status;
+                    if(code === 200)
+                    {
+                        console.log("Creating movies was a success + the response " + response.data.param);
+                        this.state.movies = [];
+                        this.state.movies.push(response.data.param);
+                    }
+                })
+                .catch(error =>
+                {
+                })
         }
 
 
@@ -98,6 +115,10 @@ export default new Vuex.Store({
                 createmovie({commit}, moviename, moviegenre,moviecast,movieplot,movieimage)
                 {
                     commit('createmoviemut',moviename, moviegenre,moviecast,movieplot,movieimage);
+                },
+                getAllMovies({commit})
+                {
+                    commit('getAllMoviesmut');
                 },
             },
 

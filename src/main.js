@@ -5,6 +5,7 @@ import store from "../store";
 import Signup from "./components/Signup.vue";
 import Login from "./components/Login";
 import AddMovie from "./components/AddMovie";
+import MovieList from "./components/MovieList";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAedwFar_PxguO-ebvRUnM39rmPxH_OMYY",
@@ -27,7 +28,6 @@ import VueAxios from 'vue-axios';
 import axios from 'axios';
 import firebase from "firebase";
 
-
 const routes = [
   {
     name : 'Sign',
@@ -45,6 +45,12 @@ const routes = [
     name : 'Create',
     path: '/create',
     component: AddMovie,
+
+  },
+  {
+    name : 'Show',
+    path: '/show',
+    component: MovieList,
 
   },
 ];
