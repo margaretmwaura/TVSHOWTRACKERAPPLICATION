@@ -1,6 +1,7 @@
 module.exports = class movie
 {
-    constructor(moviename, moviegenre,moviecast,movieplot,movieimage) {
+    constructor(id,moviename, moviegenre,moviecast,movieplot,movieimage) {
+        this.id = id;
         this.moviename = moviename;
         this.moviegenre = moviegenre;
         this.moviecast = moviecast;
@@ -10,6 +11,6 @@ module.exports = class movie
     }
 
     display() {
-        console.log(this.moviename + this.moviegenre + this.moviecast + this.movieplot + this.movieimag);
+        console.log(this.id + this.moviename + this.moviegenre + this.moviecast + this.movieplot + this.movieimag);
     }
 };

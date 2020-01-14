@@ -69,9 +69,10 @@ export default new Vuex.Store({
                     {
                         this.state.createresponse = response.status;
                         console.log("Creating movies was a success + the response " + response.data.param);
+                        let passed = JSON.parse(response.data.param);
+                        console.log("This is the passed data " + passed);
                         this.state.movies = [];
-                        this.state.movies.push(response.data.param);
-                        analytics()
+                        this.state.movies = passed;
                     }
                 })
                 .catch(error => {
@@ -90,13 +91,22 @@ export default new Vuex.Store({
                         let passed = JSON.parse(response.data.param);
                         console.log("This is the passed data " + passed);
                         this.state.movies = [];
-                        this.state.movies.push(passed);
+                        this.state.movies = passed;
                     }
                 })
                 .catch(error =>
                 {
                 })
+        },
+        addCommentmut()
+        {
+
+        },
+        addRatingmut()
+        {
+
         }
+
 
 
     },
@@ -121,6 +131,14 @@ export default new Vuex.Store({
                 getAllMovies({commit})
                 {
                     commit('getAllMoviesmut');
+                },
+                addrating({commit})
+                {
+                    commit('addRatingmut');
+                },
+                addcomment({commit})
+                {
+                    commit('addCommentmut');
                 },
             },
 

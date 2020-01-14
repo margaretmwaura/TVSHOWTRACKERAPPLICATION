@@ -1,10 +1,9 @@
 <template>
     <div id="app">
-        <ol v-for="item in movies" :key="item.moviename">
-            <li v-for="sing in item":key="item.id">
-            <Movie :movie="sing">{{item}}</Movie>
-           </li>
-        </ol>
+
+            <li v-for="item in movies":key="item.id">
+            <Movie :movie="item"></Movie>
+        </li>
     </div>
 </template>
 
