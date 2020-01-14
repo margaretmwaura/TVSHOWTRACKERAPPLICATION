@@ -11,7 +11,7 @@ export default new Vuex.Store({
     state: {
         token : ' ',
         movies : [],
-
+        commnra : [],
         signupresponse : ' ',
         signupfailure : ' ',
         loginresponse : ' ',
@@ -136,6 +136,25 @@ export default new Vuex.Store({
                 .catch(error =>
                 {
                 })
+        },
+        getallCommentsAndRatingsmut()
+        {
+            axios
+                .get('http://localhost:4000/commentsandratings')
+                .then(response => {
+                    var code = response.status;
+                    if(code === 200)
+                    {
+                        console.log("Getting comments and ratings was a success + the response " + response.data.param);
+                        let passed = JSON.parse(response.data.param);
+                        console.log("This is the passed data " + passed);
+                        this.state.commnra = [];
+                        this.state.commnra = passed;
+                    }
+                })
+                .catch(error =>
+                {
+                })
         }
     },
         getters:
@@ -167,6 +186,10 @@ export default new Vuex.Store({
                 addcomment({commit},id,comment)
                 {
                     commit('addCommentmut',id,comment);
+                },
+                getAllCommentsAndRatings({commit})
+                {
+                    commit('getallCommentsAndRatingsmut');
                 },
             },
 

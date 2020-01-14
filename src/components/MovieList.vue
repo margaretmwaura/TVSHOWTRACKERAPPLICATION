@@ -1,27 +1,42 @@
 <template>
     <div id="app">
-            <li v-for="item in movies":key="item.id">
+            <input type="text" v-model="search" placeholder="Seach Blogs">
+            <li v-for="item in filtertedmovies":key="item.id">
             <Movie :movie="item"></Movie>
-        </li>
+            </li>
+<!--           <li v-for="item in commnra" :key="item.id">-->
+<!--               <CommentsAndRatings :comnradat="item"></CommentsAndRatings>-->
+<!--           </li>-->
     </div>
 </template>
 
 <script>
 
     import Movie from "./Movie.vue";
+    import CommentsAndRatings from "./CommentsAndRatings.vue";
     import  {mapState} from 'vuex'
     export default {
         components: {
-            Movie
+            Movie,
+            CommentsAndRatings
         },
         data() {
             return {
-
+                search:''
             }
         },
-        computed : mapState(["movies","token"]),
+        computed :{
+            ...mapState(["movies","token","commnra"]),
+            filtertedmovies : function () {
+                return this.movies.filter((movie) =>{
+                        return movie.moviename.match(this.search)
+                    }
+                )
+            }
+        },
         mounted() {
             this.$store.dispatch('getAllMovies');
+            this.$store.dispatch('getAllCommentsAndRatings');
         }
     }
 </script>

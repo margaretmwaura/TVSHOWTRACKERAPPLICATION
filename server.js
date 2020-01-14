@@ -318,6 +318,7 @@ app.post('/comments' , (req,res) =>
 
 
 });
+
 app.post('/ratings' , (req,res) =>
 {
     const movieratings = req.body;
@@ -360,6 +361,19 @@ app.post('/ratings' , (req,res) =>
 
     };
 
+});
+
+app.get('/commentsandratings' , (req,res) =>
+{
+    if(allcommentsnra !== null)
+    {
+        console.log(allcommentsnra);
+        var myJson = JSON.stringify(allcommentsnra);
+        res.status(200).json({param : myJson});
+    }
+    else {
+        res.status(403).json({error:"there was an error"})
+    }
 });
 function verifyToken(req,res,next)
 {
