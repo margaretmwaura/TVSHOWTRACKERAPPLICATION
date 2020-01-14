@@ -1,24 +1,20 @@
 <template>
     <div id="app">
             <input type="text" v-model="search" placeholder="Seach Blogs">
-            <li v-for="item in filtertedmovies":key="item.id">
-            <Movie :movie="item"></Movie>
-            </li>
-<!--           <li v-for="item in commnra" :key="item.id">-->
-<!--               <CommentsAndRatings :comnradat="item"></CommentsAndRatings>-->
-<!--           </li>-->
+            <div v-for="item in filtertedmovies" :key="item.id">
+                <Movie :movie="item"> </Movie>
+            </div>
+
     </div>
 </template>
 
 <script>
 
     import Movie from "./Movie.vue";
-    import CommentsAndRatings from "./CommentsAndRatings.vue";
     import  {mapState} from 'vuex'
     export default {
         components: {
             Movie,
-            CommentsAndRatings
         },
         data() {
             return {
@@ -33,6 +29,9 @@
                     }
                 )
             }
+        },
+        methods :{
+
         },
         mounted() {
             this.$store.dispatch('getAllMovies');

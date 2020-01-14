@@ -33,17 +33,29 @@
                 </div>
             </div>
         </div>
+        <div v-for="comment in commnra" :key="comment.id">
+            <CommentsAndRatings :comnradat="comment" v-if="booleandeterminant(comment.id , movie.id)"> </CommentsAndRatings>
+        </div>
+
     </div>
 </template>
 
 <script>
+    import {mapState} from "vuex";
+    import CommentsAndRatings from "./CommentsAndRatings.vue";
     export default {
         name: "Movie",
+        components : {
+            CommentsAndRatings
+        },
         data() {
             return {
                 comments : '',
                 rating : ' '
             }
+        },
+        computed :{
+            ...mapState(["movies","token","commnra"]),
         },
         props: {
             movie: Array,
@@ -58,6 +70,20 @@
             {
                console.log("The rating you have added " + this.rating);
                 this.$store.dispatch('addrating',[this.movie.id,this.rating]);
+            },
+            booleandeterminant(one , two) {
+                if(one === two)
+                {
+
+                    console.log("This two are very equal " + two + " " + one);
+                    return true;
+                }
+                else
+                {
+
+                    console.log("This two are very different " + two + " " + one);
+                    return false;
+                }
             }
         }
     }
