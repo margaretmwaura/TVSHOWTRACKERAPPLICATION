@@ -211,7 +211,7 @@ app.post('/moviedits',verifyToken, (req, res) =>
                 {
                     // Since now a movie has been created create its comments object
                     let arr = [];
-                    let comenra = new comentnra(id , 0 , arr);
+                    let comenra = new comentnra(id , 0 ,0, arr);
                     allcommentsnra.push(comenra);
                     let datacomment = JSON.stringify(allcommentsnra , null , 2);
                     userfile.writeFile('commentsandratings.json' , datacomment , finished);
@@ -323,9 +323,43 @@ app.post('/ratings' , (req,res) =>
     const movieratings = req.body;
     let ratings = movieratings[1];
 
-    //This details should get me the comment and the id to put
+    //This details should get me the id and the rating to put
     console.log(ratings[0]);
     console.log(ratings[1]);
+
+    let movieid = ratings[0];
+    for(let i = 0 ; i<allcommentsnra.length ; i++)
+    {
+        let comnrdetails  = allcommentsnra[i].id;
+        console.log("Within the loop " + movieid + " and the comparing one " + comnrdetails);
+        if(comnrdetails === movieid)
+        {
+            allcommentsnra[i].rate += parseInt(ratings[1], 10);
+            allcommentsnra[i].num += 1;
+            let usercomments = JSON.stringify(allcommentsnra , null , 2);
+            userfile.writeFile('commentsandratings.json' , usercomments , finished);
+            function finished(error)
+            {
+                if(error)
+                {
+                    console.log("There was an error , no data added to the file");
+                }
+                else
+                {
+                    console.log("There was no error encountereed we are all set")
+                }
+            }
+
+        }
+        else
+        {
+            // console.log("User doesnt exists");
+            // console.log(email);
+        }
+
+
+    };
+
 });
 function verifyToken(req,res,next)
 {
