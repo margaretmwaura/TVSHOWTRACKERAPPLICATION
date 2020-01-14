@@ -11,6 +11,7 @@ export default new Vuex.Store({
     state: {
         token : ' ',
         movies : [],
+
         signupresponse : ' ',
         signupfailure : ' ',
         loginresponse : ' ',
@@ -98,17 +99,44 @@ export default new Vuex.Store({
                 {
                 })
         },
-        addCommentmut()
+        addCommentmut(id,comment)
         {
-
+            axios
+                .post('http://localhost:4000/comments',[id,comment])
+                .then(response => {
+                    var code = response.status;
+                    if(code === 200)
+                    {
+                        console.log("Getting movies was a success + the response " + response.data.param);
+                        let passed = JSON.parse(response.data.param);
+                        console.log("This is the passed data " + passed);
+                        this.state.movies = [];
+                        this.state.movies = passed;
+                    }
+                })
+                .catch(error =>
+                {
+                })
         },
-        addRatingmut()
+        addRatingmut(id,rate)
         {
-
+            axios
+                .post('http://localhost:4000/ratings',[id,rate])
+                .then(response => {
+                    var code = response.status;
+                    if(code === 200)
+                    {
+                        console.log("Getting movies was a success + the response " + response.data.param);
+                        let passed = JSON.parse(response.data.param);
+                        console.log("This is the passed data " + passed);
+                        this.state.movies = [];
+                        this.state.movies = passed;
+                    }
+                })
+                .catch(error =>
+                {
+                })
         }
-
-
-
     },
         getters:
             {
@@ -132,13 +160,13 @@ export default new Vuex.Store({
                 {
                     commit('getAllMoviesmut');
                 },
-                addrating({commit})
+                addrating({commit},id,rate)
                 {
-                    commit('addRatingmut');
+                    commit('addRatingmut',id,rate);
                 },
-                addcomment({commit})
+                addcomment({commit},id,comment)
                 {
-                    commit('addCommentmut');
+                    commit('addCommentmut',id,comment);
                 },
             },
 

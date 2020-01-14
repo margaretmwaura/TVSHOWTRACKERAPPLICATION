@@ -7,6 +7,8 @@ const express = require('express'),
 
 const user = require('./user');
 const movie = require('./movie');
+const comment = require('./comment');
+const comentnra = require('./moviecomenra');
 const webpush = require('web-push');
 let userfile = require('fs');
 const app = express();
@@ -62,6 +64,9 @@ let allusers = JSON.parse(fileread);
 
 let filemovie = userfile.readFileSync('moviedata.json');
 let allmovies = JSON.parse(filemovie);
+
+let filecommentsnra = userfile.readFileSync('commentsandratings.json');
+let allcommentsnra = JSON.parse(filecommentsnra);
 
 console.log("This are all the users " + allusers);
 app.post('/signup', (req, res) =>
@@ -204,6 +209,21 @@ app.post('/moviedits',verifyToken, (req, res) =>
                 }
                 else
                 {
+                    // Since now a movie has been created create its comments object
+                    let arr = [];
+                    let comenra = new comentnra(id , 0 , arr);
+                    allcommentsnra.push(comenra);
+                    let datacomment = JSON.stringify(allcommentsnra , null , 2);
+                    userfile.writeFile('commentsandratings.json' , datacomment , finished);
+                    function finished(error) {
+                        if (error) {
+                            res.sendStatus(403);
+                            console.log("There was an error , no data added to the file");
+                        } else {
+                        }
+                    }
+
+// Sending a mail syaing a movie has been posted
                     transporter.sendMail(mailOptions, function(error, info){
                         if (error) {
                             console.log(error);
@@ -246,6 +266,67 @@ app.get('/allmovies',(req,res) =>
     }
 });
 
+app.post('/comments' , (req,res) =>
+{
+    const moviecomments = req.body;
+    let commenting = moviecomments[1];
+
+    //This details should get me the id and the comment respectively
+    console.log(commenting[0]);
+    console.log(commenting[1]);
+
+    let movieid = commenting[0];
+    let commentnew = new comment(commenting[1]);
+
+    // allcommentsnra.push(commentnew);
+
+    // For this to work get the commentsnra object in the file that matches the id of the comment
+    // edit it and then write to file
+
+    for(let i = 0 ; i<allcommentsnra.length ; i++)
+    {
+        let comnrdetails  = allcommentsnra[i].id;
+        console.log("Within the loop " + movieid + " and the comparing one " + comnrdetails);
+        if(comnrdetails === movieid)
+        {
+            allcommentsnra[i].comments.push(commentnew);
+            let usercomments = JSON.stringify(allcommentsnra , null , 2);
+            userfile.writeFile('commentsandratings.json' , usercomments , finished);
+            function finished(error)
+            {
+                if(error)
+                {
+                    console.log("There was an error , no data added to the file");
+                }
+                else
+                {
+                    console.log("There was no error encountereed we are all set")
+                }
+            }
+
+        }
+        else
+        {
+            // console.log("User doesnt exists");
+            // console.log(email);
+        }
+
+
+    };
+
+
+
+
+});
+app.post('/ratings' , (req,res) =>
+{
+    const movieratings = req.body;
+    let ratings = movieratings[1];
+
+    //This details should get me the comment and the id to put
+    console.log(ratings[0]);
+    console.log(ratings[1]);
+});
 function verifyToken(req,res,next)
 {
 

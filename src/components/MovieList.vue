@@ -1,6 +1,5 @@
 <template>
     <div id="app">
-
             <li v-for="item in movies":key="item.id">
             <Movie :movie="item"></Movie>
         </li>
