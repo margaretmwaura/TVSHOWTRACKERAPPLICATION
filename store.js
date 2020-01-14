@@ -110,8 +110,8 @@ export default new Vuex.Store({
                         console.log("Getting movies was a success + the response " + response.data.param);
                         let passed = JSON.parse(response.data.param);
                         console.log("This is the passed data " + passed);
-                        this.state.movies = [];
-                        this.state.movies = passed;
+                        this.state.commnra = [];
+                        this.state.commnra = passed;
                     }
                 })
                 .catch(error =>
@@ -129,8 +129,8 @@ export default new Vuex.Store({
                         console.log("Getting movies was a success + the response " + response.data.param);
                         let passed = JSON.parse(response.data.param);
                         console.log("This is the passed data " + passed);
-                        this.state.movies = [];
-                        this.state.movies = passed;
+                        this.state.commnra = [];
+                        this.state.commnra = passed;
                     }
                 })
                 .catch(error =>

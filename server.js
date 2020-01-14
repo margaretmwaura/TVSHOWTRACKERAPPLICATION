@@ -300,6 +300,8 @@ app.post('/comments' , (req,res) =>
                 }
                 else
                 {
+                    var myJson = JSON.stringify(allcommentsnra);
+                    res.status(200).json({param : myJson});
                     console.log("There was no error encountereed we are all set")
                 }
             }
@@ -307,8 +309,7 @@ app.post('/comments' , (req,res) =>
         }
         else
         {
-            // console.log("User doesnt exists");
-            // console.log(email);
+            console.log("The movie does not exist");
         }
 
 
@@ -347,14 +348,16 @@ app.post('/ratings' , (req,res) =>
                 }
                 else
                 {
-                    console.log("There was no error encountereed we are all set")
+                    var myJson = JSON.stringify(allcommentsnra);
+                    res.status(200).json({param : myJson});
+                    console.log("There was no error encountereed we are all set");
                 }
             }
 
         }
         else
         {
-            // console.log("User doesnt exists");
+            console.log("No movie was found");
             // console.log(email);
         }
 
