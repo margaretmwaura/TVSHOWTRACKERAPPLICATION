@@ -36,7 +36,7 @@
         <div v-for="comment in commnra" :key="comment.id">
             <CommentsAndRatings :comnradat="comment" v-if="booleandeterminant(comment.id , movie.id)"> </CommentsAndRatings>
         </div>
-
+        <button @click="deletemovie">Delete Movie</button>
     </div>
 </template>
 
@@ -84,6 +84,10 @@
                     console.log("This two are very different " + two + " " + one);
                     return false;
                 }
+            },
+            deletemovie()
+            {
+                this.$store.dispatch('deletemoviecommentsandratings',[this.movie.id]);
             }
         }
     }

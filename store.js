@@ -155,7 +155,33 @@ export default new Vuex.Store({
                 .catch(error =>
                 {
                 })
+        },
+        deletemoviecommentsandratingsmut(id)
+        {
+            axios
+                .delete('http://localhost:4000/deletemovie/' + id)
+                .then(response => {
+                    var code = response.status;
+                    if(code === 200)
+                    {
+                        console.log("Deleting comments and ratings was a success + the response " + response.data.commnra);
+                        let passedc = JSON.parse(response.data.commnra);
+                        console.log("This is the passed data " + passedc);
+                        this.state.commnra = [];
+                        this.state.commnra = passedc;
+
+                        console.log("Getting movies + the response " + response.data.moovies);
+                        let passedm = JSON.parse(response.data.moovies);
+                        console.log("This is the passed data " + passedm);
+                        this.state.commnra = [];
+                        this.state.commnra = passedm;
+                    }
+                })
+                .catch(error =>
+                {
+                })
         }
+
     },
         getters:
             {
@@ -190,6 +216,10 @@ export default new Vuex.Store({
                 getAllCommentsAndRatings({commit})
                 {
                     commit('getallCommentsAndRatingsmut');
+                },
+                deletemoviecommentsandratings({commit},id)
+                {
+                    commit('deletemoviecommentsandratingsmut',id);
                 },
             },
 
