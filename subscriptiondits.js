@@ -1,7 +1,7 @@
-module.exports = class subscription
+module.exports = class subscriptiondits
 {
-    constructor(time , email ) {
-        this.time = time;
+    constructor(email) {
+        this.time = Date.now();
         this.email = email;
     }
 

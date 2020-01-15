@@ -18,6 +18,8 @@ export default new Vuex.Store({
         loginfailure : ' ',
         createresponse : ' ',
         createfailure : ' ',
+        subsciberesponse : ' ',
+        subscribefail : ' ',
     },
     mutations: {
         createuser(firstname ,lastname ,password) {
@@ -181,7 +183,27 @@ export default new Vuex.Store({
                 .catch(error =>
                 {
                 })
-        }
+        },
+        addSubscribermut(id,email)
+        {
+            axios
+                .post('http://localhost:4000/newsubsriber',[id,email])
+                .then(response => {
+                    var code = response.status;
+                    if(code === 200)
+                    {
+                        this.subsciberesponse = "Success"
+                    }
+                    else
+                    {
+                        this.subscribefail = "Fialed"
+                    }
+                })
+                .catch(error =>
+                {
+                    this.subscribefail = "Failed"
+                })
+        },
 
     },
         getters:
@@ -222,6 +244,10 @@ export default new Vuex.Store({
                 {
                     commit('deletemoviecommentsandratingsmut',id);
                 },
+                addSubscriber({commit} , id ,email)
+                {
+                    commit('addSubscribermut',id,email)
+                }
             },
 
 

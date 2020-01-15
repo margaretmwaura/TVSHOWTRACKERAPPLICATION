@@ -95,7 +95,7 @@
             },
             subscribe()
             {
-
+                this.$store.dispatch('addSubscriber',[this.movie.id, this.email]);
             }
         }
     }

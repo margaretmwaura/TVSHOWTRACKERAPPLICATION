@@ -1,7 +1,16 @@
 [
   {
     "id": "k5fp3sc1q57pg46t42q",
-    "subdetails": []
+    "subdetails": [
+      {
+        "time": 1579119661676,
+        "email": " mwaura@gmail.com"
+      },
+      {
+        "time": 1579119662144,
+        "email": " mwaura@gmail.com"
+      }
+    ]
   },
   {
     "id": "k5fp3sfsqy203yzzbig",
@@ -33,6 +42,15 @@
   },
   {
     "id": "k5fp43ae6mhha8khbp7",
-    "subdetails": []
+    "subdetails": [
+      {
+        "time": 1579119698533,
+        "email": " gnjeri@gmail.com"
+      },
+      {
+        "time": 1579119699117,
+        "email": " gnjeri@gmail.com"
+      }
+    ]
   }
 ]

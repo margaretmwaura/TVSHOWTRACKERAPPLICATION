@@ -1,4 +1,4 @@
-module.exports = class subscription
+module.exports = class subscriptiom
 {
 
     constructor(id , subdetails) {

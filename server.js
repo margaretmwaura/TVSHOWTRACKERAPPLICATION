@@ -10,6 +10,7 @@ const movie = require('./movie');
 const comment = require('./comment');
 const comentnra = require('./moviecomenra');
 const subscripobject = require('./subscriptiom');
+const subscription = require('./subscriptiondits');
 const webpush = require('web-push');
 let userfile = require('fs');
 const app = express();
@@ -394,6 +395,50 @@ app.get('/commentsandratings' , (req,res) =>
     else {
         res.status(403).json({error:"there was an error"})
     }
+});
+
+app.post('/newsubsriber' ,(req,res) =>
+{
+    const subscriptiondits = req.body;
+    let newsubriber = subscriptiondits[1];
+
+    //This details should get me the id and the rating to put
+    console.log(newsubriber[0]);
+    console.log(newsubriber[1]);
+
+    let subid = newsubriber[0];
+    for(let i = 0 ; i<allsubscrip.length ; i++)
+    {
+        let subscriptionid  = allsubscrip[i].id;
+        console.log("Within the loop " + subid + " and the comparing one " + subscriptionid);
+        if(subscriptionid === subid)
+        {
+            let newsubscrib = new subscription(newsubriber[1]);
+            allsubscrip[i].subdetails.push(newsubscrib);
+            let subscribersleg = JSON.stringify(allsubscrip , null , 2);
+            userfile.writeFile('subscribers.json' , subscribersleg , finished);
+            function finished(error)
+            {
+                if(error)
+                {
+                    console.log("There was an error , no data added to the file");
+                }
+                else
+                {
+                    res.status(200).json();
+                    console.log("There was no error encountereed we are all set");
+                }
+            }
+
+        }
+        else
+        {
+            console.log("No movie was found");
+            // console.log(email);
+        }
+
+
+    };
 });
 
 app.delete('/deletemovie/:id',(req,res) => {
