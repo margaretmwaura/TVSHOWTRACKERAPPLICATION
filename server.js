@@ -468,29 +468,56 @@ app.delete('/deletemovie/:id',(req,res) => {
                         console.log("This is the index of the movie to be deleted " + index);
                         if (index > -1) {
                             allcommentsnra.splice(index, 1);
-                          // Rewritting the file
-                            //There are two files
-                            let datastr = JSON.stringify(allmovies , null , 2);
-                            userfile.writeFile('moviedata.json' , datastr , finished);
-                            function finished(error)
+
+                            for(let i=0 ; i<allsubscrip.length ; i++)
                             {
-                                if(!error)
+                                let current_subscription  = allsubscrip[i].id;
+                                console.log("The real ids " +movieiddits + " "+" the comparing ud " + current_subscription);
+                                if(movieiddits === current_subscription)
                                 {
-                                    console.log("Movie removed from the file");
-                                    let usercomments = JSON.stringify(allcommentsnra , null , 2);
-                                    userfile.writeFile('commentsandratings.json' , usercomments , finished);
-                                    function finished(error)
+                                    const index = allsubscrip.indexOf(allsubscrip[i]);
+                                    console.log("A match has been found for the subscribers");
+                                    if(index > -1)
                                     {
-                                        if(!error)
-                                        {
-                                            console.log("Comments has been removed from the file");
-                                            let mymovies = JSON.stringify(allmovies);
-                                            let mycomments = JSON.stringify(allcommentsnra);
-                                            res.status(200).json({ commnra : mycomments , movies : mymovies});
+                                        allsubscrip.splice(index , 1);
+                                            // Rewritting the file
+                                            //There are two files
+                                            let datastr = JSON.stringify(allmovies , null , 2);
+                                            userfile.writeFile('moviedata.json' , datastr , finished);
+                                            function finished(error)
+                                            {
+                                                if(!error)
+                                                {
+                                                    console.log("Movie removed from the file");
+                                                    let usercomments = JSON.stringify(allcommentsnra , null , 2);
+                                                    userfile.writeFile('commentsandratings.json' , usercomments , finished);
+                                                    function finished(error)
+                                                    {
+                                                        if(!error)
+                                                        {
+                                                            let datasub = JSON.stringify(allsubscrip , null , 2);
+                                                            userfile.writeFile('subscribers.json' , datasub , finished);
+                                                            function finished(error)
+                                                            {
+                                                                if(!error)
+                                                                {
+                                                                    console.log("Comments has been removed from the file");
+                                                                    let mymovies = JSON.stringify(allmovies);
+                                                                    let mycomments = JSON.stringify(allcommentsnra);
+                                                                    res.status(200).json({ commnra : mycomments , movies : mymovies});
+                                                                }
+                                                            }
+
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
-                                    }
+
                                 }
+
                             }
+
 
                         }
                     }
