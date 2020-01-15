@@ -390,6 +390,9 @@ app.delete('/deletemovie/:id',(req,res) => {
         if(movieiddits === current_movieid)
         {
             const index = allmovies.indexOf(allmovies[i]);
+            console.log("This is the index of the movie to be deleted " + index);
+            console.log("A match has been found for the movies");
+            console.log("The real ids " +movieiddits + " "+" the comparing ud " + current_movieid);
             if (index > -1) {
                 allmovies.splice(index, 1);
                 for(let i=0 ; i<allcommentsnra.length ; i++)
@@ -398,14 +401,35 @@ app.delete('/deletemovie/:id',(req,res) => {
                     console.log("The real ids " + movieiddits + " "+" the comparing ud " + current_mommentraid);
                     if(movieiddits === current_mommentraid)
                     {
+                        console.log("A match has been found for the comments");
                         const index = allcommentsnra.indexOf(allcommentsnra[i]);
+                        console.log("This is the index of the movie to be deleted " + index);
                         if (index > -1) {
-
                             allcommentsnra.splice(index, 1);
-                            //The responses should be sent here
-                            let mymovies = JSON.stringify(allmovies);
-                            let mycomments = JSON.stringify(allcommentsnra);
-                            res.status(200).json({ commnra : mycomments , moovies : mymovies});
+                          // Rewritting the file
+                            //There are two files
+                            let datastr = JSON.stringify(allmovies , null , 2);
+                            userfile.writeFile('moviedata.json' , datastr , finished);
+                            function finished(error)
+                            {
+                                if(!error)
+                                {
+                                    console.log("Movie removed from the file");
+                                    let usercomments = JSON.stringify(allcommentsnra , null , 2);
+                                    userfile.writeFile('commentsandratings.json' , usercomments , finished);
+                                    function finished(error)
+                                    {
+                                        if(!error)
+                                        {
+                                            console.log("Comments has been removed from the file");
+                                            let mymovies = JSON.stringify(allmovies);
+                                            let mycomments = JSON.stringify(allcommentsnra);
+                                            res.status(200).json({ commnra : mycomments , movies : mymovies});
+                                        }
+                                    }
+                                }
+                            }
+
                         }
                     }
                 }

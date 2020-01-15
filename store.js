@@ -171,11 +171,11 @@ export default new Vuex.Store({
                         this.state.commnra = [];
                         this.state.commnra = passedc;
 
-                        console.log("Getting movies + the response " + response.data.moovies);
-                        let passedm = JSON.parse(response.data.moovies);
+                        console.log("Getting movies + the response " + response.data.movies);
+                        let passedm = JSON.parse(response.data.movies);
                         console.log("This is the passed data " + passedm);
-                        this.state.commnra = [];
-                        this.state.commnra = passedm;
+                        this.state.movies = [];
+                        this.state.movies = passedm;
                     }
                 })
                 .catch(error =>
