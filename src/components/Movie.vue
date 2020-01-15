@@ -37,6 +37,8 @@
             <CommentsAndRatings :comnradat="comment" v-if="booleandeterminant(comment.id , movie.id)"> </CommentsAndRatings>
         </div>
         <button @click="deletemovie">Delete Movie</button>
+        <input v-model="email" placeholder="enter your email">
+        <button @click="subscribe">Subscribe</button>
     </div>
 </template>
 
@@ -51,7 +53,8 @@
         data() {
             return {
                 comments : '',
-                rating : ' '
+                rating : ' ',
+                email : ' '
             }
         },
         computed :{
@@ -89,6 +92,10 @@
             {
                 this.$store.dispatch('deletemoviecommentsandratings',this.movie.id);
                 console.log(this.movie.id)
+            },
+            subscribe()
+            {
+
             }
         }
     }

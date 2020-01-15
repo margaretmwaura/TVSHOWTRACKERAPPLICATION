@@ -9,6 +9,7 @@ const user = require('./user');
 const movie = require('./movie');
 const comment = require('./comment');
 const comentnra = require('./moviecomenra');
+const subscripobject = require('./subscriptiom');
 const webpush = require('web-push');
 let userfile = require('fs');
 const app = express();
@@ -67,6 +68,9 @@ let allmovies = JSON.parse(filemovie);
 
 let filecommentsnra = userfile.readFileSync('commentsandratings.json');
 let allcommentsnra = JSON.parse(filecommentsnra);
+
+let filesubscrip = userfile.readFileSync('subscribers.json');
+let allsubscrip= JSON.parse(filesubscrip);
 
 console.log("This are all the users " + allusers);
 app.post('/signup', (req, res) =>
@@ -223,6 +227,19 @@ app.post('/moviedits',verifyToken, (req, res) =>
                         }
                     }
 
+                    // Creating a subscription object now that a movie has been added
+                    let subarr = [];
+                    let subscrobject = new subscripobject(id , subarr);
+                    allsubscrip.push(subscrobject);
+                    let datasubscrp = JSON.stringify(allsubscrip , null , 2);
+                    userfile.writeFile('subscribers.json' , datasubscrp , finished);
+                    function finished(error) {
+                        if (error) {
+                            res.sendStatus(403);
+                            console.log("There was an error , no data added to the file");
+                        } else {
+                        }
+                    }
 // Sending a mail syaing a movie has been posted
                     transporter.sendMail(mailOptions, function(error, info){
                         if (error) {
