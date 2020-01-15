@@ -47,13 +47,21 @@
       {
         "time": 1579027481912,
         "message": "I like the view"
+      },
+      {
+        "time": 1579068739958,
+        "message": "qwder"
+      },
+      {
+        "time": 1579068741176,
+        "message": "qwder"
       }
     ]
   },
   {
     "id": "k5dvo5dqxxew23nx86e",
-    "rate": 7,
-    "num": 2,
+    "rate": 12,
+    "num": 3,
     "comments": [
       {
         "time": 1579027314638,
@@ -75,9 +83,14 @@
   },
   {
     "id": "k5dvo5ivpij716jd7sd",
-    "rate": 0,
-    "num": 0,
-    "comments": []
+    "rate": 577,
+    "num": 3,
+    "comments": [
+      {
+        "time": 1579064265823,
+        "message": "Sanity check"
+      }
+    ]
   },
   {
     "id": "k5dvo5npeh3t8zpeww",

@@ -383,13 +383,11 @@ app.delete('/deletemovie/:id',(req,res) => {
 
     const movieiddits = req.params.id;
     console.log("Data that has been sent " + movieiddits);
-    let movieid = movieiddits[1];
-    console.log("The movie id gottent " + movieid);
     for(let i=0 ; i<allmovies.length ; i++)
     {
         let current_movieid = allmovies[i].id;
-        console.log("The real ids " + movieid + " "+" the comparing ud " + current_movieid);
-        if(movieid === current_movieid)
+        console.log("The real ids " +movieiddits + " "+" the comparing ud " + current_movieid);
+        if(movieiddits === current_movieid)
         {
             const index = allmovies.indexOf(allmovies[i]);
             if (index > -1) {
@@ -397,8 +395,8 @@ app.delete('/deletemovie/:id',(req,res) => {
                 for(let i=0 ; i<allcommentsnra.length ; i++)
                 {
                     let current_mommentraid = allcommentsnra[i].id;
-                    console.log("The real ids " + movieid + " "+" the comparing ud " + current_mommentraid);
-                    if(movieid === current_mommentraid)
+                    console.log("The real ids " + movieiddits + " "+" the comparing ud " + current_mommentraid);
+                    if(movieiddits === current_mommentraid)
                     {
                         const index = allcommentsnra.indexOf(allcommentsnra[i]);
                         if (index > -1) {

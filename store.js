@@ -156,12 +156,13 @@ export default new Vuex.Store({
                 {
                 })
         },
-        deletemoviecommentsandratingsmut(id)
+        deletemoviecommentsandratingsmut({context},id)
         {
+            console.log("This is the id that is being passed across " + id);
             axios
                 .delete('http://localhost:4000/deletemovie/' + id)
                 .then(response => {
-                    var code = response.status;
+                    const code = response.status;
                     if(code === 200)
                     {
                         console.log("Deleting comments and ratings was a success + the response " + response.data.commnra);
@@ -217,7 +218,7 @@ export default new Vuex.Store({
                 {
                     commit('getallCommentsAndRatingsmut');
                 },
-                deletemoviecommentsandratings({commit},id)
+                deletemoviecommentsandratings({ context, commit},id)
                 {
                     commit('deletemoviecommentsandratingsmut',id);
                 },
