@@ -6,6 +6,7 @@ import Signup from "./components/Signup.vue";
 import Login from "./components/Login";
 import AddMovie from "./components/AddMovie";
 import MovieList from "./components/MovieList";
+import EditAMovie from "./components/EditAMovie";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAedwFar_PxguO-ebvRUnM39rmPxH_OMYY",
@@ -52,6 +53,12 @@ const routes = [
     path: '/show',
     component: MovieList,
 
+  },
+  {
+    name : 'Edit',
+    path: '/edit',
+    component: EditAMovie,
+    props:true
   },
 ];
 const router = new VueRouter({

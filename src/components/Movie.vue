@@ -39,6 +39,10 @@
         <button @click="deletemovie">Delete Movie</button>
         <input v-model="email" placeholder="enter your email">
         <button @click="subscribe">Subscribe</button>
+        <br>
+        <br>
+        <router-link :to="{ name: 'Edit', params: { movie: this.movie } }">Navigate to Edit</router-link>
+
     </div>
 </template>
 
@@ -96,6 +100,17 @@
             subscribe()
             {
                 this.$store.dispatch('addSubscriber',[this.movie.id, this.email]);
+            },
+            editamovie()
+            {
+                console.log("We want to edit the movie");
+                this.$router.push({
+                    path: '/edit',
+                    params: {
+                        editmovie: this.movie ,
+                        // message: this.blog.message
+                    }
+                });
             }
         }
     }
