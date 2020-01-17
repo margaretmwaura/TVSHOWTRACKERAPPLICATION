@@ -541,36 +541,58 @@ app.post('/movieditsedit', (req, res) =>
     let plot = moviedits[4];
     let mimage = moviedits[5];
     console.log("The updating dits " + id + " " + name + " " + genre + " " + cast + " " + plot + " " + mimage);
-    for(let i=0 ; i < allmovies.length ; i++)
-    {
+    for(let i=0 ; i < allmovies.length ; i++) {
         let readmovieid = allmovies[i].id;
-        console.log("The real ids " + readmovieid + " "+" the comparing ud " + id);
-        if(readmovieid === id)
-        {
-            allmovies[i].moviename=name;
-            allmovies[i].moviegenre=genre;
-            allmovies[i].moviecast=cast;
-            allmovies[i].movieplot=plot;
-            allmovies[i].movieimag=mimage;
+        console.log("The real ids " + readmovieid + " " + " the comparing ud " + id);
+        if (readmovieid === id) {
+            allmovies[i].moviename = name;
+            allmovies[i].moviegenre = genre;
+            allmovies[i].moviecast = cast;
+            allmovies[i].movieplot = plot;
+            allmovies[i].movieimag = mimage;
 
-            let datastr = JSON.stringify(allmovies , null , 2);
-            userfile.writeFile('moviedata.json' , datastr , finished);
-            function finished(error)
-            {
-                if(error)
-                {
+            let datastr = JSON.stringify(allmovies, null, 2);
+            userfile.writeFile('moviedata.json', datastr, finished);
+
+            function finished(error) {
+                if (error) {
                     res.sendStatus(403);
                     console.log("There was an error , no data added to the file");
-                }
-                else
-                {
+                } else {
+                    console.log("Comparing time");
+                    for (let i = 0; i < allsubscrip.length; i++) {
+                        let compid = allsubscrip[i].id;
+                        if (id === compid) {
+                            console.log("Matching ids " + id + " " + compid);
+                            let emails = allsubscrip[i].subdetails;
+                            for (let i = 0; i < emails.length; i++) {
+                                let emailname = emails[i].email;
+                                var mailOptions = {
+                                    from: 'mwauramargaret1@gmail.com',
+                                    to: emailname,
+                                    subject: 'Updates on the movies',
+                                    text: 'Your movie subscription ' + name + ' has been updated'
+                                };
+                                // Sending a mail syaing a movie has been posted
+                                transporter.sendMail(mailOptions, function (error, info) {
+                                    if (error) {
+                                        console.log(error);
+                                    } else {
+                                        console.log('Email sent: ' + info.response);
+                                    }
+                                    console.log("Emails is " + emailname);
+                                });
+                            }
+                        }
+
+                    }
+
                     let mymovies = JSON.stringify(allmovies);
-                    res.status(200).json({movies : mymovies});
+                    res.status(200).json({movies: mymovies});
                 }
             }
         }
     }
-
 });
 function verifyToken(req,res,next)
 {
