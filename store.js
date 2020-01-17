@@ -204,6 +204,30 @@ export default new Vuex.Store({
                     this.subscribefail = "Failed"
                 })
         },
+        editamoviemut(movieid,moviename, moviegenre,moviecast,movieplot,movieimage)
+        {
+            axios
+                .post('http://localhost:4000/movieditsedit' , [movieid,moviename, moviegenre,moviecast,movieplot,movieimage])
+                .then(response => {
+                    var code = response.status;
+                    if(code === 200)
+                    {
+                        console.log("Getting movies was a success + the response " + response.data.param);
+                        let passed = JSON.parse(response.data.param);
+                        console.log("This is the passed data " + passed);
+                        this.state.movies = [];
+                        this.state.movies = passed;
+                    }
+                    else
+                    {
+
+                    }
+                })
+                .catch(error =>
+                {
+
+                })
+        },
 
     },
         getters:
@@ -247,6 +271,10 @@ export default new Vuex.Store({
                 addSubscriber({commit} , id ,email)
                 {
                     commit('addSubscribermut',id,email)
+                },
+                editamovie({commit} , movieid,moviename, moviegenre,moviecast,movieplot,movieimage)
+                {
+                    commit('editamoviemut' ,movieid,moviename, moviegenre,moviecast,movieplot,movieimage)
                 }
             },
 

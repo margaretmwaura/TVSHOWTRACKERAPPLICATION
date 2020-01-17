@@ -44,7 +44,7 @@
                             </label>
                         </div>
                         <div class="cell medium-12 large-12 small-12">
-                            <button>Create account</button>
+                            <button>Edit movie</button>
                         </div>
                     </div>
                 </div>
@@ -58,26 +58,31 @@
 <script>
     import axios from "axios";
     import firebase from "firebase";
+    import movie from '../../movie'
 
     export default {
         name: "EditAMovie",
         data() {
             return{
                 movie : ' ',
+                id : ' ',
                 moviename : ' ',
                 moviecast: ' ',
                 moviegenre: ' ',
-                movieplot: ' '
+                movieplot: ' ',
+                movieimagesres : ' '
             }
         },
         created() {
             console.log("Edit has been called");
+
             this.movie = this.$route.params.movie;
+            this.id = this.$route.params.movie.id;
             this.moviename = this.$route.params.movie.moviename;
             this.moviecast = this.$route.params.movie.moviecast;
             this.moviegenre = this.$route.params.movie.moviegenre;
             this.movieplot = this.$route.params.movie.movieplot;
-
+            this.movieimagesres = this.$route.params.movie.movieimag;
         },
         methods: {
             create() {
@@ -116,8 +121,9 @@
             uploadMovie()
             {
                 const analytics = firebase.analytics();
-                analytics.logEvent('create',"Event creation");
-                this.$store.dispatch('createmovie',[this.moviename, this.moviecast,this.movieplot,this.moviegenre,this.movieimagesres]);
+                analytics.logEvent('create',"Event Editting");
+                console.log("We are editting a movie");
+                this.$store.dispatch('editamovie', [this.id,this.moviename, this.moviegenre,this.moviecast,this.moviecast,this.movieimagesres]);
 
             }
         },

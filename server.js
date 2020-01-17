@@ -527,6 +527,51 @@ app.delete('/deletemovie/:id',(req,res) => {
     }
 
 });
+
+
+app.post('/movieditsedit', (req, res) =>
+{
+    const moviecomments = req.body;
+    let moviedits = moviecomments[1];
+    console.log("These are the parameters we have gotten " + moviedits);
+    let id = moviedits[0];
+    let name = moviedits[1];
+    let genre = moviedits[2];
+    let cast = moviedits[3];
+    let plot = moviedits[4];
+    let mimage = moviedits[5];
+    console.log("The updating dits " + id + " " + name + " " + genre + " " + cast + " " + plot + " " + mimage);
+    for(let i=0 ; i < allmovies.length ; i++)
+    {
+        let readmovieid = allmovies[i].id;
+        console.log("The real ids " + readmovieid + " "+" the comparing ud " + id);
+        if(readmovieid === id)
+        {
+            allmovies[i].moviename=name;
+            allmovies[i].moviegenre=genre;
+            allmovies[i].moviecast=cast;
+            allmovies[i].movieplot=plot;
+            allmovies[i].movieimag=mimage;
+
+            let datastr = JSON.stringify(allmovies , null , 2);
+            userfile.writeFile('moviedata.json' , datastr , finished);
+            function finished(error)
+            {
+                if(error)
+                {
+                    res.sendStatus(403);
+                    console.log("There was an error , no data added to the file");
+                }
+                else
+                {
+                    let mymovies = JSON.stringify(allmovies);
+                    res.status(200).json({movies : mymovies});
+                }
+            }
+        }
+    }
+
+});
 function verifyToken(req,res,next)
 {
 
