@@ -6,8 +6,9 @@
                 <router-link to="/create" id="thingt">Create</router-link>
                 <router-link to="/sign" id="thingtt">Signup</router-link>
                 <router-link to="/Login" id="thingttt">Login</router-link>
+                <button id="log_out" @click="logoutuser">Log Out</button>
             </div>
-
+          <p>{{token}}</p>
         </div>
         <router-view></router-view>
         <notifications group="foo" ></notifications>
@@ -16,6 +17,7 @@
 
 <script>
     import Navbar from "./components/Navbar.vue";
+    import {mapState} from "vuex";
     export default {
         name: 'app',
         components:
@@ -27,7 +29,15 @@
 
             }
         },
+        computed :{
+            ...mapState(["token"]),
+        },
         methods: {
+            logoutuser()
+            {
+                this.$store.dispatch('logout');
+
+            }
         }
     }
 </script>

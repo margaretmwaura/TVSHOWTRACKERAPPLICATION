@@ -228,6 +228,10 @@ export default new Vuex.Store({
 
                 })
         },
+        logoutmut()
+        {
+            this.state.token = ' '
+        }
 
     },
         getters:
@@ -275,6 +279,10 @@ export default new Vuex.Store({
                 editamovie({commit} , movieid,moviename, moviegenre,moviecast,movieplot,movieimage)
                 {
                     commit('editamoviemut' ,movieid,moviename, moviegenre,moviecast,movieplot,movieimage)
+                },
+                logout({commit})
+                {
+                    commit('logoutmut')
                 }
             },
 
