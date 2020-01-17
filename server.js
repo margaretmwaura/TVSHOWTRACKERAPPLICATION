@@ -130,8 +130,8 @@ app.post('/login', (req, res) =>
 
    for(let i = 0 ; i<allusers.length ; i++)
     {
-        let storedemail = allusers[i].email;
-        let email = userfromnet[0];
+        let storedemail = allusers[i].email.trim();
+        let email = userfromnet[0].trim();
         console.log("Within the loop " + email + "and the comparing one " + storedemail);
         if(storedemail === email)
         {
@@ -157,7 +157,7 @@ app.post('/login', (req, res) =>
            console.log(token);
            if(error)
            {
-               console.log("There was an erro while trying to generate key " + error);
+               console.log("There was an error while trying to generate key " + error);
            }
            res.status(200).json({token: token});
        });

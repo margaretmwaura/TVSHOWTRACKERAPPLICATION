@@ -1,17 +1,17 @@
 [
   {
     "name": " Mwaura",
-    "email": " mwaura@gmail.com",
+    "email": "mwaura@gmail.com",
     "password": " Aswift07"
   },
   {
     "name": " Mwaura",
-    "email": " mwaura@gmail.com",
+    "email": "mwaura@gmail.com",
     "password": " Aswift07"
   },
   {
     "name": "shiro",
-    "email": " mwaura@gmail.com",
+    "email": "mwaura@gmail.com",
     "password": " Aswift0745"
   },
   {
@@ -31,7 +31,12 @@
   },
   {
     "name": " Maggy",
-    "email": " mwauramargaret1@gmail.com",
+    "email": "mwauramargaret1@gmail.com",
+    "password": " Aswift07"
+  },
+  {
+    "name": " glad",
+    "email": " gladysnjeri@gmail.com",
     "password": " Aswift07"
   }
 ]
