@@ -29,7 +29,7 @@
 </template>
 
 <script>
-    import  {mapState} from 'vuex'
+    import {mapGetters, mapState} from 'vuex'
     export default {
         data() {
             return {
@@ -38,7 +38,14 @@
                 password: " ",
             }
         },
-        computed : mapState(["token"]),
+        computed :  {
+            ...mapGetters([
+                'gettingMovies',
+                'currentuser',
+                'gettingcommentsandratings'
+                // ...
+            ]),
+        },
         methods: {
             create() {
                 console.log("The data i am passing : " + this.firstname + this.email + this.password);

@@ -47,7 +47,7 @@
 </template>
 
 <script>
-    import {mapState} from "vuex";
+    import {mapGetters, mapState} from "vuex";
     import CommentsAndRatings from "./CommentsAndRatings.vue";
     export default {
         name: "Movie",
@@ -58,11 +58,19 @@
             return {
                 comments : '',
                 rating : ' ',
-                email : ' '
+                email : ' ',
+                movies: [],
+                token: ' ',
+                comnra: []
             }
         },
         computed :{
-            ...mapState(["movies","token","commnra"]),
+            ...mapGetters([
+                'gettingMovies',
+                'currentuser',
+                'gettingcommentsandratings'
+                // ...
+            ]),
         },
         props: {
             movie: Array,

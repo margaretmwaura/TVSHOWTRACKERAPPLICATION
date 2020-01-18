@@ -29,7 +29,9 @@ export default new Vuex.Store({
                     var code = response.status;
                     if(code === 200)
                     {
+
                         this.state.token = response.data.token;
+                        console.log("The token gotten from signup " + this.state.token);
                         this.state.signupresponse = response.status;
                     }
                 })
@@ -46,6 +48,7 @@ export default new Vuex.Store({
                     if(code === 200)
                     {
                         this.state.token = response.data.token;
+                        console.log("The token gotten from Login " + this.state.token);
                         this.state.loginresponse = response.status;
                     }
                     else
@@ -63,7 +66,7 @@ export default new Vuex.Store({
             axios
                 .post('http://localhost:4000/moviedits',[moviename, moviegenre,moviecast,movieplot,movieimage],{
                     headers: {
-                        'Authorization': 'Bearer ' + this.state.name
+                        'Authorization': 'Bearer ' + this.state.token
                     }
                 })
                 .then(response => {
@@ -239,6 +242,12 @@ export default new Vuex.Store({
                 currentuser: state => {
                     return state.token
                 },
+                gettingMovies: state => {
+                    return state.movies
+                },
+                gettingcommentsandratings: state => {
+                    return state.commnra
+                }
             },
         actions:
             {

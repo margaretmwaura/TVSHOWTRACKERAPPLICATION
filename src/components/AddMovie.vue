@@ -54,7 +54,7 @@
 </template>
 
 <script>
-    import  {mapState} from 'vuex'
+    import {mapGetters} from 'vuex'
     import axios from "axios";
     import firebase from "firebase";
     export default {
@@ -68,7 +68,13 @@
                 movieimagesres : " "
             }
         },
-        computed : mapState(["token"]),
+        computed : {
+            ...mapGetters([
+                'currentuser',
+                // ...
+            ]),
+        },
+
         methods: {
             create() {
                 console.log("The data i am passing : " + this.moviename + this.moviecast + this.movieplot + this.moviegenre);
