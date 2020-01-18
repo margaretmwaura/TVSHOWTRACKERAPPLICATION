@@ -179,7 +179,7 @@ app.post('/addmovie',upload.single('image'), (req, res) =>
     }
 
 });
-app.post('/moviedits',verifyToken, (req, res) =>
+app.post('/moviedits', (req, res) =>
 {
     const moviedits = req.body;
     let movied = moviedits[1];
@@ -194,15 +194,15 @@ app.post('/moviedits',verifyToken, (req, res) =>
     let newmovie = new movie(id,movied[0] , movied[1] , movied[2] , movied[3] , movied[4].file);
     allmovies.push(newmovie);
 
-    jwt.verify(req.token,'secretkey',(err,auth) =>
-    {
-        console.log("This is the token " + req.token);
-        if(err)
-        {
-            res.sendStatus(403);
-            console.log("There was an error");
-        }
-        else {
+    // jwt.verify(req.token,'secretkey',(err,auth) =>
+    // {
+    //     console.log("This is the token " + req.token);
+    //     if(err)
+    //     {
+    //         res.sendStatus(403);
+    //         console.log("There was an error");
+    //     }
+    //     else {
             let datastr = JSON.stringify(allmovies , null , 2);
             userfile.writeFile('moviedata.json' , datastr , finished);
             function finished(error)
@@ -255,8 +255,8 @@ app.post('/moviedits',verifyToken, (req, res) =>
 
                 }
             }
-        }
-    });
+    //     }
+    // });
 
 });
 //subsribe route

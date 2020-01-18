@@ -2,23 +2,22 @@
     <div class="grid-frame">
         <div class="grid-container">
             <div class="grid-x">
-                <div class="cell medium-1 large-1 small-1"></div>
-                <div class="cell medium-1 small-1 large-1">
-                    <p id="userid"> {{movie.moviename}}</p>
+                <div class="cell medium-2 large-2 small-2">
+                    <p>{{movie.moviename}} - {{movie.moviegenre}}</p>
                 </div>
-                <div class="cell medium-1 small-1 large-1">
-                    <p id="genre"> {{movie.moviegenre}}</p>
+                <div class="cell medium-8 large-8 small-8">
+                    <div class="grid-y">
+                        <div class="cell medium-7 large-7 small-7">
+
+                        </div>
+                        <div class="cell medium-5 large-5 small-5">
+
+                        </div>
+                    </div>
                 </div>
-                <div class="cell medium-3 small-3 large-3">
-                    <p id="title">{{movie.moviecast}}</p>
+                <div class="cell medium-2 large-2 small-2">
+
                 </div>
-                <div class="cell medium-5 small-5 large-5">
-                    <p id="body">{{movie.movieplot}}</p>
-                </div>
-                <div class="cell medium-5 small-5 large-5">
-                    <p id="id">{{movie.id}}</p>
-                </div>
-                <div class="cell medium-1 large-1 small-1"></div>
             </div>
 
             <div class="grid-x">
