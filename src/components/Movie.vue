@@ -62,6 +62,7 @@
 <script>
     import {mapGetters, mapState} from "vuex";
     import CommentsAndRatings from "./CommentsAndRatings.vue";
+    import notificationmixin from "../Mixins/notificationmixin";
     export default {
         name: "Movie",
         components : {
@@ -165,7 +166,23 @@
                 }
 
             }
-        }
+        },
+        watch: {
+            '$store.state.subsciberesponse' : function () {
+                console.log("Susbcribing");
+                this.informwithnotification("Success" , "You are subscribed now");
+                this.$store.dispatch('clearsubscriptionresponse');
+                console.log("Store has changed");
+
+            },
+            '$store.state.subscribefail' : function () {
+                console.log("Not subscribed");
+                this.informwithnotification("Fail" , "You havent been added to the subscription list");
+                this.$store.dispatch('clearsubscriptionfailure');
+            }
+
+        },
+        mixins: [notificationmixin],
     }
 </script>
 

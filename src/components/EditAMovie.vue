@@ -59,7 +59,7 @@
     import axios from "axios";
     import firebase from "firebase";
     import movie from '../../movie'
-
+    import notificationmixin from "../Mixins/notificationmixin";
     export default {
         name: "EditAMovie",
         data() {
@@ -123,10 +123,26 @@
                 const analytics = firebase.analytics();
                 analytics.logEvent('create',"Event Editting");
                 console.log("We are editting a movie");
-                this.$store.dispatch('editamovie', [this.id,this.moviename, this.moviegenre,this.moviecast,this.moviecast,this.movieimagesres]);
+                this.$store.dispatch('editamovie', [this.id,this.moviename, this.moviegenre,this.moviecast,this.movieplot,this.movieimagesres]);
 
             }
         },
+        watch: {
+            '$store.state.editresponse' : function () {
+                console.log("A movie has been editted");
+                this.informwithnotification("Success" , "Movie has been editted");
+                this.$store.dispatch('cleareditmovieresponse');
+                console.log("Store has changed");
+
+            },
+            '$store.state.editfailure' : function () {
+                console.log("A movie has not been editted");
+                this.informwithnotification("Fail" , "Movie has been not been editted");
+                this.$store.dispatch('cleareditfailureresponse');
+            }
+
+        },
+        mixins: [notificationmixin],
     }
 </script>
 

@@ -18,6 +18,10 @@ export default new Vuex.Store({
         loginfailure : ' ',
         createresponse : ' ',
         createfailure : ' ',
+        editresponse : ' ',
+        editfailure : ' ',
+        deleteresponse : ' ',
+        deletefailure : ' ',
         subsciberesponse : ' ',
         subscribefail : ' ',
     },
@@ -73,7 +77,8 @@ export default new Vuex.Store({
                     var code = response.status;
                     if(code === 200)
                     {
-                        this.state.createresponse = response.status;
+                        this.state.createresponse = "Sucess";
+                        console.log("The store state " + this.state.createresponse);
                         console.log("Creating movies was a success + the response " + response.data.param);
                         let passed = JSON.parse(response.data.param);
                         console.log("This is the passed data " + passed);
@@ -181,10 +186,12 @@ export default new Vuex.Store({
                         console.log("This is the passed data " + passedm);
                         this.state.movies = [];
                         this.state.movies = passedm;
+                        this.state.deleteresponse = "Was a sucess"
                     }
                 })
                 .catch(error =>
                 {
+                    this.state.deletefailure = "It failed"
                 })
         },
         addSubscribermut(id,email)
@@ -195,11 +202,11 @@ export default new Vuex.Store({
                     var code = response.status;
                     if(code === 200)
                     {
-                        this.subsciberesponse = "Success"
+                        this.state.subsciberesponse = "Success"
                     }
                     else
                     {
-                        this.subscribefail = "Fialed"
+                        this.state.subscribefail = "Fialed"
                     }
                 })
                 .catch(error =>
@@ -216,24 +223,45 @@ export default new Vuex.Store({
                     if(code === 200)
                     {
                         console.log("Getting movies was a success + the response " + response.data.param);
-                        let passed = JSON.parse(response.data.param);
-                        console.log("This is the passed data " + passed);
-                        this.state.movies = [];
-                        this.state.movies = passed;
-                    }
-                    else
-                    {
-
+                        // let passed = JSON.parse(response.data.param);
+                        // console.log("This is the passed data " + passed);
+                        // this.state.movies = [];
+                        // this.state.movies = passed;
+                        this.state.editresponse = "Movieeditted"
                     }
                 })
                 .catch(error =>
                 {
-
+                    this.state.editfailure = "It failed"
                 })
         },
         logoutmut()
         {
             this.state.token = ' '
+        },
+        clearcreatemovieresponsemut()
+        {
+            this.state.createresponse = ' '
+        },
+        clearfailuremovieresponsemut()
+        {
+            this.state.createfailure = ' '
+        },
+        cleareditmovieresponsemut()
+        {
+            this.state.editresponse = ' '
+        },
+        cleareditfailureresponsemut()
+        {
+          this.state.editfailure = ' '
+        },
+        clearsubscriptionresponsemut()
+        {
+            this.state.subsciberesponse = ' '
+        },
+        clearsubscriptionfailuremut()
+        {
+            this.state.subscribefail = ' '
         }
 
     },
@@ -292,6 +320,30 @@ export default new Vuex.Store({
                 logout({commit})
                 {
                     commit('logoutmut')
+                },
+                clearcreatemovieresponse({commit})
+                {
+                    commit('clearcreatemovieresponsemut')
+                },
+                clearfailuremovieresponse({commit})
+                {
+                    commit('clearfailuremovieresponsemut')
+                },
+                cleareditmovieresponse({commit})
+                {
+                    commit('cleareditmovieresponsemut')
+                },
+                cleareditfailureresponse({commit})
+                {
+                    commit('cleareditfailureresponsemut')
+                },
+                clearsubscriptionresponse({commit})
+                {
+                    commit('clearsubscriptionresponsemut')
+                },
+                clearsubscriptionfailure({commit})
+                {
+                    commit('clearsubscriptionfailuremut')
                 }
             },
 

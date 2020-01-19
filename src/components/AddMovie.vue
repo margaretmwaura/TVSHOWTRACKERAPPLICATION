@@ -57,7 +57,10 @@
     import {mapGetters} from 'vuex'
     import axios from "axios";
     import firebase from "firebase";
+    import notificationmixin from "../Mixins/notificationmixin";
+
     export default {
+
         data() {
             return {
                 moviename : " ",
@@ -74,7 +77,6 @@
                 // ...
             ]),
         },
-
         methods: {
             create() {
                 console.log("The data i am passing : " + this.moviename + this.moviecast + this.movieplot + this.moviegenre);
@@ -118,6 +120,22 @@
 
             }
         },
+        watch: {
+            '$store.state.createresponse' : function () {
+                console.log("A movie has been created");
+                this.informwithnotification("Success" , "Movie has been created");
+                this.$store.dispatch('clearcreatemovieresponse');
+                console.log("Store has changed");
+
+            },
+            '$store.state.createfailure' : function () {
+                console.log("A movie has not been created");
+                this.informwithnotification("Fail" , "Movie has been not been created");
+                this.$store.dispatch('clearfailuremovieresponse');
+            }
+
+        },
+        mixins: [notificationmixin],
 
     }
 </script>

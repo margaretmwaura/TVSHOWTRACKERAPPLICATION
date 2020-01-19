@@ -49,7 +49,7 @@
     <router-view>
 
     </router-view>
-
+        <notifications group="foo" />
     </div>
 </template>
 

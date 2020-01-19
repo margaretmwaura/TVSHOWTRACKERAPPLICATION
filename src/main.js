@@ -8,6 +8,7 @@ import AddMovie from "./components/AddMovie";
 import MovieList from "./components/MovieList";
 import EditAMovie from "./components/EditAMovie";
 import Movie from "./components/Movie";
+import Notifications from 'vue-notification'
 import date from "./Filters/date";
 
 const firebaseConfig = {
@@ -22,7 +23,7 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-import Notifications from 'vue-notification'
+
 Vue.use(Notifications);
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
