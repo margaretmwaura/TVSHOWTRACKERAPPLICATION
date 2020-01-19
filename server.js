@@ -538,7 +538,7 @@ app.post('/movieditsedit', (req, res) =>
     let genre = moviedits[2];
     let cast = moviedits[3];
     let plot = moviedits[4];
-    let mimage = moviedits[5];
+    let mimage = moviedits[5].file;
     console.log("The updating dits " + id + " " + name + " " + genre + " " + cast + " " + plot + " " + mimage);
     for(let i=0 ; i < allmovies.length ; i++) {
         let readmovieid = allmovies[i].id;

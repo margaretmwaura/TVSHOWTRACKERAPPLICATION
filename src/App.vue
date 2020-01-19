@@ -1,7 +1,5 @@
 <template>
     <div>
-
-
     <div id="app" class="grid-frame">
               <div id="app_bannermessage" class="grid-container grid-y">
 

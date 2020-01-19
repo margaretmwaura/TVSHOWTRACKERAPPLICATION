@@ -7,6 +7,8 @@ import Login from "./components/Login";
 import AddMovie from "./components/AddMovie";
 import MovieList from "./components/MovieList";
 import EditAMovie from "./components/EditAMovie";
+import Movie from "./components/Movie";
+import date from "./Filters/date";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAedwFar_PxguO-ebvRUnM39rmPxH_OMYY",
@@ -24,7 +26,7 @@ import Notifications from 'vue-notification'
 Vue.use(Notifications);
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
-
+Vue.filter('date',date);
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 import firebase from "firebase";
@@ -58,6 +60,12 @@ const routes = [
     name : 'Edit',
     path: '/edit',
     component: EditAMovie,
+    props:true
+  },
+  {
+    name : 'Info',
+    path: '/info',
+    component: Movie,
     props:true
   },
 ];

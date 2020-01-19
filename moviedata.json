@@ -1,50 +1,42 @@
 [
   {
-    "id": "k5jihdt6ecoetn935nj",
-    "moviename": " Friends With better Lives",
-    "moviegenre": "Zoe-Litter Jones, James Van , Kevin Connoly ",
-    "moviecast": " Six people all think their friends have better lives. Will (James Van Der Beek) is a newly-single bachelor pining for his ex-wife; Jules (Brooklyn Decker) and Lowell (Rick Donald) are newly engaged; Kate (Zoe Lister-Jones) is a successful, single career woman who does not have the best luck with dating; and Andi (Majandra Delfino) and Bobby (Kevin Connolly) are a happily married couple with one child and one on the way, pining for their younger fun days.",
-    "movieplot": "Drama ",
-    "movieimag": "2020-01-18T11:28:54.599Zfwbl.jpeg"
+    "id": "k5kzuh8cfyeixfmljct",
+    "moviename": " Friends With Better Lives",
+    "moviegenre": " Comedy",
+    "moviecast": " Zoe Lister Jones",
+    "movieplot": " Zoe Lister Jones",
+    "movieimag": "2020-01-19T12:25:48.410Zfwbl.jpeg"
   },
   {
-    "id": "k5jil9shvkj78z6jjgc",
-    "moviename": "God Friended me",
-    "moviegenre": "Brandon Michael Hall, Viiolet Beane , Suraj Sharma",
-    "moviecast": "God Friended Me is an American comedy-drama television series created by Steven Lilien and Bryan Wynbrandt. It stars Brandon Micheal Hall, Violett Beane, Suraj Sharma, Javicia Leslie and Joe Morton.[1] The series was ordered on May 11, 2018 and premiered on September 30, 2018 on CBS.[2] CBS renewed the series for a second season of 20 episodes[3] which premiered on September 29, 2019.[4]",
-    "movieplot": "Comedy - Drama",
-    "movieimag": "2020-01-18T11:34:35.032Zgodfriendedme.jpeg"
+    "id": "k5kzxc5sltdq50mc51m",
+    "moviename": " God Firended Me",
+    "moviegenre": " Comedy - Drama",
+    "moviecast": "Brandon Michael , Hall Suraj Sharma , Joe Morton",
+    "movieplot": "Brandon Michael , Hall Suraj Sharma , Joe Morton",
+    "movieimag": "2020-01-19T12:27:58.642ZGodfriended.jpeg"
   },
   {
-    "id": "k5jinm0g258wr2hu8l5",
-    "moviename": "How to get away with murder",
-    "moviegenre": "Viola Davis ,Annelis Ketin , Charlie Weber",
-    "moviecast": "How to Get Away with Murder is an American legal thriller television series that premiered on ABC on September 25, 2014.[1] The series was created by Peter Nowalk, and produced by Shonda Rhimes and ABC Studios. The series airs on ABC as part of a night of programming, all under Rhimes's Shondaland production company.[2]",
-    "movieplot": "Comedy - Drama",
-    "movieimag": "2020-01-18T11:35:06.545Zhowtogetaway.jpeg"
+    "id": "k5kzzy3vpt3ddg76urs",
+    "moviename": "How to get away with murder ",
+    "moviegenre": " Legal Thriller",
+    "moviecast": " Jack Falahee , Analise Keating",
+    "movieplot": " Viola Davis stars as Annalise Keating, a law professor at a prestigious Philadelphia university who, with five of her students, becomes entwined in a murder plot.[3] The series features an ensemble cast with Alfred Enoch, Jack Falahee, Aja Naomi King, Matt McGorry, and Karla Souza as Keating's students, Charlie Weber and Liza Weil as her employees, and Billy Brown as a detective with the Philadelphia Police Department, who is Annalise's lover. From the third season onward, Conrad Ricamora was promoted to the main cast after recurring heavily in the first two seasons.[4]",
+    "movieimag": "2020-01-19T12:28:45.674Zmurder.jpeg"
   },
   {
-    "id": "k5jipna1vq142mb7exk",
-    "moviename": "Mom",
-    "moviegenre": "Anna Fallis , Allison Janey",
-    "moviecast": "Mom is an American sitcom television series that premiered on CBS on September 23, 2013. The series is created by Chuck Lorre, Eddie Gorodetsky, and Gemma Baker, while the former two also serve as executive producers on the series, along with Nick Bakay. [1] On February 5, 2019, it was renewed for its seventh and eighth seasons,[2] with the seventh season premiering on September 26, 2019.[3]",
-    "movieplot": "Comedy ",
-    "movieimag": "2020-01-18T11:37:11.034Zmom.jpeg"
+    "id": "k5l01sas392vxudlhkn",
+    "moviename": " Mom",
+    "moviegenre": " Comedy",
+    "moviecast": " Anna Faris , Allison Janey",
+    "movieplot": " Mom is an American sitcom television series that premiered on CBS on September 23, 2013. The series is created by Chuck Lorre, Eddie Gorodetsky, and Gemma Baker, while the former two also serve as executive producers on the series, along with Nick Bakay. [1] On February 5, 2019, it was renewed for its seventh and eighth seasons,[2] with the seventh season premiering on September 26, 2019.[3]",
+    "movieimag": "2020-01-19T12:30:34.332Zmom2.jpeg"
   },
   {
-    "id": "k5jitj6ou40cx8q9e7g",
+    "id": "k5l03j7ji8w5z1zqf8i",
     "moviename": " Money Heist",
-    "moviegenre": " Salvador Dali , Alvaro Morte , Javier Gultrierz",
-    "moviecast": " Money Heist (Spanish: La casa de papel, transl. The House of Paper) is a Spanish television heist crime drama series. Created by Álex Pina, the series was initially intended as a limited series to be told in two parts. It had its original run of 15 episodes on Spanish network Antena 3 from 2 May 2017 through 23 November 2017. Netflix acquired the global streaming rights in late 2017. ",
-    "movieplot": " Spanish Television",
-    "movieimag": "2020-01-18T11:41:00.183Zmoneyheist.jpeg"
-  },
-  {
-    "id": "k5jivpm66r2y5v9mgge",
-    "moviename": "Silicon Valley",
-    "moviegenre": " Salvador Dali , Alvaro Morte , Javier Gultrierz",
-    "moviecast": " Silicon Valley is an American comedy television series created by Mike Judge, John Altschuler and Dave Krinsky, that premiered on April 6, 2014, on HBO.[1] The series focuses on five young men who found a startup company in Silicon Valley.[2][3] A sixth and final season consisting of seven episodes premiered on October 27, 2019, and concluded on December 8, 2019.[4][5",
-    "movieplot": "Comedy",
-    "movieimag": "2020-01-18T11:42:42.495Zsiliconvalley.jpeg"
+    "moviegenre": " Spanish Television Thriller",
+    "moviecast": " Alvaro-Morte , Paco Tous , Alba Folres",
+    "movieplot": " Alvaro-Morte , Paco Tous , Alba Folres",
+    "movieimag": "2020-01-19T12:33:00.382Zmoneyheist.jpeg"
   }
 ]

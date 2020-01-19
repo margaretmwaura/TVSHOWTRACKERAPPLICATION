@@ -114,7 +114,7 @@
             {
                 const analytics = firebase.analytics();
                 analytics.logEvent('create',"Event creation");
-                this.$store.dispatch('createmovie',[this.moviename, this.moviecast,this.movieplot,this.moviegenre,this.movieimagesres]);
+                this.$store.dispatch('createmovie',[this.moviename, this.moviegenre,this.moviecast,this.movieplot,this.movieimagesres]);
 
             }
         },
