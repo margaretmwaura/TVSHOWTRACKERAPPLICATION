@@ -44,7 +44,7 @@
                             </label>
                         </div>
                         <div class="cell medium-12 large-12 small-12">
-                            <button>Edit movie</button>
+                            <button class="primary button expanded" v-bind:disabled="disabled">Edit movie</button>
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,8 @@
                 moviecast: ' ',
                 moviegenre: ' ',
                 movieplot: ' ',
-                movieimagesres : ' '
+                movieimagesres : ' ',
+                disabled : true
             }
         },
         created() {
@@ -102,6 +103,7 @@
                             console.log("The response " + response.data);
                             this.movieimagesres = response.data;
                             console.log("This is the image name stored " + this.movieimagesres)
+                            this.disabled = false
                         }
                         else
                         {
@@ -123,7 +125,15 @@
                 const analytics = firebase.analytics();
                 analytics.logEvent('create',"Event Editting");
                 console.log("We are editting a movie");
-                this.$store.dispatch('editamovie', [this.id,this.moviename, this.moviegenre,this.moviecast,this.movieplot,this.movieimagesres]);
+
+
+                if(this.moviename !== " " || this.moviegenre !== " " || this.moviecast !== " " || this.movieplot !== " " || this.movieimagesres !== " ")
+                {
+                    this.$store.dispatch('editamovie', [this.id,this.moviename, this.moviegenre,this.moviecast,this.movieplot,this.movieimagesres]);
+                }
+                else {
+                    this.informwithnotification("Error" , "The details entered are insufficient");
+                }
 
             }
         },

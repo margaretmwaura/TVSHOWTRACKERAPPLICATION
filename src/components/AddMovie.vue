@@ -3,6 +3,8 @@
         <div>
 
             <form v-on:submit.prevent="create" enctype="multipart/form-data">
+
+                <p> Add a new Movie to the list of movies</p>
                 <div class="grid-container">
                     <div class="grid-x grid-padding-x">
                         <div class="cell medium-12 large-12 small-12">
@@ -11,7 +13,7 @@
                             </label>
                         </div>
                         <div class="cell medium-12 large-12 small-12">
-                            <button>Upload image</button>
+                            <button class="button">Upload image</button>
                         </div>
                     </div>
                 </div>
@@ -41,7 +43,7 @@
                             </label>
                         </div>
                         <div class="cell medium-12 large-12 small-12">
-                            <button>Create account</button>
+                            <button class="primary button expanded" v-bind:disabled="disabled">Add Movie</button>
                         </div>
                     </div>
                 </div>
@@ -68,7 +70,8 @@
                 movieplot : " ",
                 moviegenre : " ",
                 movieimage : " ",
-                movieimagesres : " "
+                movieimagesres : " ",
+                disabled : true
             }
         },
         computed : {
@@ -96,6 +99,7 @@
                             console.log("The response " + response.data);
                             this.movieimagesres = response.data;
                             console.log("This is the image name stored " + this.movieimagesres)
+                            this.disabled = false
                         }
                         else
                         {
@@ -116,9 +120,21 @@
             {
                 const analytics = firebase.analytics();
                 analytics.logEvent('create',"Event creation");
-                this.$store.dispatch('createmovie',[this.moviename, this.moviegenre,this.moviecast,this.movieplot,this.movieimagesres]);
 
-            }
+                if(this.moviename !== " " || this.moviegenre !== " " || this.moviecast !== " " || this.movieplot !== " " || this.movieimagesres !== " ")
+                {
+                    this.$store.dispatch('createmovie',[this.moviename, this.moviegenre,this.moviecast,this.movieplot,this.movieimagesres]);
+                    this.moviename = " ";
+                    this.moviegenre = " ";
+                    this.moviecast = " ";
+                    this.movieplot = " ";
+                }
+                else
+                {
+                    this.informwithnotification("Error" , "The details entered are insufficient");
+                }
+
+            },
         },
         watch: {
             '$store.state.createresponse' : function () {
@@ -140,6 +156,13 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+    p{
+        font-weight: bold;
+        text-align: center;
+        font-size: 17px;
+    }
+    label{
+        font-size:15px;
+    }
 </style>
