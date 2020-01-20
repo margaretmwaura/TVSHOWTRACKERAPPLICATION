@@ -194,15 +194,15 @@ app.post('/moviedits', (req, res) =>
     let newmovie = new movie(id,movied[0] , movied[1] , movied[2] , movied[3] , movied[4].file);
     allmovies.push(newmovie);
 
-    // jwt.verify(req.token,'secretkey',(err,auth) =>
-    // {
-    //     console.log("This is the token " + req.token);
-    //     if(err)
-    //     {
-    //         res.sendStatus(403);
-    //         console.log("There was an error");
-    //     }
-    //     else {
+    jwt.verify(req.token,'secretkey',(err,auth) =>
+    {
+        console.log("This is the token " + req.token);
+        if(err)
+        {
+            res.sendStatus(403);
+            console.log("There was an error");
+        }
+        else {
             let datastr = JSON.stringify(allmovies , null , 2);
             userfile.writeFile('moviedata.json' , datastr , finished);
             function finished(error)
@@ -255,8 +255,8 @@ app.post('/moviedits', (req, res) =>
 
                 }
             }
-    //     }
-    // });
+        }
+    });
 
 });
 //subsribe route
@@ -444,66 +444,61 @@ app.delete('/deletemovie/:id',(req,res) => {
 
     const movieiddits = req.params.id;
     console.log("Data that has been sent " + movieiddits);
-    for(let i=0 ; i<allmovies.length ; i++)
-    {
-        let current_movieid = allmovies[i].id;
-        console.log("The real ids " +movieiddits + " "+" the comparing ud " + current_movieid);
-        if(movieiddits === current_movieid)
-        {
-            const index = allmovies.indexOf(allmovies[i]);
-            console.log("This is the index of the movie to be deleted " + index);
-            console.log("A match has been found for the movies");
-            console.log("The real ids " +movieiddits + " "+" the comparing ud " + current_movieid);
-            if (index > -1) {
-                allmovies.splice(index, 1);
-                for(let i=0 ; i<allcommentsnra.length ; i++)
-                {
-                    let current_mommentraid = allcommentsnra[i].id;
-                    console.log("The real ids " + movieiddits + " "+" the comparing ud " + current_mommentraid);
-                    if(movieiddits === current_mommentraid)
-                    {
-                        console.log("A match has been found for the comments");
-                        const index = allcommentsnra.indexOf(allcommentsnra[i]);
-                        console.log("This is the index of the movie to be deleted " + index);
-                        if (index > -1) {
-                            allcommentsnra.splice(index, 1);
 
-                            for(let i=0 ; i<allsubscrip.length ; i++)
-                            {
-                                let current_subscription  = allsubscrip[i].id;
-                                console.log("The real ids " +movieiddits + " "+" the comparing ud " + current_subscription);
-                                if(movieiddits === current_subscription)
-                                {
-                                    const index = allsubscrip.indexOf(allsubscrip[i]);
-                                    console.log("A match has been found for the subscribers");
-                                    if(index > -1)
-                                    {
-                                        allsubscrip.splice(index , 1);
+    jwt.verify(req.token,'secretkey',(err,auth) => {
+        for (let i = 0; i < allmovies.length; i++) {
+            let current_movieid = allmovies[i].id;
+            console.log("The real ids " + movieiddits + " " + " the comparing ud " + current_movieid);
+            if (movieiddits === current_movieid) {
+                const index = allmovies.indexOf(allmovies[i]);
+                console.log("This is the index of the movie to be deleted " + index);
+                console.log("A match has been found for the movies");
+                console.log("The real ids " + movieiddits + " " + " the comparing ud " + current_movieid);
+                if (index > -1) {
+                    allmovies.splice(index, 1);
+                    for (let i = 0; i < allcommentsnra.length; i++) {
+                        let current_mommentraid = allcommentsnra[i].id;
+                        console.log("The real ids " + movieiddits + " " + " the comparing ud " + current_mommentraid);
+                        if (movieiddits === current_mommentraid) {
+                            console.log("A match has been found for the comments");
+                            const index = allcommentsnra.indexOf(allcommentsnra[i]);
+                            console.log("This is the index of the movie to be deleted " + index);
+                            if (index > -1) {
+                                allcommentsnra.splice(index, 1);
+
+                                for (let i = 0; i < allsubscrip.length; i++) {
+                                    let current_subscription = allsubscrip[i].id;
+                                    console.log("The real ids " + movieiddits + " " + " the comparing ud " + current_subscription);
+                                    if (movieiddits === current_subscription) {
+                                        const index = allsubscrip.indexOf(allsubscrip[i]);
+                                        console.log("A match has been found for the subscribers");
+                                        if (index > -1) {
+                                            allsubscrip.splice(index, 1);
                                             // Rewritting the file
                                             //There are two files
-                                            let datastr = JSON.stringify(allmovies , null , 2);
-                                            userfile.writeFile('moviedata.json' , datastr , finished);
-                                            function finished(error)
-                                            {
-                                                if(!error)
-                                                {
+                                            let datastr = JSON.stringify(allmovies, null, 2);
+                                            userfile.writeFile('moviedata.json', datastr, finished);
+
+                                            function finished(error) {
+                                                if (!error) {
                                                     console.log("Movie removed from the file");
-                                                    let usercomments = JSON.stringify(allcommentsnra , null , 2);
-                                                    userfile.writeFile('commentsandratings.json' , usercomments , finished);
-                                                    function finished(error)
-                                                    {
-                                                        if(!error)
-                                                        {
-                                                            let datasub = JSON.stringify(allsubscrip , null , 2);
-                                                            userfile.writeFile('subscribers.json' , datasub , finished);
-                                                            function finished(error)
-                                                            {
-                                                                if(!error)
-                                                                {
+                                                    let usercomments = JSON.stringify(allcommentsnra, null, 2);
+                                                    userfile.writeFile('commentsandratings.json', usercomments, finished);
+
+                                                    function finished(error) {
+                                                        if (!error) {
+                                                            let datasub = JSON.stringify(allsubscrip, null, 2);
+                                                            userfile.writeFile('subscribers.json', datasub, finished);
+
+                                                            function finished(error) {
+                                                                if (!error) {
                                                                     console.log("Comments has been removed from the file");
                                                                     let mymovies = JSON.stringify(allmovies);
                                                                     let mycomments = JSON.stringify(allcommentsnra);
-                                                                    res.status(200).json({ commnra : mycomments , movies : mymovies});
+                                                                    res.status(200).json({
+                                                                        commnra: mycomments,
+                                                                        movies: mymovies
+                                                                    });
                                                                 }
                                                             }
 
@@ -513,18 +508,18 @@ app.delete('/deletemovie/:id',(req,res) => {
                                             }
                                         }
 
+                                    }
+
                                 }
 
+
                             }
-
-
                         }
                     }
                 }
             }
         }
-    }
-
+    });
 });
 
 
@@ -540,58 +535,62 @@ app.post('/movieditsedit', (req, res) =>
     let plot = moviedits[4];
     let mimage = moviedits[5].file;
     console.log("The updating dits " + id + " " + name + " " + genre + " " + cast + " " + plot + " " + mimage);
-    for(let i=0 ; i < allmovies.length ; i++) {
-        let readmovieid = allmovies[i].id;
-        console.log("The real ids " + readmovieid + " " + " the comparing ud " + id);
-        if (readmovieid === id) {
-            allmovies[i].moviename = name;
-            allmovies[i].moviegenre = genre;
-            allmovies[i].moviecast = cast;
-            allmovies[i].movieplot = plot;
-            allmovies[i].movieimag = mimage;
 
-            let datastr = JSON.stringify(allmovies, null, 2);
-            userfile.writeFile('moviedata.json', datastr, finished);
+    jwt.verify(req.token,'secretkey',(err,auth) => {
+        for (let i = 0; i < allmovies.length; i++) {
+            let readmovieid = allmovies[i].id;
+            console.log("The real ids " + readmovieid + " " + " the comparing ud " + id);
+            if (readmovieid === id) {
+                allmovies[i].moviename = name;
+                allmovies[i].moviegenre = genre;
+                allmovies[i].moviecast = cast;
+                allmovies[i].movieplot = plot;
+                allmovies[i].movieimag = mimage;
 
-            function finished(error) {
-                if (error) {
-                    res.sendStatus(403);
-                    console.log("There was an error , no data added to the file");
-                } else {
-                    console.log("Comparing time");
-                    for (let i = 0; i < allsubscrip.length; i++) {
-                        let compid = allsubscrip[i].id;
-                        if (id === compid) {
-                            console.log("Matching ids " + id + " " + compid);
-                            let emails = allsubscrip[i].subdetails;
-                            for (let i = 0; i < emails.length; i++) {
-                                let emailname = emails[i].email;
-                                var mailOptions = {
-                                    from: 'mwauramargaret1@gmail.com',
-                                    to: emailname,
-                                    subject: 'Updates on the movies',
-                                    text: 'Your movie subscription ' + name + ' has been updated'
-                                };
-                                // Sending a mail syaing a movie has been posted
-                                transporter.sendMail(mailOptions, function (error, info) {
-                                    if (error) {
-                                        console.log(error);
-                                    } else {
-                                        console.log('Email sent: ' + info.response);
-                                    }
-                                    console.log("Emails is " + emailname);
-                                });
+                let datastr = JSON.stringify(allmovies, null, 2);
+                userfile.writeFile('moviedata.json', datastr, finished);
+
+                function finished(error) {
+                    if (error) {
+                        res.sendStatus(403);
+                        console.log("There was an error , no data added to the file");
+                    } else {
+                        console.log("Comparing time");
+                        for (let i = 0; i < allsubscrip.length; i++) {
+                            let compid = allsubscrip[i].id;
+                            if (id === compid) {
+                                console.log("Matching ids " + id + " " + compid);
+                                let emails = allsubscrip[i].subdetails;
+                                for (let i = 0; i < emails.length; i++) {
+                                    let emailname = emails[i].email;
+                                    var mailOptions = {
+                                        from: 'mwauramargaret1@gmail.com',
+                                        to: emailname,
+                                        subject: 'Updates on the movies',
+                                        text: 'Your movie subscription ' + name + ' has been updated'
+                                    };
+                                    // Sending a mail syaing a movie has been posted
+                                    transporter.sendMail(mailOptions, function (error, info) {
+                                        if (error) {
+                                            console.log(error);
+                                        } else {
+                                            console.log('Email sent: ' + info.response);
+                                        }
+                                        console.log("Emails is " + emailname);
+                                    });
+                                }
                             }
+
                         }
 
+                        let mymovies = JSON.stringify(allmovies);
+                        res.status(200).json({movies: mymovies});
                     }
-
-                    let mymovies = JSON.stringify(allmovies);
-                    res.status(200).json({movies: mymovies});
                 }
             }
         }
-    }
+
+    });
 });
 function verifyToken(req,res,next)
 {

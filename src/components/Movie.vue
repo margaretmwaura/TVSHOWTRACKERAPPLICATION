@@ -48,9 +48,9 @@
                     <button @click="subscribe">Subscribe</button>
                     <br>
                     <br>
-                    <router-link :to="{ name: 'Edit', params: { movie: this.movie } }">Navigate to Edit</router-link>
+                    <router-link :to="{ name: 'Edit', params: { movie: this.movie } }" v-if="checkingtoken">Navigate to Edit</router-link>
                     <br>
-                    <button @click="deletemovie">Delete Movie</button>
+                    <button @click="deletemovie" v-if="checkingtoken">Delete Movie</button>
                 </div>
             </div>
         </div>
@@ -94,6 +94,21 @@
                 'gettingcommentsandratings'
                 // ...
             ]),
+            checkingtoken()
+            {
+                if(this.currentuser !== ' ')
+                {
+                    console.log("The Token is present " + this.currentuser);
+                    this.check = true;
+                    return true;
+                }
+                else
+                {
+                    console.log("The Token is absent" + this.currentuser);
+                    this.check = false;
+                    return false
+                }
+            },
         },
         created() {
             console.log("Info has been called");

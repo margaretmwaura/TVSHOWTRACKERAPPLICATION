@@ -1,14 +1,8 @@
 import Vue from 'vue';
 import App from './App.vue';
-import VueRouter from 'vue-router';
 import store from "../store";
-import Signup from "./components/Signup.vue";
-import Login from "./components/Login";
-import AddMovie from "./components/AddMovie";
-import MovieList from "./components/MovieList";
-import EditAMovie from "./components/EditAMovie";
-import Movie from "./components/Movie";
 import Notifications from 'vue-notification'
+import router from "./approutes/routes";
 import date from "./Filters/date";
 
 const firebaseConfig = {
@@ -25,55 +19,11 @@ firebase.initializeApp(firebaseConfig);
 
 
 Vue.use(Notifications);
-Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 Vue.filter('date',date);
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 import firebase from "firebase";
-
-const routes = [
-  {
-    name : 'Sign',
-    path: '/sign',
-    component: Signup,
-
-  },
-  {
-    name : 'Login',
-    path: '/login',
-    component: Login,
-
-  },
-  {
-    name : 'Create',
-    path: '/create',
-    component: AddMovie,
-
-  },
-  {
-    name : 'Show',
-    path: '/show',
-    component: MovieList,
-
-  },
-  {
-    name : 'Edit',
-    path: '/edit',
-    component: EditAMovie,
-    props:true
-  },
-  {
-    name : 'Info',
-    path: '/info',
-    component: Movie,
-    props:true
-  },
-];
-const router = new VueRouter({
-  mode: 'history',
-  routes: routes
-});
 
 new Vue({
   router,

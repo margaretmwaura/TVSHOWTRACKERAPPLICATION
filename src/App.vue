@@ -20,10 +20,10 @@
                         <div class="cell small-12 large-8 medium-8">
                             <div id="app_bannermessage_inner">
                                 <router-link to="/show" id="thing">Movies</router-link>
-                                <router-link to="/create" id="thingt">Create</router-link>
-                                <router-link to="/sign" id="thingtt">Signup</router-link>
-                                <router-link to="/Login" id="thingttt">Login</router-link>
-                                <button id="log_out" @click="logoutuser" >Log Out</button>
+                                <router-link to="/create" id="thingt" v-if="checkingtoken">Create</router-link>
+                                <router-link to="/sign" id="thingtt" v-if="!checkingtoken">Signup</router-link>
+                                <router-link to="/Login" id="thingttt" v-if="!checkingtoken">Login</router-link>
+                                <button id="log_out" @click="logoutuser" v-if="checkingtoken">Log Out</button>
                             </div>
                         </div>
 
@@ -46,6 +46,8 @@
 
 
     </div>
+        <button v-if="checkingtoken" id="app_sanitycheck">You are Logged in</button>
+        <button v-if="!checkingtoken" id="app_sanitychecknot">You are not Logged in</button>
     <router-view>
 
     </router-view>
@@ -55,29 +57,46 @@
 
 <script>
     import Navbar from "./components/Navbar.vue";
-    import {mapState} from "vuex";
+    import {mapGetters, mapState} from "vuex";
     export default {
         name: 'app',
         components:
             {
-                Navbar
+                Navbar,
+
             },
         data (){
             return {
-
+                check: ' ',
             }
         },
-        computed :  {
-            token () {
-                return this.$store.getters.currentuser
-            }
+        computed : {
+            ...mapGetters([
+                'currentuser',
+                // ...
+            ]),
+            checkingtoken()
+            {
+                if(this.currentuser !== ' ')
+                {
+                    console.log("The Token is present " + this.currentuser);
+                    this.check = true;
+                    return true;
+                }
+                else
+                {
+                    console.log("The Token is absent" + this.currentuser);
+                    this.check = false;
+                    return false
+                }
+            },
         },
         methods: {
             logoutuser()
             {
                 this.$store.dispatch('logout');
+            },
 
-            }
         }
     }
 </script>
@@ -190,6 +209,21 @@
 
 
             }
+        }
+
+        &_sanitycheck
+        {
+            margin-top: 3%;
+            color: green;
+            background-color: indianred;
+            padding: 15px;
+        }
+        &_sanitychecknot
+        {
+            margin-top: 3%;
+            color: rebeccapurple;
+            background-color: indianred;
+            padding: 15px;
         }
 
     }
