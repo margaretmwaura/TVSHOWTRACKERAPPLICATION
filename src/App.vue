@@ -19,7 +19,7 @@
                         <div class="cell small-0 large-2 medium-2"></div>
                         <div class="cell small-12 large-8 medium-8">
                             <div id="app_bannermessage_inner">
-                                <router-link to="/show" id="thing">Movies</router-link>
+                                <router-link to="/" id="thing">Movies</router-link>
                                 <router-link to="/create" id="thingt" v-if="checkingtoken">Create</router-link>
                                 <router-link to="/sign" id="thingtt" v-if="!checkingtoken">Signup</router-link>
                                 <router-link to="/Login" id="thingttt" v-if="!checkingtoken">Login</router-link>

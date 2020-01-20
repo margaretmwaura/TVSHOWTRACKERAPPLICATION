@@ -3,53 +3,61 @@
         <div class="grid-container">
             <div class="grid-container" id="top">
                 {{moviename}} - {{moviegenre}}
+                <br>
             </div>
-            <div class="grid-x grid-container" id="moviedits">
-                <div class="cell medium-6 large-6 small-12" id="moviedits_im">
+            <div class="grid-x grid-container grid-margin-x" id="moviedits">
+                <div class="cell medium-12 large-6 small-12" id="moviedits_im">
                     <img :src="`../../public/images/${movieimagesres}`"/>
                 </div>
-                <div class="cell medium-6 large-6 small-12" id="moviedits_n">
+                <div class="cell medium-12 large-6 small-12" id="moviedits_n">
                   {{movieplot}}
                     <br>
                     <br>
                     <p>Behold the cast :: {{moviecast}}</p>
+                </div>
+            </div>
+            <div class="grid-x grid-margin-x" id="comments">
+                <div class="cell medium-12 large-4 small-12" id="comments_input">
+                    <p> Give us your feedback and rate it </p>
+                    <div class="input-group">
+                        <span class="input-group-label"> </span>
+                        <input class="input-group-field" v-model="comments" placeholder="Place your comments" >
+                        <div class="input-group-button">
+                            <input type="submit" class="button" value="Submit" v-on:click="addcomment">
+                        </div>
+                    </div>
+                    <p>Add your rating below between 1-5</p>
+                    <div class="input-group">
+                        <span class="input-group-label">1-5</span>
+                        <input class="input-group-field" v-model="rating" placeholder="Place your rating" >
+                        <div class="input-group-button">
+                            <input type="submit" class="button" value="Submit" v-on:click="addrating">
+                        </div>
+                    </div>
 
                 </div>
-
-            </div>
-            <div class="grid-x" id="comments">
-                <div class="cell medium-4 large-4 small-4" id="comments_peoples">
+                <div class="cell medium-12 large-4 small-12" id="comments_peoples">
                     <h6>Other peoples reviews</h6>
                         <div v-for="comment in gettingcommentsandratings" :key="comment.id">
                             <div v-if="booleandeterminant(comment.id , movie.id)">
                                 <li v-for="item in comment.comments" :key="item.id" style="list-style: none">
                                     <p>{{item.message}} sent one <span>{{item.time | date }}</span></p>
                                 </li>
-                                <p>Rating {{ratenum( comment.rate,  comment.num)}}</p>
+                                <p>Rating {{ratenum( comment.rate,  comment.num)}} </p>
                             </div>
 
                         </div>
                 </div>
-                <div class="cell medium-4 large-4 small-4" id="comments_input">
-                    <p>How is the show ? Give us your feedback . Get to rate it </p>
-                    <input v-model="comments" placeholder="Place your comments"/>
-                    <br>
-                    <button v-on:click="addcomment">Add comment</button>
-                    <br>
-                    <p>Add your rating below</p>
-                    <input v-model="rating" placeholder="Place your rating " v-on:blur="addrating"/>
-                </div>
-                <div class="cell medium-4 large-4 small-4" id="comments_subscribe">
-
-                    <p>Get to know whenver there is a change in the show</p>
-
-                    <input v-model="email" placeholder="enter your email">
-                    <br>
-                    <button @click="subscribe">Subscribe</button>
-                    <br>
-                    <br>
-                    <router-link :to="{ name: 'Edit', params: { movie: this.movie } }" v-if="checkingtoken">Navigate to Edit</router-link>
-                    <br>
+                <div class="cell medium-12 large-4 small-12" id="comments_subscribe">
+                    <p>Subscribe</p>
+                    <div class="input-group">
+                        <span class="input-group-label"> </span>
+                        <input class="input-group-field" v-model="email" placeholder="enter your email" >
+                        <div class="input-group-button">
+                            <input type="submit" class="button" value="Submit" @click="subscribe">
+                        </div>
+                    </div>
+                    <router-link :to="{ name: 'Edit', params: { movie: this.movie } }" v-if="checkingtoken" tag="button"> Edit</router-link>
                     <button @click="deletemovie" v-if="checkingtoken">Delete Movie</button>
                 </div>
             </div>
@@ -151,7 +159,7 @@
             {
                 this.$store.dispatch('deletemoviecommentsandratings',this.movie.id);
                 this.$router.push({
-                    path: '/show',
+                    path: '/',
                 });
                 console.log(this.movie.id)
             },
@@ -215,13 +223,14 @@
     }
     #moviedits
     {
-        padding-top: 0.5%;
+        padding-top: 2%;
        &_im
        {
            img
            {
                width: 100%;
                height: 100%;
+               object-fit: cover;
            }
        }
         &_n
@@ -238,6 +247,8 @@
     {
         &_peoples
         {
+            padding-top: 2%;
+            text-align: center;
             p{
                 font-family:Serif;
                 font-weight: bold;
@@ -266,7 +277,6 @@
 
             p{
                 font-weight: bold;
-                color: gray;
             }
 
             button
@@ -275,6 +285,10 @@
                 color: white;
                 background-color: indianred;
                 padding: 10px;
+            }
+
+            #indigo{
+                color : indigo;
             }
         }
         &_subscribe
@@ -284,7 +298,6 @@
             text-align: center;
             p{
                 font-weight: bold;
-                color: gray;
             }
 
             button
@@ -294,6 +307,7 @@
                 background-color: indianred;
                 padding: 10px;
             }
+
         }
     }
 </style>

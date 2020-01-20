@@ -29,8 +29,8 @@ const routes = [
 
     },
     {
-        name : 'Show',
-        path: '/show',
+        name : 'Home',
+        path: '/',
         component: MovieList,
 
     },
