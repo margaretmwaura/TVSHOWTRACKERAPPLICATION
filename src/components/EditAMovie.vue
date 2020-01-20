@@ -58,7 +58,7 @@
 <script>
     import axios from "axios";
     import firebase from "firebase";
-    import movie from '../../movie'
+    import movie from '../models/movie'
     import notificationmixin from "../Mixins/notificationmixin";
     export default {
         name: "EditAMovie",

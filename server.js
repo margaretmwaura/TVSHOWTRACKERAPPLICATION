@@ -5,12 +5,12 @@ const express = require('express'),
     cors = require('cors'),
     jwt = require('jsonwebtoken');
 
-const user = require('./user');
-const movie = require('./movie');
-const comment = require('./comment');
-const comentnra = require('./moviecomenra');
-const subscripobject = require('./subscriptiom');
-const subscription = require('./subscriptiondits');
+const user = require('./src/models/user');
+const movie = require('./src/models/movie');
+const comment = require('./src/models/comment');
+const comentnra = require('./src/models/moviecomenra');
+const subscripobject = require('./src/models/subscriptiom');
+const subscription = require('./src/models/subscriptiondits');
 const webpush = require('web-push');
 let userfile = require('fs');
 const app = express();
@@ -61,16 +61,16 @@ webpush.setVapidDetails('mailto:mwauramargaret1@gmail.com',publicVapidKey,privat
 
 app.listen(port, () => console.log('Hello world app listening on port ${port}!'));
 
-let fileread = userfile.readFileSync('userdata.json');
+let fileread = userfile.readFileSync('./src/database/userdata.json');
 let allusers = JSON.parse(fileread);
 
-let filemovie = userfile.readFileSync('moviedata.json');
+let filemovie = userfile.readFileSync('./src/database/moviedata.json');
 let allmovies = JSON.parse(filemovie);
 
-let filecommentsnra = userfile.readFileSync('commentsandratings.json');
+let filecommentsnra = userfile.readFileSync('./src/database/commentsandratings.json');
 let allcommentsnra = JSON.parse(filecommentsnra);
 
-let filesubscrip = userfile.readFileSync('subscribers.json');
+let filesubscrip = userfile.readFileSync('./src/database/subscribers.json');
 let allsubscrip= JSON.parse(filesubscrip);
 
 console.log("This are all the users " + allusers);
@@ -85,13 +85,13 @@ app.post('/signup', (req, res) =>
    let userob = new user(userfromnet[0] , userfromnet[1] , userfromnet[2]);
    allusers.push(userob);
    console.log("This is the created user : " + userob.display());
-    if(userob != null)
+    if(userob !== null)
     {
              jwt.sign({userob},'secretkey' , (error,token)=>
              {
-                res.status(200).json({token : token});
+
                 let userdata = JSON.stringify(allusers , null , 2);
-                userfile.writeFile('userdata.json' , userdata , finished);
+                userfile.writeFile('./src/database/userdata.json' , userdata , finished);
                 function finished(error)
                 {
                     if(error)
@@ -101,6 +101,7 @@ app.post('/signup', (req, res) =>
                     else
                     {
                         console.log("There was no error encountereed we are all set")
+                        res.status(200).json({token : token});
                     }
                 }
 
@@ -179,7 +180,7 @@ app.post('/addmovie',upload.single('image'), (req, res) =>
     }
 
 });
-app.post('/moviedits', (req, res) =>
+app.post('/moviedits',verifyToken, (req, res) =>
 {
     const moviedits = req.body;
     let movied = moviedits[1];
@@ -204,7 +205,7 @@ app.post('/moviedits', (req, res) =>
         }
         else {
             let datastr = JSON.stringify(allmovies , null , 2);
-            userfile.writeFile('moviedata.json' , datastr , finished);
+            userfile.writeFile('./src/database/moviedata.json' , datastr , finished);
             function finished(error)
             {
                 if(error)
@@ -219,7 +220,7 @@ app.post('/moviedits', (req, res) =>
                     let comenra = new comentnra(id , 0 ,0, arr);
                     allcommentsnra.push(comenra);
                     let datacomment = JSON.stringify(allcommentsnra , null , 2);
-                    userfile.writeFile('commentsandratings.json' , datacomment , finished);
+                    userfile.writeFile('./src/database/commentsandratings.json' , datacomment , finished);
                     function finished(error) {
                         if (error) {
                             res.sendStatus(403);
@@ -233,7 +234,7 @@ app.post('/moviedits', (req, res) =>
                     let subscrobject = new subscripobject(id , subarr);
                     allsubscrip.push(subscrobject);
                     let datasubscrp = JSON.stringify(allsubscrip , null , 2);
-                    userfile.writeFile('subscribers.json' , datasubscrp , finished);
+                    userfile.writeFile('./src/database/subscribers.json' , datasubscrp , finished);
                     function finished(error) {
                         if (error) {
                             res.sendStatus(403);
@@ -308,7 +309,7 @@ app.post('/comments' , (req,res) =>
         {
             allcommentsnra[i].comments.push(commentnew);
             let usercomments = JSON.stringify(allcommentsnra , null , 2);
-            userfile.writeFile('commentsandratings.json' , usercomments , finished);
+            userfile.writeFile('./src/database/commentsandratings.json' , usercomments , finished);
             function finished(error)
             {
                 if(error)
@@ -356,7 +357,7 @@ app.post('/ratings' , (req,res) =>
             allcommentsnra[i].rate += parseInt(ratings[1], 10);
             allcommentsnra[i].num += 1;
             let usercomments = JSON.stringify(allcommentsnra , null , 2);
-            userfile.writeFile('commentsandratings.json' , usercomments , finished);
+            userfile.writeFile('./src/database/commentsandratings.json' , usercomments , finished);
             function finished(error)
             {
                 if(error)
@@ -415,7 +416,7 @@ app.post('/newsubsriber' ,(req,res) =>
             let newsubscrib = new subscription(newsubriber[1]);
             allsubscrip[i].subdetails.push(newsubscrib);
             let subscribersleg = JSON.stringify(allsubscrip , null , 2);
-            userfile.writeFile('subscribers.json' , subscribersleg , finished);
+            userfile.writeFile('./src/database/subscribers.json' , subscribersleg , finished);
             function finished(error)
             {
                 if(error)
@@ -440,7 +441,7 @@ app.post('/newsubsriber' ,(req,res) =>
     };
 });
 
-app.delete('/deletemovie/:id',(req,res) => {
+app.delete('/deletemovie/:id',verifyToken,(req,res) => {
 
     const movieiddits = req.params.id;
     console.log("Data that has been sent " + movieiddits);
@@ -477,18 +478,18 @@ app.delete('/deletemovie/:id',(req,res) => {
                                             // Rewritting the file
                                             //There are two files
                                             let datastr = JSON.stringify(allmovies, null, 2);
-                                            userfile.writeFile('moviedata.json', datastr, finished);
+                                            userfile.writeFile('./src/database/moviedata.json', datastr, finished);
 
                                             function finished(error) {
                                                 if (!error) {
                                                     console.log("Movie removed from the file");
                                                     let usercomments = JSON.stringify(allcommentsnra, null, 2);
-                                                    userfile.writeFile('commentsandratings.json', usercomments, finished);
+                                                    userfile.writeFile('./src/database/commentsandratings.json', usercomments, finished);
 
                                                     function finished(error) {
                                                         if (!error) {
                                                             let datasub = JSON.stringify(allsubscrip, null, 2);
-                                                            userfile.writeFile('subscribers.json', datasub, finished);
+                                                            userfile.writeFile('./src/database/subscribers.json', datasub, finished);
 
                                                             function finished(error) {
                                                                 if (!error) {
@@ -523,7 +524,7 @@ app.delete('/deletemovie/:id',(req,res) => {
 });
 
 
-app.post('/movieditsedit', (req, res) =>
+app.post('/movieditsedit', verifyToken,(req, res) =>
 {
     const moviecomments = req.body;
     let moviedits = moviecomments[1];
@@ -548,7 +549,7 @@ app.post('/movieditsedit', (req, res) =>
                 allmovies[i].movieimag = mimage;
 
                 let datastr = JSON.stringify(allmovies, null, 2);
-                userfile.writeFile('moviedata.json', datastr, finished);
+                userfile.writeFile('./src/database/moviedata.json', datastr, finished);
 
                 function finished(error) {
                     if (error) {

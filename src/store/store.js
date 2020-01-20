@@ -170,7 +170,11 @@ export default new Vuex.Store({
         {
             console.log("This is the id that is being passed across " + id);
             axios
-                .delete('http://localhost:4000/deletemovie/' + id)
+                .delete('http://localhost:4000/deletemovie/' + id,{
+                    headers: {
+                        'Authorization': 'Bearer ' + this.state.token
+                    }
+                })
                 .then(response => {
                     const code = response.status;
                     if(code === 200)
@@ -217,7 +221,11 @@ export default new Vuex.Store({
         editamoviemut(movieid,moviename, moviegenre,moviecast,movieplot,movieimage)
         {
             axios
-                .post('http://localhost:4000/movieditsedit' , [movieid,moviename, moviegenre,moviecast,movieplot,movieimage])
+                .post('http://localhost:4000/movieditsedit' , [movieid,moviename, moviegenre,moviecast,movieplot,movieimage],{
+                    headers: {
+                        'Authorization': 'Bearer ' + this.state.token
+                    }
+                })
                 .then(response => {
                     var code = response.status;
                     if(code === 200)
