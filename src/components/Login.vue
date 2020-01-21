@@ -51,10 +51,10 @@
                 }
                 else
                 {
-                    this.email = " ";
-                    this.password = " ";
                     console.log("The data i am passing : " + this.email , this.password);
                     this.$store.dispatch('loginusers',[this.email,this.password]);
+                    this.email = " ";
+                    this.password = " ";
                 }
             }
         },

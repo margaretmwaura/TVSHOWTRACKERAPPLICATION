@@ -52,16 +52,16 @@
             create() {
                 console.log("The data i am passing : " + this.firstname + this.email + this.password);
 
-                if(this.firstname === " " || this.email === " " | this.password === " ")
+                if(this.firstname === " " || this.email === " " || this.password === " ")
                 {
                     this.informwithnotification("Error" , "Enter all details");
                 }
                 else
                 {
+                    this.$store.dispatch('signingupusers',[this.firstname, this.email,this.password]);
                     this.firstname = " ";
                     this.email = " ";
                     this.password = " ";
-                    this.$store.dispatch('signingupusers',[this.firstname, this.email,this.password]);
                 }
             }
         },

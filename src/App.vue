@@ -24,6 +24,7 @@
                                 <router-link to="/sign" id="thingtt" v-if="!checkingtoken">Signup</router-link>
                                 <router-link to="/Login" id="thingttt" v-if="!checkingtoken">Login</router-link>
                                 <button id="log_out" @click="logoutuser" v-if="checkingtoken">Log Out</button>
+                                <button v-on:click="openModal" v-if="!showModal">Subscriptions</button>
                             </div>
                         </div>
 
@@ -48,31 +49,38 @@
     </div>
         <button v-if="checkingtoken" id="app_sanitycheck">You are Logged in</button>
         <button v-if="!checkingtoken" id="app_sanitychecknot">You are not Logged in</button>
+
     <router-view>
 
     </router-view>
         <notifications group="foo" />
+        <Modal v-if="showModal" :showModal=showModal v-bind:movies="getsubscriptions">
+        </Modal>
+        <button v-on:click="showSubscriptions" v-if="!showModal" > Show Subscriptions</button>
     </div>
 </template>
 
 <script>
     import Navbar from "./components/Navbar.vue";
+     import Modal from "./components/Modal";
     import {mapGetters, mapState} from "vuex";
     export default {
         name: 'app',
         components:
             {
                 Navbar,
-
+                Modal
             },
         data (){
             return {
                 check: ' ',
+                showModal: false
             }
         },
         computed : {
             ...mapGetters([
                 'currentuser',
+                'getsubscriptions'
                 // ...
             ]),
             checkingtoken()
@@ -90,11 +98,18 @@
                     return false
                 }
             },
+            openModal() {
+                this.showModal = true;
+            }
         },
         methods: {
             logoutuser()
             {
                 this.$store.dispatch('logout');
+            },
+            showSubscriptions() {
+                console.log("Opening the modal " + this.showModal);
+                this.showModal = true;
             },
 
         }

@@ -12,6 +12,7 @@ export default new Vuex.Store({
         token : ' ',
         movies : [],
         commnra : [],
+        subscribed : [],
         signupresponse : ' ',
         signupfailure : ' ',
         loginresponse : ' ',
@@ -270,6 +271,29 @@ export default new Vuex.Store({
         clearsubscriptionfailuremut()
         {
             this.state.subscribefail = ' '
+        },
+        getsubscribedmut({context},email)
+        {
+            axios
+                .get('http://localhost:4000/usersubscriptions/' + email)
+                .then(response => {
+                    var code = response.status;
+                    if(code === 200)
+                    {
+                        console.log("Getting movies was a success + the response " + response.data.param);
+                        let passed = JSON.parse(response.data.param);
+                        console.log("This is the passed data " + passed);
+                        this.state.subscribed = [];
+                        this.state.subscribed = passed;
+                    }
+                })
+                .catch(error =>
+                {
+                })
+        },
+        clearsubscribemut()
+        {
+            this.state.subscribed = ' '
         }
 
     },
@@ -283,7 +307,11 @@ export default new Vuex.Store({
                 },
                 gettingcommentsandratings: state => {
                     return state.commnra
+                },
+                getsubscriptions: state => {
+                    return state.subscribed
                 }
+
             },
         actions:
             {
@@ -352,7 +380,16 @@ export default new Vuex.Store({
                 clearsubscriptionfailure({commit})
                 {
                     commit('clearsubscriptionfailuremut')
+                },
+                getsubscribed({ context, commit},email)
+                {
+                    commit('getsubscribedmut',email)
+                },
+                clearsubscribe({commit})
+                {
+                    commit('clearsubscribemut')
                 }
+
             },
 
 

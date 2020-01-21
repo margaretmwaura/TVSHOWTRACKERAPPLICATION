@@ -71,6 +71,7 @@
     import {mapGetters, mapState} from "vuex";
     import CommentsAndRatings from "./CommentsAndRatings.vue";
     import notificationmixin from "../Mixins/notificationmixin";
+    import firebase from "firebase";
     export default {
         name: "Movie",
         components : {
@@ -165,6 +166,8 @@
             },
             subscribe()
             {
+                const analytics = firebase.analytics();
+                analytics.logEvent('subscribe',"subscribed");
                 this.$store.dispatch('addSubscriber',[this.movie.id, this.email]);
             },
             editamovie()

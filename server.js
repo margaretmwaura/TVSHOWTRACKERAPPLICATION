@@ -593,6 +593,43 @@ app.post('/movieditsedit', verifyToken,(req, res) =>
 
     });
 });
+
+app.get('/usersubscriptions/:email' , (req,res) =>
+{
+    let email =  req.params.email;
+    console.log("The email " + email);
+    let subscriptiondits = [];
+    for (let i = 0; i < allsubscrip.length; i++)
+    {
+        let id = allsubscrip[i].id;
+        console.log("The id of the first subscrition " + id);
+        let subdetails = allsubscrip[i].subdetails;
+        console.log("To iterate " + subdetails);
+        for(let j=0 ; j<subdetails.length ; j++)
+        {
+            console.log("The email of a subscription object " + subdetails[j].email);
+            let compareone = email.trim();
+            let comparetwo = subdetails[j].email.trim();
+                if(compareone === comparetwo)
+                {
+                    console.log("The emailas are similar");
+                    for(let k = 0 ; k<allmovies.length ; k++)
+                    {
+                        if(id === allmovies[k].id)
+                        {
+                            subscriptiondits.push(allmovies[k].moviename);
+                            console.log("The id pushed is " + allmovies[k].moviename);
+                        }
+                    }
+
+                }
+            }
+
+
+    }
+    var myJson = JSON.stringify(subscriptiondits);
+    res.status(200).json({param: myJson});
+});
 function verifyToken(req,res,next)
 {
 
