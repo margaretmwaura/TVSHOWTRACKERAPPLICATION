@@ -7,7 +7,10 @@
             </div>
             <div class="grid-x grid-container grid-margin-x" id="moviedits">
                 <div class="cell medium-12 large-6 small-12" id="moviedits_im">
-                    <img :src="`../../public/images/${movieimagesres}`"/>
+                    <iframe width="100%" height="315" :src="movieUrl"
+                            frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                    </iframe>
                 </div>
                 <div class="cell medium-12 large-6 small-12" id="moviedits_n">
                   {{movieplot}}
@@ -54,7 +57,7 @@
             </div>
             <div class="grid-container">
                 <star-rating @rating-selected="getUserRating($event)" :rating="rating"> </star-rating>
-                <h3>Selected Rating: {{rating}}</h3>
+                <p>Selected Rating: {{rating}}</p>
             </div>
         </div>
 
@@ -88,6 +91,7 @@
                 moviegenre : ' ',
                 movieplot : ' ',
                 movieimagesres : ' ',
+                movieUrl:" ",
                 rate: ' ',
                 num:' ',
                 rating: 0,
@@ -127,6 +131,7 @@
             this.moviegenre = this.$route.params.movie.moviegenre;
             this.movieplot = this.$route.params.movie.movieplot;
             this.movieimagesres = this.$route.params.movie.movieimag;
+            this.movieUrl=this.$route.params.movie.url.replace("watch?v=", "embed/");
         },
         methods :{
             addcomment()

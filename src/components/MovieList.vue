@@ -2,7 +2,6 @@
     <div class="grid-container small-12 large-12">
         <div class="grid-x" id="intro">
             <div class="cell medium-1 large-1 small-0">
-
             </div>
             <div class="cell medium-10 large-10 small-12" id="intro_message">
                 <h5>Movies and Series</h5>
@@ -15,9 +14,7 @@
                     <input type="text" v-model="search" placeholder="Seach Movie">
                 </p>
             </div>
-            <div class="cell medium-1 large-1 small-0">
-
-            </div>
+            <div class="cell medium-1 large-1 small-0"></div>
         </div>
         <ul :style="this.gridStyle" class="card-list">
             <li v-for="(card, index) in filtertedmovies" class="card-item">
@@ -55,7 +52,6 @@
                 <iframe width="100%" height="315px" src="https://www.youtube.com/embed/Qz65no3WnJk?autoplay=1&mute=1"
                         frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen>
-
                 </iframe>
             </div>
             <div class="cell medium-12 large-6 small-12" id="video_dits_message">
@@ -241,7 +237,7 @@
                 height: 200px;
                 width: 200px;
                 color: #ffffff;
-                font-size: 20px;
+                font-size: 17px;
                 position: absolute;
                 background-color: crimson;
                 top: 50%;

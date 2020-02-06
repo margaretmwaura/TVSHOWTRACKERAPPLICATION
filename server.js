@@ -188,11 +188,12 @@ app.post('/moviedits',verifyToken, (req, res) =>
     console.log(movied[1]);
     console.log(movied[2]);
     console.log(movied[3]);
+    console.log(movied[4]);
     //The fourth attribute I am retrieving it using the file name because it is an object from the uploading of image response
-    console.log(movied[4].file);
+    console.log(movied[5].file);
     //generate id
     let id  = generate_unique_ids();
-    let newmovie = new movie(id,movied[0] , movied[1] , movied[2] , movied[3] ,movied[4], movied[4].file);
+    let newmovie = new movie(id,movied[0] , movied[1] , movied[2] , movied[3] ,movied[4], movied[5].file);
     allmovies.push(newmovie);
 
     jwt.verify(req.token,'secretkey',(err,auth) =>

@@ -5,7 +5,8 @@
     "moviegenre": " Thriller-Fiction",
     "moviecast": " Joe-Morton , Suraj Sharma",
     "movieplot": "God Friended Me is an American comedy-drama television series created by Steven Lilien and Bryan Wynbrandt. It stars Brandon Micheal Hall, Violett Beane, Suraj Sharma, Javicia Leslie, Joe Morton and Erica Gimpel.[1] The series was ordered on May 11, 2018 and premiered on September 30, 2018 on CBS.[2] ",
-    "movieimag": "2020-02-06T15:14:32.722Zgodfriendedme.jpeg"
+    "movieimag": "2020-02-06T18:55:25.867Zgodfriendedme.jpeg",
+    "url": " https://www.youtube.com/watch?v=9awX2lSGpso"
   },
   {
     "id": "k6ascw3oac3vs7lvtqv",
@@ -13,7 +14,8 @@
     "moviegenre": " Comedy",
     "moviecast": " Zoe-Lister Jones, Kevin Connoly",
     "movieplot": " Friends with Better Lives is an American sitcom television series created by Dana Klein. The multi-camera series premiered on CBS on March 31, 2014, as part of the 2013–14 American television season.[1]  On May 10, 2014, CBS canceled the series after only five episodes had aired.[2",
-    "movieimag": "2020-02-06T13:36:34.585Zfwbl.jpeg"
+    "movieimag": "2020-02-06T18:56:16.460Zfwbl.jpg",
+    "url": " https://www.youtube.com/watch?v=f-5XQCtoKOQ"
   },
   {
     "id": "k6asebuiwndv2g5x3x",
@@ -21,6 +23,16 @@
     "moviegenre": " Legal Thriller",
     "moviecast": " Annalise Keating , Jack Falahee",
     "movieplot": " How to Get Away with Murder is an American legal thriller television series that premiered on ABC on September 25, 2014.[1] The series was created by Peter Nowalk, and produced by Shonda Rhimes and ABC Studios. The series airs on ABC as part of a night of programming, all under Rhimes's Shondaland production company.[2]",
-    "movieimag": "2020-02-06T15:13:25.650Zmurder.jpeg"
+    "movieimag": "2020-02-06T18:57:05.135Zhowtogetaway.jpeg",
+    "url": " https://www.youtube.com/watch?v=dkb-aBaxkVk"
+  },
+  {
+    "id": "k6ayh8qqzc0wp4ad54",
+    "url": " https://www.youtube.com/watch?v=djVLKxWcDsc",
+    "moviename": " Mom",
+    "moviegenre": " Comedy",
+    "moviecast": " Alison Jane",
+    "movieplot": " Mom is an American sitcom television series that premiered on CBS on September 23, 2013. The series was created by Chuck Lorre, Eddie Gorodetsky, and Gemma Baker, while the former two also serve as executive producers on the series, along with Nick Bakay. [1]",
+    "movieimag": "2020-02-06T18:54:47.959Zmom2.jpeg"
   }
 ]
