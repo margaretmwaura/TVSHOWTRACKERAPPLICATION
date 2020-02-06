@@ -26,14 +26,6 @@
                             <input type="submit" class="button" value="Submit" v-on:click="addcomment">
                         </div>
                     </div>
-                    <p>Add your rating below between 1-5</p>
-                    <div class="input-group">
-                        <span class="input-group-label">1-5</span>
-                        <input class="input-group-field" v-model="rating" placeholder="Place your rating" >
-                        <div class="input-group-button">
-                            <input type="submit" class="button" value="Submit" v-on:click="addrating">
-                        </div>
-                    </div>
 
                 </div>
                 <div class="cell medium-12 large-4 small-12" id="comments_peoples">
@@ -61,6 +53,10 @@
                     <button @click="deletemovie" v-if="checkingtoken">Delete Movie</button>
                 </div>
             </div>
+            <div class="grid-container">
+                <star-rating @rating-selected="getUserRating($event)" :rating="rating"> </star-rating>
+                <h3>Selected Rating: {{rating}}</h3>
+            </div>
         </div>
 
 
@@ -75,7 +71,8 @@
     export default {
         name: "Movie",
         components : {
-            CommentsAndRatings
+            CommentsAndRatings,
+
         },
         data() {
             return {
@@ -93,7 +90,8 @@
                 movieplot : ' ',
                 movieimagesres : ' ',
                 rate: ' ',
-                num:' '
+                num:' ',
+                rating: 0,
             }
         },
         computed :{
@@ -191,6 +189,11 @@
                     return "There are no ratings yet";
                 }
 
+            },
+            getUserRating:function ($event) {
+                this.rating = $event;
+                console.log("This is the rating selected by the use " + this.rating);
+                this.$store.dispatch('addrating',[this.movie.id,this.rating]);
             }
         },
         watch: {
