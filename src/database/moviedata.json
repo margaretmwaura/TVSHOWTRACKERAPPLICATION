@@ -1,58 +1,26 @@
 [
   {
-    "id": "k5kzuh8cfyeixfmljct",
-    "moviename": " Friends With Better Lives",
+    "id": "k6as6u3dhtn6dzbklc",
+    "moviename": " God Friended Me",
+    "moviegenre": " Thriller-Fiction",
+    "moviecast": " Joe-Morton , Suraj Sharma",
+    "movieplot": "God Friended Me is an American comedy-drama television series created by Steven Lilien and Bryan Wynbrandt. It stars Brandon Micheal Hall, Violett Beane, Suraj Sharma, Javicia Leslie, Joe Morton and Erica Gimpel.[1] The series was ordered on May 11, 2018 and premiered on September 30, 2018 on CBS.[2] ",
+    "movieimag": "2020-02-06T13:32:16.226Zgodfriended.jpg"
+  },
+  {
+    "id": "k6ascw3oac3vs7lvtqv",
+    "moviename": " Friends with Better Lives",
     "moviegenre": " Comedy",
-    "moviecast": " Zoe Lister Jones",
-    "movieplot": " Zoe Lister Jones",
-    "movieimag": "2020-01-19T15:02:42.083Zfwbl.jpeg"
+    "moviecast": " Zoe-Lister Jones, Kevin Connoly",
+    "movieplot": " Friends with Better Lives is an American sitcom television series created by Dana Klein. The multi-camera series premiered on CBS on March 31, 2014, as part of the 2013–14 American television season.[1]  On May 10, 2014, CBS canceled the series after only five episodes had aired.[2",
+    "movieimag": "2020-02-06T13:36:34.585Zfwbl.jpeg"
   },
   {
-    "id": "k5kzxc5sltdq50mc51m",
-    "moviename": " God Firended Me",
-    "moviegenre": " Comedy - Drama",
-    "moviecast": "Brandon Michael , Hall Suraj Sharma , Joe Morton",
-    "movieplot": "God Friended Me is an American comedy-drama television series created by Steven Lilien and Bryan Wynbrandt. It stars Brandon Micheal Hall, Violett Beane, Suraj Sharma, Javicia Leslie and Joe Morton.[1] The series was ordered on May 11, 2018 and premiered on September 30, 2018 on CBS.[2] CBS renewed the series for a second season of 20 episodes[3] which premiered on September 29, 2019.[4]",
-    "movieimag": "2020-01-20T14:18:48.282ZGod2.jpeg"
-  },
-  {
-    "id": "k5kzzy3vpt3ddg76urs",
-    "moviename": "How to get away with murder ",
+    "id": "k6asebuiwndv2g5x3x",
+    "moviename": " How to get away with Murder",
     "moviegenre": " Legal Thriller",
-    "moviecast": " Jack Falahee , Analise Keating",
-    "movieplot": " Viola Davis stars as Annalise Keating, a law professor at a prestigious Philadelphia university who, with five of her students, becomes entwined in a murder plot.[3] The series features an ensemble cast with Alfred Enoch, Jack Falahee, Aja Naomi King, Matt McGorry, and Karla Souza as Keating's students, Charlie Weber and Liza Weil as her employees, and Billy Brown as a detective with the Philadelphia Police Department, who is Annalise's lover. From the third season onward, Conrad Ricamora was promoted to the main cast after recurring heavily in the first two seasons.[4]",
-    "movieimag": "2020-01-19T12:28:45.674Zmurder.jpeg"
-  },
-  {
-    "id": "k5l01sas392vxudlhkn",
-    "moviename": " Mom",
-    "moviegenre": " Comedy",
-    "moviecast": " Anna Faris , Allison Janey",
-    "movieplot": " Mom is an American sitcom television series that premiered on CBS on September 23, 2013. The series is created by Chuck Lorre, Eddie Gorodetsky, and Gemma Baker, while the former two also serve as executive producers on the series, along with Nick Bakay. [1] On February 5, 2019, it was renewed for its seventh and eighth seasons,[2] with the seventh season premiering on September 26, 2019.[3]",
-    "movieimag": "2020-01-19T12:30:34.332Zmom2.jpeg"
-  },
-  {
-    "id": "k5l03j7ji8w5z1zqf8i",
-    "moviename": " Money Heist",
-    "moviegenre": " Spanish Television Thriller",
-    "moviecast": " Alvaro-Morte , Paco Tous , Alba Folres",
-    "movieplot": " Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow.",
-    "movieimag": "2020-01-19T15:01:31.354Zmoneyheist.jpeg"
-  },
-  {
-    "id": "k5ltjcs56vmjmzac4it",
-    "moviename": " Silicon Valley",
-    "moviegenre": " Thriller",
-    "moviecast": "The dumbs ",
-    "movieplot": " It ends well",
-    "movieimag": "2020-01-20T02:16:17.863Zsiliconvalley.jpeg"
-  },
-  {
-    "id": "k5mthrankcpx27ll1r",
-    "moviename": " Best days",
-    "moviegenre": " The great",
-    "moviecast": " The people",
-    "movieplot": "It ends well ",
-    "movieimag": "2020-01-20T19:02:48.285Zszabo-viktor-HRcpw5H01Lc-unsplash.jpg"
+    "moviecast": " Annalise Keating , Jack Falahee",
+    "movieplot": " How to Get Away with Murder is an American legal thriller television series that premiered on ABC on September 25, 2014.[1] The series was created by Peter Nowalk, and produced by Shonda Rhimes and ABC Studios. The series airs on ABC as part of a night of programming, all under Rhimes's Shondaland production company.[2]",
+    "movieimag": "2020-02-06T13:38:05.940Zhowtogetaway.jpeg"
   }
 ]

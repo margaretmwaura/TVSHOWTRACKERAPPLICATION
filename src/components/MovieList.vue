@@ -25,13 +25,19 @@
                     <div class="cell medium-1 large-1 small-0">
 
                     </div>
-                    <div class="cell medium-10 large-10 small-12">
+
+                    <div class="cell medium-12 large-10 small-12">
                         <div class="grid-y" id="content">
                             <div class="cell medium-2 large-2 small-2 " id="content_title">
                                 <p>{{card.moviename}} - {{card.moviegenre}}</p>
                             </div>
                             <div class="cell medium-10 large-10 small-10 " id="content_banner">
                                 <img :src="`../../public/images/${card.movieimag}`"/>
+                                <div class="overlay">
+                                    <div class="text" id="overFlowLinks">
+                                        <a href=" "><p >Watch the Movie pal</p></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -83,6 +89,7 @@
                 search: '',
                 cards: [1, 2, 3, 4],
                 numberOfColumns: 3,
+                img:''
             }
         },
         computed: {
@@ -94,7 +101,7 @@
             ]),
             filtertedmovies: function () {
                 return this.gettingMovies.filter((movie) => {
-                        return movie.moviename.match(this.search)
+                        return movie.movieplot.match(this.search)
                     }
                 )
             },
@@ -138,6 +145,11 @@
                         movie: movie,
                     }
                 });
+            },
+            getImgUrl(image) {
+                var images = require.context('../../public/images', false, /\.jpg$/);
+                console.log("Image is " + images);
+                return images('./' + image)
             }
         },
         mounted() {
@@ -202,12 +214,62 @@
         }
 
         &_banner {
+            position: relative;
             img {
                 height: 100%;
                 width: 100%;
                 object-fit: cover;
+                display: block;
             }
+            .overlay
+            {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 100%;
+                width: 100%;
+                opacity: 0;
+                transition: .5s ease;
+                background-color: #FFF0F5;
+            }
+
+            .text {
+
+                border-radius: 50%;
+                height: 200px;
+                width: 200px;
+                color: #ffffff;
+                font-size: 20px;
+                position: absolute;
+                background-color: crimson;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                text-align: center;
+
+                p{
+                    color:white;
+                    font-weight:bold;
+                    margin-top:40%;
+                }
+            }
+
+            #overFlowLinks  a:hover
+            {
+                color: white;
+                border-bottom: 15px solid white;
+            }
+
         }
+
+        &_banner:hover .overlay
+        {
+            opacity: .9;
+        }
+
     }
 
     #video_dits {

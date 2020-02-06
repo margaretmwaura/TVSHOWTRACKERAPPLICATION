@@ -2,9 +2,9 @@
     <div>
         <transition name="modal">
             <div v-if="isOpen">
-                <div class="overlay" @click.self="isOpen = false">
+                <div class="overlay" @click.self="closemodal">
                     <div class="modal">
-                        <h5>Check subscriptions</h5>
+                        <h5>Search for your subscriptions</h5>
                         <div class="input-group">
                             <span class="input-group-label"> </span>
                             <input class="input-group-field" v-model="email" placeholder="Enter email" >
@@ -16,8 +16,6 @@
                             <p>{{item}}</p>
                         </ul>
                     </div>
-
-                    <slot></slot>
                 </div>
             </div>
         </transition>
@@ -35,7 +33,8 @@
             return {
                 isOpen: false,
                 email: ' ',
-                subscritpions : []
+                subscritpions : [],
+
             };
         },
         props: {
@@ -46,9 +45,14 @@
                 this.$store.dispatch('getsubscribed',this.email);
                 console.log("The email is " + this.email)
             },
+            closemodal()
+            {
+                this.isOpen = false;
+                this.$store.dispatch('clearsubscribe');
+            }
 
         },
-    };
+        };
 </script>
 
 <style scoped >
@@ -59,7 +63,7 @@
         padding: 20px;
         background-color: #fff;
         border-radius: 2px;
-        box-shadow: 0 2px 8px 3px;
+        /*box-shadow: 0 2px 8px 3px;*/
         transition: all 0.2s ease-in;
         font-family: Helvetica, Arial, sans-serif;
     }
@@ -79,7 +83,7 @@
     button {
         padding: 7px;
         margin-top: 10px;
-        background-color: green;
+        background-color: indianred;
         color: white;
         font-size: 1.1rem;
     }
@@ -93,8 +97,16 @@
         align-items: center;
         width: 100%;
         height: 100%;
-        background: #00000094;
+        background: #00000080;
         z-index: 999;
         transition: opacity 0.2s ease;
+    }
+
+    p{
+        color: black;
+    }
+    h5{
+        color: black;
+        font-weight: bold;
     }
 </style>

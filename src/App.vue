@@ -44,8 +44,6 @@
                      </div>
                  </div>
               </div>
-
-
     </div>
         <button v-if="checkingtoken" id="app_sanitycheck">You are Logged in</button>
         <button v-if="!checkingtoken" id="app_sanitychecknot">You are not Logged in</button>
@@ -54,9 +52,18 @@
 
     </router-view>
         <notifications group="foo" />
-        <Modal v-if="showModal" :showModal=showModal v-bind:movies="getsubscriptions">
-        </Modal>
-        <button v-on:click="showSubscriptions" v-if="!showModal" > Show Subscriptions</button>
+
+        <div class="grid-frame" id="footer">
+
+            <p>A Movie Agency in Liason</p>
+            <p>hello@maggie.com  . 04367578585 . 47478415y875</p>
+            <div class="grid-container cell medium-12 small-12 large-12">
+                <Modal v-if="showModal" :showModal=showModal v-bind:movies="getsubscriptions">
+                </Modal>
+                <button v-on:click="showSubscriptions" v-if="!showModal" > Show Subscriptions</button>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -129,17 +136,19 @@
 
         &_bannermessage
         {
-            margin: 50px;
+            margin-left: 2.5%;
+            margin-top: 4%;
             height: 700px;
             width: 100%;
             border: thick solid white;
             float: left;
 
+
             &_inner
             {
-                padding-top: 30px;
-                float: right;
-                padding-right: 30px;
+                padding-top: 5%;
+                text-align: right;
+                padding-right: 5%;
                 font-family:Serif;
 
                 button{
@@ -148,42 +157,43 @@
                 #thing
                 {
                     color: white;
-                    margin-right: 50px;
+                    margin-right: 3%;
                     text-decoration: none;
 
                 }
                 #thingt
                 {
                     color: white;
-                    margin-right: 50px;
+                    margin-right: 3%;
                     text-decoration: none;
                 }
                 #thingtt
                 {
                     color: white;
-                    margin-right: 50px;
+                    margin-right: 3%;
                     text-decoration: none;
                 }
                 #thingttt
                 {
                     color: white;
-                    margin-right: 50px;
+                    margin-right: 3%;
                     text-decoration: none;
                 }
                 #thingtttt
                 {
                     color: white;
-                    margin-right: 50px;
+                    margin-right: 3%;
                     text-decoration: none;
                 }
             }
 
             &_logo
             {
+                margin-top: 6%;
                 p{
-                    padding-top: 30px;
+                    padding-top: 5%;
                     color: white;
-                    padding-left: 30px;
+                    padding-left: 5%;
                     font-size: 20px;
                     font-style: italic;
                     font-weight: bolder;
@@ -197,13 +207,13 @@
 
             &_message
             {
+                padding-top: 20%;
                 p{
                     color: white;
-                    padding-left: 30px;
+                    padding-left: 1%;
                     font-size: 30px;
                     letter-spacing: 0.4em;
                     text-align: center;
-                    padding-top: 20%;
                     font-family:Serif;
                 }
             }
@@ -241,5 +251,17 @@
             padding: 15px;
         }
 
+    }
+
+    #footer
+    {
+        padding: 5%;
+        background-color: gray;
+        color: white;
+        margin-top: 3%;
+        p{
+            font-size: 16px;
+            font-family:Serif;
+        }
     }
 </style>

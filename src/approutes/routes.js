@@ -4,7 +4,6 @@ import AddMovie from "../components/AddMovie";
 import MovieList from "../components/MovieList";
 import Movie from "../components/Movie";
 import VueRouter from "vue-router";
-import EditAMovie from "../components/EditAMovie";
 import Vue from "vue";
 Vue.use(VueRouter);
 
@@ -33,12 +32,6 @@ const routes = [
         path: '/',
         component: MovieList,
 
-    },
-    {
-        name : 'Edit',
-        path: '/edit',
-        component: EditAMovie,
-        props:true
     },
     {
         name : 'Info',
