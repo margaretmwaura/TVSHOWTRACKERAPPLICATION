@@ -26,7 +26,6 @@
                             <input type="submit" class="button" value="Submit" v-on:click="addcomment">
                         </div>
                     </div>
-
                 </div>
                 <div class="cell medium-12 large-4 small-12" id="comments_peoples">
                     <h6>Other peoples reviews</h6>

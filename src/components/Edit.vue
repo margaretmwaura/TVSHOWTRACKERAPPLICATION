@@ -23,6 +23,11 @@
                 <div class="grid-container">
                     <div class="grid-x grid-padding-x">
                         <div class="cell medium-12 large-12 small-12">
+                            <label>Movie URL
+                                <input type="text" v-model="movieurl">
+                            </label>
+                        </div>
+                        <div class="cell medium-12 large-12 small-12">
                             <label>Movie Name
                                 <input type="text" v-model="moviename">
                             </label>
@@ -73,6 +78,7 @@
                 movieimage : " ",
                 movieimagesres : " ",
                 movieid:" ",
+                movieurl:" ",
                 disabled : true
             }
         },
@@ -125,7 +131,7 @@
 
                 if(this.moviename !== " " || this.moviegenre !== " " || this.moviecast !== " " || this.movieplot !== " " || this.movieimagesres !== " ")
                 {
-                    this.$store.dispatch('editamovie',[this.movieid,this.moviename, this.moviegenre,this.moviecast,this.movieplot,this.movieimagesres]);
+                    this.$store.dispatch('editamovie',[this.movieid,this.movieurl,this.moviename, this.moviegenre,this.moviecast,this.movieplot,this.movieimagesres]);
                     this.moviename = " ";
                     this.moviegenre = " ";
                     this.moviecast = " ";

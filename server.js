@@ -192,7 +192,7 @@ app.post('/moviedits',verifyToken, (req, res) =>
     console.log(movied[4].file);
     //generate id
     let id  = generate_unique_ids();
-    let newmovie = new movie(id,movied[0] , movied[1] , movied[2] , movied[3] , movied[4].file);
+    let newmovie = new movie(id,movied[0] , movied[1] , movied[2] , movied[3] ,movied[4], movied[4].file);
     allmovies.push(newmovie);
 
     jwt.verify(req.token,'secretkey',(err,auth) =>
@@ -530,11 +530,12 @@ app.post('/movieditsedit', verifyToken,(req, res) =>
     let moviedits = moviecomments[1];
     console.log("These are the parameters we have gotten " + moviedits);
     let id = moviedits[0];
-    let name = moviedits[1];
-    let genre = moviedits[2];
-    let cast = moviedits[3];
-    let plot = moviedits[4];
-    let mimage = moviedits[5].file;
+    let url = moviedits[1];
+    let name = moviedits[2];
+    let genre = moviedits[3];
+    let cast = moviedits[4];
+    let plot = moviedits[5];
+    let mimage = moviedits[6].file;
     console.log("The updating dits " + id + " " + name + " " + genre + " " + cast + " " + plot + " " + mimage);
 
     jwt.verify(req.token,'secretkey',(err,auth) => {
@@ -542,6 +543,7 @@ app.post('/movieditsedit', verifyToken,(req, res) =>
             let readmovieid = allmovies[i].id;
             console.log("The real ids " + readmovieid + " " + " the comparing ud " + id);
             if (readmovieid === id) {
+                allmovies[i].url = url;
                 allmovies[i].moviename = name;
                 allmovies[i].moviegenre = genre;
                 allmovies[i].moviecast = cast;

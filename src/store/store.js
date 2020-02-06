@@ -66,10 +66,10 @@ export default new Vuex.Store({
                 })
 
         },
-        createmoviemut(moviename, moviegenre,moviecast,movieplot,movieimage)
+        createmoviemut(url,moviename, moviegenre,moviecast,movieplot,movieimage)
         {
             axios
-                .post('http://localhost:4000/moviedits',[moviename, moviegenre,moviecast,movieplot,movieimage],{
+                .post('http://localhost:4000/moviedits',[url,moviename, moviegenre,moviecast,movieplot,movieimage],{
                     headers: {
                         'Authorization': 'Bearer ' + this.state.token
                     }
@@ -219,10 +219,10 @@ export default new Vuex.Store({
                     this.subscribefail = "Failed"
                 })
         },
-        editamoviemut(movieid,moviename, moviegenre,moviecast,movieplot,movieimage)
+        editamoviemut(movieid,url,moviename, moviegenre,moviecast,movieplot,movieimage)
         {
             axios
-                .post('http://localhost:4000/movieditsedit' , [movieid,moviename, moviegenre,moviecast,movieplot,movieimage],{
+                .post('http://localhost:4000/movieditsedit' , [movieid,url,moviename, moviegenre,moviecast,movieplot,movieimage],{
                     headers: {
                         'Authorization': 'Bearer ' + this.state.token
                     }
@@ -321,9 +321,9 @@ export default new Vuex.Store({
                 loginusers({commit}, email, password) {
                     commit('loginusermut',email,password);
                 },
-                createmovie({commit}, moviename, moviegenre,moviecast,movieplot,movieimage)
+                createmovie({commit}, url,moviename, moviegenre,moviecast,movieplot,movieimage)
                 {
-                    commit('createmoviemut',moviename, moviegenre,moviecast,movieplot,movieimage);
+                    commit('createmoviemut',url,moviename, moviegenre,moviecast,movieplot,movieimage);
                 },
                 getAllMovies({commit})
                 {
@@ -349,9 +349,9 @@ export default new Vuex.Store({
                 {
                     commit('addSubscribermut',id,email)
                 },
-                editamovie({commit} , movieid,moviename, moviegenre,moviecast,movieplot,movieimage)
+                editamovie({commit} , movieid,url,moviename, moviegenre,moviecast,movieplot,movieimage)
                 {
-                    commit('editamoviemut' ,movieid,moviename, moviegenre,moviecast,movieplot,movieimage)
+                    commit('editamoviemut' ,movieid,url,moviename, moviegenre,moviecast,movieplot,movieimage)
                 },
                 logout({commit})
                 {
