@@ -32,7 +32,7 @@
                                 <img :src="`../../public/images/${card.movieimag}`"/>
                                 <div class="overlay">
                                     <div class="text" id="overFlowLinks">
-                                        <a href=" "><p >Watch the Movie pal</p></a>
+                                        <p >Watch the Movie pal</p>
                                     </div>
                                 </div>
                             </div>

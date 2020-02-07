@@ -5,44 +5,13 @@
                 {{moviename}} - {{moviegenre}}
                 <br>
             </div>
-            <div class="grid-x grid-container grid-margin-x" id="moviedits">
-                <div class="cell medium-12 large-6 small-12" id="moviedits_im">
-                    <iframe width="100%" height="315" :src="movieUrl"
-                            frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="cell medium-12 large-6 small-12" id="moviedits_n">
-                  {{movieplot}}
-                    <br>
-                    <br>
-                    <p>Behold the cast :: {{moviecast}}</p>
-                </div>
-            </div>
-            <div class="grid-x grid-margin-x" id="comments">
-                <div class="cell medium-12 large-4 small-12" id="comments_input">
-                    <p> Give us your feedback and rate it </p>
-                    <div class="input-group">
-                        <span class="input-group-label"> </span>
-                        <input class="input-group-field" v-model="comments" placeholder="Place your comments" >
-                        <div class="input-group-button">
-                            <input type="submit" class="button" value="Submit" v-on:click="addcomment">
-                        </div>
-                    </div>
-                </div>
-                <div class="cell medium-12 large-4 small-12" id="comments_peoples">
-                    <h6>Other peoples reviews</h6>
-                        <div v-for="comment in gettingcommentsandratings" :key="comment.id">
-                            <div v-if="booleandeterminant(comment.id , movie.id)">
-                                <li v-for="item in comment.comments" :key="item.id" style="list-style: none">
-                                    <p>{{item.message}} sent one <span>{{item.time | date }}</span></p>
-                                </li>
-                                <p>Rating {{ratenum( comment.rate,  comment.num)}} </p>
-                            </div>
-
-                        </div>
-                </div>
-                <div class="cell medium-12 large-4 small-12" id="comments_subscribe">
+            <div class="grid-container" id="moviedits_n">
+                {{movieplot}}
+                <br>
+                <br>
+                <p>Behold the cast :: {{moviecast}}</p>
+                <br>
+                <div id="comments_subscribe">
                     <p>Subscribe</p>
                     <div class="input-group">
                         <span class="input-group-label"> </span>
@@ -55,9 +24,36 @@
                     <button @click="deletemovie" v-if="checkingtoken">Delete Movie</button>
                 </div>
             </div>
-            <div class="grid-container">
-                <star-rating @rating-selected="getUserRating($event)" :rating="rating"> </star-rating>
-                <p>Selected Rating: {{rating}}</p>
+            <div class="grid-x grid-container grid-margin-x" id="moviedits">
+                <div class="cell medium-12 large-6 small-12" id="moviedits_im">
+                    <iframe width="100%" height="515" :src="movieUrl"
+                            frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="cell medium-12 large-6 small-12" id="comments_peoples">
+                    <h6>Other peoples reviews</h6>
+                    <div v-for="comment in gettingcommentsandratings" :key="comment.id">
+                        <div v-if="booleandeterminant(comment.id , movie.id)">
+                            <li v-for="item in comment.comments" :key="item.id" style="list-style: none">
+                                <p>{{item.message}} sent one <span>{{item.time | date }}</span></p>
+                            </li>
+                            <div id="comments_input">
+                                <p> Give us your feedback </p>
+                                <div class="input-group">
+                                    <span class="input-group-label"> </span>
+                                    <input class="input-group-field" v-model="comments" placeholder="Place your comments" >
+                                    <div class="input-group-button">
+                                        <input type="submit" class="button" value="Submit" v-on:click="addcomment">
+                                    </div>
+                                </div>
+                            </div>
+                            <p>Rating is :{{ratenum( comment.rate,  comment.num)}} , you can rate below </p>
+                        </div>
+                    </div>
+                    <star-rating @rating-selected="getUserRating($event)" :rating="rating" :star-size="30"> </star-rating>
+                    </p>
+                </div>
             </div>
         </div>
 
@@ -233,7 +229,7 @@
     }
     #moviedits
     {
-        padding-top: 2%;
+        /*padding-top: 2%;*/
        &_im
        {
            img
@@ -250,6 +246,10 @@
             font-family:Serif;
             font-weight: bold;
             font-size: 16px;
+
+            star-rating{
+
+            }
         }
     }
 
@@ -257,8 +257,6 @@
     {
         &_peoples
         {
-            padding-top: 2%;
-            text-align: center;
             p{
                 font-family:Serif;
                 font-weight: bold;
@@ -266,7 +264,7 @@
             }
             h6
             {
-                text-align: center;
+
                 padding-top: 3%;
                 font-weight: bold;
                 font-size: 18px;
@@ -303,7 +301,6 @@
         }
         &_subscribe
         {
-            padding-top: 3%;
             padding-left: 3%;
             text-align: center;
             p{
