@@ -47,7 +47,6 @@
     </div>
 <!--        <button v-if="checkingtoken" id="app_sanitycheck">You are Logged in</button>-->
 <!--        <button v-if="!checkingtoken" id="app_sanitychecknot">You are not Logged in</button>-->
-
     <router-view>
 
     </router-view>
@@ -185,6 +184,12 @@
                     margin-right: 3%;
                     text-decoration: none;
                 }
+                #thingtstat
+                {
+                    color: white;
+                    margin-right: 3%;
+                    text-decoration: none;
+                }
             }
 
             &_logo
@@ -218,7 +223,7 @@
                 }
             }
 
-            &_arrow
+            &_arrows
             {
 
                 #direction

@@ -163,6 +163,10 @@ app.post('/login', (req, res) =>
            res.status(200).json({token: token});
        });
    }
+   else
+   {
+       res.status(403).json("Forbinddedn");
+   }
 
 });
 app.post('/addmovie',upload.single('image'), (req, res) =>
@@ -265,10 +269,9 @@ app.post('/moviedits',verifyToken, (req, res) =>
 app.post('/subscribe' , (req,res) => {
 
     const subscription = req.body;
-
     //201 status
     res.status(201).json({});
-    const payload = JSON.stringify({title : 'push tests' , message : 'There are new movies you should go checkout'});
+    const payload = JSON.stringify({title : 'New Movies' , message : 'There are new movies you should go checkout'});
     webpush.sendNotification(subscription,payload).catch(error => console.error());
 });
 

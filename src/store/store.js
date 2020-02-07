@@ -56,7 +56,7 @@ export default new Vuex.Store({
                         console.log("The token gotten from Login " + this.state.token);
                         this.state.loginresponse = response.status;
                     }
-                    else
+                    if(code === 403)
                     {
                         this.state.loginfailure = "Error";
                     }
@@ -294,6 +294,14 @@ export default new Vuex.Store({
         clearsubscribemut()
         {
             this.state.subscribed = ' '
+        },
+        clearLoginSuccessMut()
+        {
+           this.state.loginresponse=' '
+        },
+        clearLoginFailureMut()
+        {
+            this.state.loginfailure=' '
         }
 
     },
@@ -388,6 +396,14 @@ export default new Vuex.Store({
                 clearsubscribe({commit})
                 {
                     commit('clearsubscribemut')
+                },
+                clearLoginSuccess({commit})
+                {
+                    commit('clearLoginSuccessMut')
+                },
+                clearLoginFailure({commit})
+                {
+                    commit('clearLoginFailureMut')
                 }
 
             },

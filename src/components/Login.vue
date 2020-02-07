@@ -58,6 +58,19 @@
                 }
             }
         },
+        watch: {
+            '$store.state.loginresponse': function () {
+                this.informwithnotification("Success", "You have successfully been logged in");
+                this.$store.dispatch('clearLoginSuccess');
+                console.log("Store has changed");
+
+            },
+            '$store.state.loginfailure': function () {
+                this.informwithnotification("Fail", "You have not managed to log in");
+                this.$store.dispatch('clearLoginFailure');
+            }
+
+        },
         mixins: [notificationmixin],
 
     }

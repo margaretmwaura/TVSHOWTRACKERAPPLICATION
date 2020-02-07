@@ -31,7 +31,7 @@
                             allowfullscreen>
                     </iframe>
                 </div>
-                <div class="cell medium-12 large-6 small-12" id="comments_peoples">
+                <div class="cell medium-12 large-6 small-12" id="moviedits_comments_peoples">
                     <h6>Other peoples reviews</h6>
                     <div v-for="comment in gettingcommentsandratings" :key="comment.id">
                         <div v-if="booleandeterminant(comment.id , movie.id)">
@@ -228,15 +228,10 @@
     }
     #moviedits
     {
-        /*padding-top: 2%;*/
+
        &_im
        {
-           img
-           {
-               width: 100%;
-               height: 100%;
-               object-fit: cover;
-           }
+
        }
         &_n
         {
@@ -250,70 +245,72 @@
 
             }
         }
-    }
 
-    #comments
-    {
-        &_peoples
+        &_comments
         {
-            p{
-                font-family:Serif;
-                font-weight: bold;
-                font-size: 16px;
-            }
-            h6
+            &_peoples
             {
+                p{
+                    font-family:Serif;
+                    font-weight: bold;
+                    font-size: 16px;
+                }
+                h6
+                {
 
+                    padding-top: 3%;
+                    font-weight: bold;
+                    font-size: 18px;
+                }
+
+                span{
+                    font-weight: normal;
+                    font-size: 12px;
+                    font-style: italic;
+                }
+            }
+
+            &_input
+            {
+                text-align: center;
                 padding-top: 3%;
-                font-weight: bold;
-                font-size: 18px;
+                padding-left: 3%;
+
+                p{
+                    font-weight: bold;
+                }
+
+                button
+                {
+                    margin-top: 3%;
+                    color: white;
+                    background-color: indianred;
+                    padding: 10px;
+                }
+
+                #indigo{
+                    color : indigo;
+                }
             }
-
-            span{
-                font-weight: normal;
-                font-size: 12px;
-                font-style: italic;
-            }
-        }
-
-        &_input
-        {
-            text-align: center;
-            padding-top: 3%;
-            padding-left: 3%;
-
-            p{
-                font-weight: bold;
-            }
-
-            button
+            &_subscribe
             {
-                margin-top: 3%;
-                color: white;
-                background-color: indianred;
-                padding: 10px;
-            }
+                padding-left: 3%;
+                text-align: center;
+                p{
+                    font-weight: bold;
+                }
 
-            #indigo{
-                color : indigo;
-            }
-        }
-        &_subscribe
-        {
-            padding-left: 3%;
-            text-align: center;
-            p{
-                font-weight: bold;
-            }
+                button
+                {
+                    margin-top: 3%;
+                    color: white;
+                    background-color: indianred;
+                    padding: 10px;
+                }
 
-            button
-            {
-                margin-top: 3%;
-                color: white;
-                background-color: indianred;
-                padding: 10px;
             }
-
         }
     }
+
+
 </style>
