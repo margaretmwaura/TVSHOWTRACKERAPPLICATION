@@ -54,6 +54,11 @@
                     <star-rating @rating-selected="getUserRating($event)" :rating="rating" :star-size="30"> </star-rating>
                 </div>
             </div>
+            <div class="grid-container" id="with_perms">
+                <router-link :to="{ name: 'Edit', params: { movie: this.movie } }" class="button">Edit Movie</router-link>
+                <button @click="deletemovie" class="button" id="with_perms_delete">Delete Movie</button>
+            </div>
+
         </div>
 
 
@@ -312,5 +317,14 @@
         }
     }
 
+    #with_perms
+    {
+
+        &_delete
+        {
+            color: white;
+            background-color: indianred;
+        }
+    }
 
 </style>
