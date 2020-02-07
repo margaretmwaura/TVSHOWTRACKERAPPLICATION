@@ -4,6 +4,7 @@ import store from "./store/store";
 import Notifications from 'vue-notification'
 import router from "./approutes/routes";
 import date from "./Filters/date";
+import truncating from "./Filters/truncating";
 import StarRating from 'vue-star-rating'
 
 const firebaseConfig = {
@@ -22,6 +23,7 @@ firebase.initializeApp(firebaseConfig);
 Vue.use(Notifications);
 Vue.use(VueAxios, axios);
 Vue.filter('date',date);
+Vue.filter('truncate',truncating);
 Vue.component('star-rating', StarRating);
 
 import VueAxios from 'vue-axios';

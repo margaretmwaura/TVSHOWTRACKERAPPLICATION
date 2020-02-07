@@ -48,11 +48,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <p>Rating is :{{ratenum( comment.rate,  comment.num)}} , you can rate below </p>
+                            <p>Rating is :{{ratenum( comment.rate ,  comment.num  ) | truncate }} , you can rate below </p>
                         </div>
                     </div>
                     <star-rating @rating-selected="getUserRating($event)" :rating="rating" :star-size="30"> </star-rating>
-                    </p>
                 </div>
             </div>
         </div>
@@ -186,7 +185,7 @@
                 }
                 else
                 {
-                    return "There are no ratings yet";
+                    return (0);
                 }
 
             },
