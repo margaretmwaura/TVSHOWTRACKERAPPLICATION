@@ -1,6 +1,6 @@
 module.exports = class movie
 {
-    constructor(id,url,moviename, moviegenre,moviecast,movieplot,movieimage) {
+    constructor(id,url,moviename, moviegenre,moviecast,movieplot,movieimage,season) {
         this.id = id;
         this.url= url;
         this.moviename = moviename;
@@ -8,6 +8,7 @@ module.exports = class movie
         this.moviecast = moviecast;
         this.movieplot = movieplot;
         this.movieimag = movieimage
+        this.season = season;
 
     }
 

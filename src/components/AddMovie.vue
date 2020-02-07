@@ -48,6 +48,11 @@
                             </label>
                         </div>
                         <div class="cell medium-12 large-12 small-12">
+                            <label>Latest Season
+                                <input type="text" v-model="movieSeason">
+                            </label>
+                        </div>
+                        <div class="cell medium-12 large-12 small-12">
                             <button class="primary button expanded" v-bind:disabled="disabled">Add Movie</button>
                         </div>
                     </div>
@@ -77,6 +82,7 @@
                 movieimage : " ",
                 movieimagesres : " ",
                 movieurl:" ",
+                movieSeason:" ",
                 disabled : true
             }
         },
@@ -129,7 +135,7 @@
 
                 if(this.moviename !== " " || this.moviegenre !== " " || this.moviecast !== " " || this.movieplot !== " " || this.movieimagesres !== " ")
                 {
-                    this.$store.dispatch('createmovie',[this.movieurl,this.moviename, this.moviegenre,this.moviecast,this.movieplot,this.movieimagesres]);
+                    this.$store.dispatch('createmovie',[this.movieurl,this.moviename, this.moviegenre,this.moviecast,this.movieplot,this.movieimagesres,this.movieSeason]);
                     this.moviename = " ";
                     this.moviegenre = " ";
                     this.moviecast = " ";

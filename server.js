@@ -197,7 +197,7 @@ app.post('/moviedits',verifyToken, (req, res) =>
     console.log(movied[5].file);
     //generate id
     let id  = generate_unique_ids();
-    let newmovie = new movie(id,movied[0] , movied[1] , movied[2] , movied[3] ,movied[4], movied[5].file);
+    let newmovie = new movie(id,movied[0] , movied[1] , movied[2] , movied[3] ,movied[4], movied[5].file,movied[6]);
     allmovies.push(newmovie);
 
     jwt.verify(req.token,'secretkey',(err,auth) =>
@@ -540,6 +540,7 @@ app.post('/movieditsedit', verifyToken,(req, res) =>
     let cast = moviedits[4];
     let plot = moviedits[5];
     let mimage = moviedits[6].file;
+    let season = moviedits[7];
     console.log("The updating dits " + id + " " + name + " " + genre + " " + cast + " " + plot + " " + mimage);
 
     jwt.verify(req.token,'secretkey',(err,auth) => {
@@ -553,7 +554,7 @@ app.post('/movieditsedit', verifyToken,(req, res) =>
                 allmovies[i].moviecast = cast;
                 allmovies[i].movieplot = plot;
                 allmovies[i].movieimag = mimage;
-
+                allmovies[i].season = season;
                 let datastr = JSON.stringify(allmovies, null, 2);
                 userfile.writeFile('./src/database/moviedata.json', datastr, finished);
 
