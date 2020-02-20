@@ -2,14 +2,14 @@
     <div class="grid-frame">
         <div class="grid-container">
             <div class="grid-container" id="top">
-                {{moviename}} - {{moviegenre}}
+                {{movie_name}} - {{movie_genre}}
                 <br>
             </div>
             <div class="grid-container" id="moviedits_n">
-                {{movieplot}}
+                {{movie_plot}}
                 <br>
                 <br>
-                <p>Behold the cast :: {{moviecast}}</p>
+                <p>Behold the cast :: {{movie_cast}}</p>
                 <br>
                 <p>Currently at Season :: {{movieSeason}}</p>
                 <div id="comments_subscribe">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="cell medium-12 large-6 small-12" id="moviedits_comments_peoples">
                     <h6>Other peoples reviews</h6>
-                    <div v-for="comment in gettingcommentsandratings" :key="comment.id">
+                    <div v-for="comment in getting_comments_and_ratings" :key="comment.id">
                         <div v-if="booleanDeterminant(comment.id , movie.id)">
                             <li v-for="item in comment.comments" :key="item.id" style="list-style: none">
                                 <p>{{item.message}} sent on <span>{{item.time | date }}</span></p>
@@ -84,11 +84,11 @@
                 comnra: [],
                 movie: ' ',
                 id: ' ',
-                moviename : ' ',
-                moviecast : ' ',
-                moviegenre : ' ',
-                movieplot : ' ',
-                movieimagesres : ' ',
+                movie_name : ' ',
+                movie_cast : ' ',
+                movie_genre : ' ',
+                movie_plot : ' ',
+                movie_images_res : ' ',
                 movieUrl:" ",
                 movieSeason:" ",
                 rate: ' ',
@@ -99,21 +99,21 @@
         computed :{
             ...mapGetters([
                 'gettingMovies',
-                'currentuser',
-                'gettingcommentsandratings'
+                'current_user',
+                'getting_comments_and_ratings'
                 // ...
             ]),
             checkingToken()
             {
-                if(this.currentuser !== ' ')
+                if(this.current_user !== ' ')
                 {
-                    console.log("The Token is present " + this.currentuser);
+                    console.log("The Token is present " + this.current_user);
                     this.check = true;
                     return true;
                 }
                 else
                 {
-                    console.log("The Token is absent" + this.currentuser);
+                    console.log("The Token is absent" + this.current_user);
                     this.check = false;
                     return false
                 }
@@ -125,11 +125,11 @@
             this.movie = this.$route.params.movie;
             console.log("Details recevied " + this.movie);
             this.id = this.$route.params.movie.id;
-            this.moviename = this.$route.params.movie.moviename;
-            this.moviecast = this.$route.params.movie.moviecast;
-            this.moviegenre = this.$route.params.movie.moviegenre;
-            this.movieplot = this.$route.params.movie.movieplot;
-            this.movieimagesres = this.$route.params.movie.movieimag;
+            this.movie_name = this.$route.params.movie.movie_name;
+            this.movie_cast = this.$route.params.movie.movie_cast;
+            this.movie_genre = this.$route.params.movie.movie_genre;
+            this.movie_plot = this.$route.params.movie.movie_plot;
+            this.movie_images_res = this.$route.params.movie.movie_image;
             this.movieUrl=this.$route.params.movie.url.replace("watch?v=", "embed/");
             this.movieSeason= this.$route.params.movie.season;
         },
@@ -137,30 +137,28 @@
             addComment()
             {
                console.log("The comment you have added " + this.comments);
-                this.$store.dispatch('addcomment',[this.movie.id,this.comments]);
+                this.$store.dispatch('add_comment',[this.movie.id,this.comments]);
             },
             addRating()
             {
                console.log("The rating you have added " + this.rating);
-                this.$store.dispatch('addrating',[this.movie.id,this.rating]);
+                this.$store.dispatch('add_rating',[this.movie.id,this.rating]);
             },
             booleanDeterminant(one , two) {
                 if(one === two)
                 {
-
                     console.log("This two are very equal " + two + " " + one);
                     return true;
                 }
                 else
                 {
-
                     console.log("This two are very different " + two + " " + one);
                     return false;
                 }
             },
             deleteMovie()
             {
-                this.$store.dispatch('deletemoviecommentsandratings',this.movie.id);
+                this.$store.dispatch('delete_movie_comments_and_ratings',this.movie.id);
                 this.$router.push({
                     path: '/',
                 });
@@ -183,10 +181,10 @@
                     }
                 });
             },
-            rateNum : function ( num , numtwo)
+            rateNum : function ( num , num_two)
             {
                 if(num !==0){
-                    return (num/numtwo)
+                    return (num/num_two)
                 }
                 else
                 {
@@ -197,23 +195,8 @@
             getUserRating:function ($event) {
                 this.rating = $event;
                 console.log("This is the rating selected by the use " + this.rating);
-                this.$store.dispatch('addrating',[this.movie.id,this.rating]);
+                this.$store.dispatch('add_rating',[this.movie.id,this.rating]);
             }
-        },
-        watch: {
-            '$store.state.subsciberesponse' : function () {
-                console.log("Susbcribing");
-                this.informwithnotification("Success" , "You are subscribed now");
-                this.$store.dispatch('clearsubscriptionresponse');
-                console.log("Store has changed");
-
-            },
-            '$store.state.subscribefail' : function () {
-                console.log("Not subscribed");
-                this.informwithnotification("Fail" , "You havent been added to the subscription list");
-                this.$store.dispatch('clearsubscriptionfailure');
-            }
-
         },
         mixins: [notificationmixin],
     }

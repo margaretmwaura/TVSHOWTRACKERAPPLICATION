@@ -549,11 +549,11 @@ app.post('/movieditsedit', verifyToken,(req, res) =>
             console.log("The real ids " + readmovieid + " " + " the comparing ud " + id);
             if (readmovieid === id) {
                 allmovies[i].url = url;
-                allmovies[i].moviename = name;
-                allmovies[i].moviegenre = genre;
-                allmovies[i].moviecast = cast;
-                allmovies[i].movieplot = plot;
-                allmovies[i].movieimag = mimage;
+                allmovies[i].movie_name = name;
+                allmovies[i].movie_genre = genre;
+                allmovies[i].movie_cast = cast;
+                allmovies[i].movie_plot = plot;
+                allmovies[i].movie_image = mimage;
                 allmovies[i].season = season;
                 let datastr = JSON.stringify(allmovies, null, 2);
                 userfile.writeFile('./src/database/moviedata.json', datastr, finished);

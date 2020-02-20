@@ -90,7 +90,7 @@
         },
         computed : {
             ...mapGetters([
-                'currentuser',
+                'current_user',
                 // ...
             ]),
         },
@@ -137,7 +137,7 @@
 
                 if(this.movieName !== " " || this.movieGenre !== " " || this.movieCast !== " " || this.moviePlot !== " " || this.movieImagesRes !== " ")
                 {
-                    this.$store.dispatch('editamovie',[this.movieId,this.movieUrl,this.movieName, this.movieGenre,this.movieCast,this.moviePlot,this.movieImagesRes,this.movieSeason]);
+                    this.$store.dispatch('edit_movie',[this.movieId,this.movieUrl,this.movieName, this.movieGenre,this.movieCast,this.moviePlot,this.movieImagesRes,this.movieSeason]);
                     this.moviename = " ";
                     this.moviegenre = " ";
                     this.moviecast = " ";
@@ -149,21 +149,6 @@
                 }
 
             },
-        },
-        watch: {
-            '$store.state.createresponse' : function () {
-                console.log("A movie has been created");
-                this.informwithnotification("Success" , "Movie has been created");
-                this.$store.dispatch('clearcreatemovieresponse');
-                console.log("Store has changed");
-
-            },
-            '$store.state.createfailure' : function () {
-                console.log("A movie has not been created");
-                this.informwithnotification("Fail" , "Movie has been not been created");
-                this.$store.dispatch('clearfailuremovieresponse');
-            }
-
         },
         mixins: [notificationmixin],
 

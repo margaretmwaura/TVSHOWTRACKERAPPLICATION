@@ -1,12 +1,12 @@
 <template>
     <div>
     <div id="app" class="grid-frame">
-              <div id="app_bannermessage" class="grid-container grid-y">
+              <div id="app_banner_message" class="grid-container grid-y">
 
                 <div class="cell small-2 large-2 medium-2">
                     <div class="grid-x">
                         <div class="cell small-0 large-2 medium-2">
-                            <div id="app_bannermessage_logo">
+                            <div id="app_banner_message_logo">
                                 <p>MAGGIE
                                     <br>
                                     <span>
@@ -18,23 +18,23 @@
                         </div>
                         <div class="cell small-0 large-2 medium-2"></div>
                         <div class="cell small-12 large-8 medium-8">
-                            <div id="app_bannermessage_inner">
+                            <div id="app_banner_message_inner">
                                 <router-link to="/" id="thing">Movies</router-link>
-                                <router-link to="/create" id="thingt" v-if="checkingtoken">Create</router-link>
-                                <router-link to="/sign" id="thingtt" v-if="!checkingtoken">Signup</router-link>
-                                <router-link to="/Login" id="thingttt" v-if="!checkingtoken">Login</router-link>
-                                <button id="log_out" @click="logoutuser" v-if="checkingtoken">Log Out</button>
+                                <router-link to="/create" id="thing_t" v-if="checking_token">Create</router-link>
+                                <router-link to="/sign" id="thing_tt" v-if="!checking_token">Sign up</router-link>
+                                <router-link to="/Login" id="thing_ttt" v-if="!checking_token">Login</router-link>
+                                <button id="log_out" @click="logout_user" v-if="checking_token">Log Out</button>
                                 <button v-on:click="openModal" v-if="!showModal">Subscriptions</button>
                             </div>
                         </div>
 
                     </div>
                 </div>
-                <div class="cell small-8 large-8 medium-8" id="app_bannermessage_message">
+                <div class="cell small-8 large-8 medium-8" id="app_banner_message_message">
                     <p>MOVIES AND SERIES</p>
                     </div>
 
-                 <div class="cell small-2 large-2 medium-2" id="app_bannermessage_arrow">
+                 <div class="cell small-2 large-2 medium-2" id="app_banner_message_arrow">
 
                      <div id="direction">
 
@@ -56,7 +56,7 @@
             <p>A Movie Agency in Liason</p>
             <p>hello@maggie.com  . 04367578585 . 47478415y875</p>
             <div class="grid-container cell medium-12 small-12 large-12">
-                <Modal v-if="showModal" :showModal=showModal v-bind:movies="getsubscriptions">
+                <Modal v-if="showModal" :showModal=showModal v-bind:movies="get_subscriptions">
                 </Modal>
                 <button v-on:click="showSubscriptions" v-if="!showModal" > Show Subscriptions</button>
             </div>
@@ -84,21 +84,21 @@
         },
         computed : {
             ...mapGetters([
-                'currentuser',
-                'getsubscriptions'
+                'current_user',
+                'get_subscriptions'
                 // ...
             ]),
-            checkingtoken()
+            checking_token()
             {
-                if(this.currentuser !== ' ')
+                if(this.current_user !== ' ')
                 {
-                    console.log("The Token is present " + this.currentuser);
+                    console.log("The Token is present " + this.current_user);
                     this.check = true;
                     return true;
                 }
                 else
                 {
-                    console.log("The Token is absent" + this.currentuser);
+                    console.log("The Token is absent" + this.current_user);
                     this.check = false;
                     return false
                 }
@@ -108,7 +108,7 @@
             }
         },
         methods: {
-            logoutuser()
+            logout_user()
             {
                 this.$store.dispatch('logout');
             },
@@ -132,7 +132,7 @@
         background-size: cover;
         position:relative;
 
-        &_bannermessage
+        &_banner_message
         {
             margin-left: 2.5%;
             margin-top: 4%;
@@ -159,31 +159,19 @@
                     text-decoration: none;
 
                 }
-                #thingt
+                #thing_t
                 {
                     color: white;
                     margin-right: 3%;
                     text-decoration: none;
                 }
-                #thingtt
+                #thing_tt
                 {
                     color: white;
                     margin-right: 3%;
                     text-decoration: none;
                 }
-                #thingttt
-                {
-                    color: white;
-                    margin-right: 3%;
-                    text-decoration: none;
-                }
-                #thingtttt
-                {
-                    color: white;
-                    margin-right: 3%;
-                    text-decoration: none;
-                }
-                #thingtstat
+                #thing_ttt
                 {
                     color: white;
                     margin-right: 3%;

@@ -6,7 +6,7 @@
                 <div class="grid-x grid-padding-x">
                     <div class="cell medium-12 large-12 small-12">
                         <label>Name
-                            <input type="text" v-model="firstname">
+                            <input type="text" v-model="first_name">
                         </label>
                     </div>
                     <div class="cell medium-12 large-12 small-12">
@@ -35,22 +35,20 @@
     export default {
         data() {
             return {
-                firstname : " ",
+                first_name : " ",
                 email : " ",
                 password: " ",
             }
         },
         computed :  {
             ...mapGetters([
-                'gettingMovies',
-                'currentuser',
-                'gettingcommentsandratings'
+                'current_user',
                 // ...
             ]),
         },
         methods: {
             create() {
-                console.log("The data i am passing : " + this.firstname + this.email + this.password);
+                console.log("The data i am passing : " + this.first_name + this.email + this.password);
 
                 if(this.firstname === " " || this.email === " " || this.password === " ")
                 {
@@ -58,7 +56,7 @@
                 }
                 else
                 {
-                    this.$store.dispatch('signingupusers',[this.firstname, this.email,this.password]);
+                    this.$store.dispatch('signing_up_users',[this.first_name, this.email,this.password]);
                     this.firstname = " ";
                     this.email = " ";
                     this.password = " ";

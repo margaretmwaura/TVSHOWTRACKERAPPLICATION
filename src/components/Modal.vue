@@ -42,13 +42,12 @@
         },
         methods: {
             check() {
-                this.$store.dispatch('getsubscribed',this.email);
+                this.$store.dispatch('get_subscribed',this.email);
                 console.log("The email is " + this.email)
             },
             closeModal()
             {
                 this.isOpen = false;
-                this.$store.dispatch('clearsubscribe');
             }
 
         },

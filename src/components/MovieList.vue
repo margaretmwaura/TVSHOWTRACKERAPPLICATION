@@ -26,10 +26,10 @@
                     <div class="cell medium-12 large-10 small-12">
                         <div class="grid-y" id="content">
                             <div class="cell medium-2 large-2 small-2 " id="content_title">
-                                <p>{{card.moviename}} - {{card.moviegenre}}</p>
+                                <p>{{card.movie_name}} - {{card.movie_genre}}</p>
                             </div>
                             <div class="cell medium-10 large-10 small-10 " id="content_banner">
-                                <img :src="`/img/${card.movieimag}`"/>
+                                <img :src="`/img/${card.movie_image}`"/>
                                 <div class="overlay">
                                     <div class="text" id="overFlowLinks">
                                         <p >Watch the Movie pal</p>
@@ -91,13 +91,13 @@
         computed: {
             ...mapGetters([
                 'gettingMovies',
-                'currentuser',
-                'gettingcommentsandratings'
+                'current_user',
+                'getting_comments_and_ratings'
                 // ...
             ]),
             filteredMovies: function () {
                 return this.gettingMovies.filter((movie) => {
-                        return movie.moviename.toLowerCase().includes(this.search.toLowerCase());
+                        return movie.movie_name.toLowerCase().includes(this.search.toLowerCase());
                     }
                 )
             },
@@ -111,30 +111,19 @@
             onResize() {
                 if (window.innerWidth < 1000) {
                     this.numberOfColumns = 1;
-                    console.log("Window size is " + window.innerWidth);
-                    console.log("CHnaged value " + this.numberOfColumns);
-                    console.log("Tab")
                 } else {
                     this.numberOfColumns = 3;
-                    console.log("Window size is " + window.innerWidth);
-                    console.log("CHnaged value " + this.numberOfColumns);
-                    console.log("Mobile")
 
                 }
             },
             booleanDeterminant(one, two) {
                 if (one === two) {
-
-                    console.log("This two are very equal " + two + " " + one);
                     return true;
                 } else {
-
-                    console.log("This two are very different " + two + " " + one);
                     return false;
                 }
             },
             moveToFullInfo(movie) {
-                console.log("We want to see the movie" + movie.moviename);
                 this.$router.push({
                     name: 'Info',
                     params: {

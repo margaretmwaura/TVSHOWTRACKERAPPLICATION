@@ -13,39 +13,38 @@ export default new Vuex.Store({
         movies : [],
         commnra : [],
         subscribed : [],
-        signupresponse : ' ',
-        signupfailure : ' ',
-        loginresponse : ' ',
-        loginfailure : ' ',
-        createresponse : ' ',
-        createfailure : ' ',
-        editresponse : ' ',
-        editfailure : ' ',
-        deleteresponse : ' ',
-        deletefailure : ' ',
-        subsciberesponse : ' ',
-        subscribefail : ' ',
+        signup_response : ' ',
+        signup_failure : ' ',
+        login_response : ' ',
+        login_failure : ' ',
+        create_response : ' ',
+        create_failure : ' ',
+        edit_response : ' ',
+        edit_failure : ' ',
+        delete_response : ' ',
+        delete_failure : ' ',
+        subscibe_response : ' ',
+        subscribe_fail : ' ',
     },
     mutations: {
-        createuser(firstname ,lastname ,password) {
+        create_user(first_name ,last_name ,password) {
             axios
-                .post('http://localhost:4000/signup',[firstname,lastname,password])
+                .post('http://localhost:4000/signup',[first_name,last_name,password])
                 .then(response => {
                     var code = response.status;
                     if(code === 200)
                     {
-
                         this.state.token = response.data.token;
                         console.log("The token gotten from signup " + this.state.token);
-                        this.state.signupresponse = response.status;
+                        this.state.signup_response = response.status;
                     }
                 })
                 .catch(error => {
-                    this.state.signupfailure = "error";
+                    this.state.signup_failure = "error";
                 })
 
         },
-        loginusermut(email , password) {
+        login_user_mut(email , password) {
             axios
                 .post('http://localhost:4000/login',[email,password])
                 .then(response => {
@@ -54,22 +53,22 @@ export default new Vuex.Store({
                     {
                         this.state.token = response.data.token;
                         console.log("The token gotten from Login " + this.state.token);
-                        this.state.loginresponse = response.status;
+                        this.state.login_response = response.status;
                     }
                     if(code === 403)
                     {
-                        this.state.loginfailure = "Error";
+                        this.state.login_failure = "Error";
                     }
                 })
                 .catch(error => {
-                    this.state.loginfailure = "error";
+                    this.state.login_failure = "error";
                 })
 
         },
-        createmoviemut(url,moviename, moviegenre,moviecast,movieplot,movieimage,movieSeason)
+        create_movie_mut(url,movie_name, movie_genre,movie_cast,movie_plot,movie_image,movieSeason)
         {
             axios
-                .post('http://localhost:4000/moviedits',[url,moviename, moviegenre,moviecast,movieplot,movieimage,movieSeason],{
+                .post('http://localhost:4000/moviedits',[url,movie_name, movie_genre,movie_cast,movie_plot,movie_image,movieSeason],{
                     headers: {
                         'Authorization': 'Bearer ' + this.state.token
                     }
@@ -78,8 +77,8 @@ export default new Vuex.Store({
                     var code = response.status;
                     if(code === 200)
                     {
-                        this.state.createresponse = "Sucess";
-                        console.log("The store state " + this.state.createresponse);
+                        this.state.create_response = "Sucess";
+                        console.log("The store state " + this.state.create_response);
                         console.log("Creating movies was a success + the response " + response.data.param);
                         let passed = JSON.parse(response.data.param);
                         console.log("This is the passed data " + passed);
@@ -88,7 +87,7 @@ export default new Vuex.Store({
                     }
                 })
                 .catch(error => {
-                    this.state.createfailure = "error";
+                    this.state.create_failure = "error";
                 })
         },
         getAllMoviesmut()
@@ -110,7 +109,7 @@ export default new Vuex.Store({
                 {
                 })
         },
-        addCommentmut(id,comment)
+        add_comment_mut(id,comment)
         {
             axios
                 .post('http://localhost:4000/comments',[id,comment])
@@ -129,7 +128,7 @@ export default new Vuex.Store({
                 {
                 })
         },
-        addRatingmut(id,rate)
+        add_rating_mut(id,rate)
         {
             axios
                 .post('http://localhost:4000/ratings',[id,rate])
@@ -148,7 +147,7 @@ export default new Vuex.Store({
                 {
                 })
         },
-        getallCommentsAndRatingsmut()
+        getallCommentsAndRatingsMut()
         {
             axios
                 .get('http://localhost:4000/commentsandratings')
@@ -167,7 +166,7 @@ export default new Vuex.Store({
                 {
                 })
         },
-        deletemoviecommentsandratingsmut({context},id)
+        delete_movie_comments_and_ratings_mut({context},id)
         {
             console.log("This is the id that is being passed across " + id);
             axios
@@ -191,15 +190,15 @@ export default new Vuex.Store({
                         console.log("This is the passed data " + passedm);
                         this.state.movies = [];
                         this.state.movies = passedm;
-                        this.state.deleteresponse = "Was a sucess"
+                        this.state.delete_response = "Was a sucess"
                     }
                 })
                 .catch(error =>
                 {
-                    this.state.deletefailure = "It failed"
+                    this.state.delete_failure = "It failed"
                 })
         },
-        addSubscribermut(id,email)
+        addSubscriberMut(id,email)
         {
             axios
                 .post('http://localhost:4000/newsubsriber',[id,email])
@@ -207,22 +206,22 @@ export default new Vuex.Store({
                     var code = response.status;
                     if(code === 200)
                     {
-                        this.state.subsciberesponse = "Success"
+                        this.state.subscibe_response = "Success"
                     }
                     else
                     {
-                        this.state.subscribefail = "Fialed"
+                        this.state.subscribe_fail = "Fialed"
                     }
                 })
                 .catch(error =>
                 {
-                    this.subscribefail = "Failed"
+                    this.subscribe_fail = "Failed"
                 })
         },
-        editamoviemut(movieid,url,moviename, moviegenre,moviecast,movieplot,movieimage,movieSeason)
+        edit_movie_mut(movieid,url,movie_name, movie_genre,movie_cast,movie_plot,movie_image,movieSeason)
         {
             axios
-                .post('http://localhost:4000/movieditsedit' , [movieid,url,moviename, moviegenre,moviecast,movieplot,movieimage,movieSeason],{
+                .post('http://localhost:4000/movieditsedit' , [movieid,url,movie_name, movie_genre,movie_cast,movie_plot,movie_image,movieSeason],{
                     headers: {
                         'Authorization': 'Bearer ' + this.state.token
                     }
@@ -232,47 +231,15 @@ export default new Vuex.Store({
                     if(code === 200)
                     {
                         console.log("Getting movies was a success + the response " + response.data.param);
-                        // let passed = JSON.parse(response.data.param);
-                        // console.log("This is the passed data " + passed);
-                        // this.state.movies = [];
-                        // this.state.movies = passed;
-                        this.state.editresponse = "Movieeditted"
+                        this.state.edit_response = "Movieeditted"
                     }
                 })
                 .catch(error =>
                 {
-                    this.state.editfailure = "It failed"
+                    this.state.edit_failure = "It failed"
                 })
         },
-        logoutmut()
-        {
-            this.state.token = ' '
-        },
-        clearcreatemovieresponsemut()
-        {
-            this.state.createresponse = ' '
-        },
-        clearfailuremovieresponsemut()
-        {
-            this.state.createfailure = ' '
-        },
-        cleareditmovieresponsemut()
-        {
-            this.state.editresponse = ' '
-        },
-        cleareditfailureresponsemut()
-        {
-          this.state.editfailure = ' '
-        },
-        clearsubscriptionresponsemut()
-        {
-            this.state.subsciberesponse = ' '
-        },
-        clearsubscriptionfailuremut()
-        {
-            this.state.subscribefail = ' '
-        },
-        getsubscribedmut({context},email)
+        get_subscribed_mut({context},email)
         {
             axios
                 .get('http://localhost:4000/usersubscriptions/' + email)
@@ -291,120 +258,72 @@ export default new Vuex.Store({
                 {
                 })
         },
-        clearsubscribemut()
-        {
-            this.state.subscribed = ' '
-        },
-        clearLoginSuccessMut()
-        {
-           this.state.loginresponse=' '
-        },
-        clearLoginFailureMut()
-        {
-            this.state.loginfailure=' '
-        }
 
     },
         getters:
             {
-                currentuser: state => {
+                current_user: state => {
                     return state.token
                 },
                 gettingMovies: state => {
                     return state.movies
                 },
-                gettingcommentsandratings: state => {
+                getting_comments_and_ratings: state => {
                     return state.commnra
                 },
-                getsubscriptions: state => {
+                get_subscriptions: state => {
                     return state.subscribed
                 }
 
             },
         actions:
             {
-                signingupusers({commit}, firstname , lastname , password) {
-                    commit('createuser',firstname,lastname,password);
+                signing_up_users({commit}, first_name , last_name , password) {
+                    commit('create_user',first_name,last_name,password);
                 },
-                loginusers({commit}, email, password) {
-                    commit('loginusermut',email,password);
+                login_users({commit}, email, password) {
+                    commit('login_user_mut',email,password);
                 },
-                createmovie({commit}, url,moviename, moviegenre,moviecast,movieplot,movieimage,movieSeason)
+                create_movie({commit}, url,movie_name, movie_genre,movie_cast,movie_plot,movie_image,movieSeason)
                 {
-                    commit('createmoviemut',url,moviename, moviegenre,moviecast,movieplot,movieimage,movieSeason);
+                    commit('create_movie_mut',url,movie_name, movie_genre,movie_cast,movie_plot,movie_image,movieSeason);
                 },
                 getAllMovies({commit})
                 {
                     commit('getAllMoviesmut');
                 },
-                addrating({commit},id,rate)
+                add_rating({commit},id,rate)
                 {
-                    commit('addRatingmut',id,rate);
+                    commit('add_rating_mut',id,rate);
                 },
-                addcomment({commit},id,comment)
+                add_comment({commit},id,comment)
                 {
-                    commit('addCommentmut',id,comment);
+                    commit('add_comment_mut',id,comment);
                 },
                 getAllCommentsAndRatings({commit})
                 {
-                    commit('getallCommentsAndRatingsmut');
+                    commit('getallCommentsAndRatingsMut');
                 },
-                deletemoviecommentsandratings({ context, commit},id)
+                delete_movie_comments_and_ratings({ context, commit},id)
                 {
-                    commit('deletemoviecommentsandratingsmut',id);
+                    commit('delete_movie_comments_and_ratings_mut',id);
                 },
                 addSubscriber({commit} , id ,email)
                 {
-                    commit('addSubscribermut',id,email)
+                    commit('addSubscriberMut',id,email)
                 },
-                editamovie({commit} , movieid,url,moviename, moviegenre,moviecast,movieplot,movieimage,movieSeason)
+                edit_movie({commit} , movieid,url,movie_name, movie_genre,movie_cast,movie_plot,movie_image,movieSeason)
                 {
-                    commit('editamoviemut' ,movieid,url,moviename, moviegenre,moviecast,movieplot,movieimage,movieSeason)
+                    commit('edit_movie_mut' ,movieid,url,movie_name, movie_genre,movie_cast,movie_plot,movie_image,movieSeason)
                 },
                 logout({commit})
                 {
-                    commit('logoutmut')
+                    commit('logout_mut')
                 },
-                clearcreatemovieresponse({commit})
+                get_subscribed({ context, commit},email)
                 {
-                    commit('clearcreatemovieresponsemut')
+                    commit('get_subscribed_mut',email)
                 },
-                clearfailuremovieresponse({commit})
-                {
-                    commit('clearfailuremovieresponsemut')
-                },
-                cleareditmovieresponse({commit})
-                {
-                    commit('cleareditmovieresponsemut')
-                },
-                cleareditfailureresponse({commit})
-                {
-                    commit('cleareditfailureresponsemut')
-                },
-                clearsubscriptionresponse({commit})
-                {
-                    commit('clearsubscriptionresponsemut')
-                },
-                clearsubscriptionfailure({commit})
-                {
-                    commit('clearsubscriptionfailuremut')
-                },
-                getsubscribed({ context, commit},email)
-                {
-                    commit('getsubscribedmut',email)
-                },
-                clearsubscribe({commit})
-                {
-                    commit('clearsubscribemut')
-                },
-                clearLoginSuccess({commit})
-                {
-                    commit('clearLoginSuccessMut')
-                },
-                clearLoginFailure({commit})
-                {
-                    commit('clearLoginFailureMut')
-                }
 
             },
 

@@ -1,18 +1,18 @@
 module.exports = class movie
 {
-    constructor(id,url,moviename, moviegenre,moviecast,movieplot,movieimage,season) {
+    constructor(id,url,movie_name, movie_genre,movie_cast,movie_plot,movie_image,season) {
         this.id = id;
         this.url= url;
-        this.moviename = moviename;
-        this.moviegenre = moviegenre;
-        this.moviecast = moviecast;
-        this.movieplot = movieplot;
-        this.movieimag = movieimage
+        this.movie_name = movie_name;
+        this.movie_genre = movie_genre;
+        this.movie_cast = movie_cast;
+        this.movie_plot = movie_plot;
+        this.movie_image = movie_image;
         this.season = season;
 
     }
 
     display() {
-        console.log(this.id + this.moviename + this.moviegenre + this.moviecast + this.movieplot + this.movieimag);
+        console.log(this.id + this.movie_name + this.movie_genre + this.movie_cast + this.movie_plot + this.movie_image);
     }
 };
