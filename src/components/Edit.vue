@@ -24,27 +24,27 @@
                     <div class="grid-x grid-padding-x">
                         <div class="cell medium-12 large-12 small-12">
                             <label>Movie URL
-                                <input type="text" v-model="movieurl">
+                                <input type="text" v-model="movieUrl">
                             </label>
                         </div>
                         <div class="cell medium-12 large-12 small-12">
                             <label>Movie Name
-                                <input type="text" v-model="moviename">
+                                <input type="text" v-model="movieName">
                             </label>
                         </div>
                         <div class="cell medium-12 large-12 small-12">
                             <label>Movie Cast
-                                <input type="text" v-model="moviecast">
+                                <input type="text" v-model="movieCast">
                             </label>
                         </div>
                         <div class="cell medium-12 large-12 small-12">
                             <label>Movie genre
-                                <input type="text" v-model="moviegenre">
+                                <input type="text" v-model="movieGenre">
                             </label>
                         </div>
                         <div class="cell medium-12 large-12 small-12">
                             <label>Movie Plot
-                                <input type="text" v-model="movieplot">
+                                <input type="text" v-model="moviePlot">
                             </label>
                         </div>
                         <div class="cell medium-12 large-12 small-12">
@@ -76,14 +76,14 @@
         data() {
             return {
                 movie:" ",
-                moviename : " ",
-                moviecast : " ",
-                movieplot : " ",
-                moviegenre : " ",
-                movieimage : " ",
-                movieimagesres : " ",
-                movieid:" ",
-                movieurl:" ",
+                movieName : " ",
+                movieCast : " ",
+                moviePlot : " ",
+                movieGenre : " ",
+                movieImage : " ",
+                movieImagesRes : " ",
+                movieId:" ",
+                movieUrl:" ",
                 movieSeason:" ",
                 disabled : true
             }
@@ -96,9 +96,9 @@
         },
         methods: {
             edit() {
-                console.log("The data i am passing : " + this.moviename + this.moviecast + this.movieplot + this.moviegenre);
+                console.log("The data i am passing : " + this.movieName + this.movieCast + this.moviePlot + this.movieGenre);
                 const fb = new FormData();
-                fb.append('image',this.movieimage);
+                fb.append('image',this.movieImage);
                 axios
                     .post('http://localhost:4000/addmovie',fb,
                         {
@@ -111,8 +111,8 @@
                         if(code === 200)
                         {
                             console.log("The response " + response.data);
-                            this.movieimagesres = response.data;
-                            console.log("This is the image name stored " + this.movieimagesres);
+                            this.movieImagesRes = response.data;
+                            console.log("This is the image name stored " + this.movieImagesRes);
                             this.disabled = false
                         }
                         else
@@ -127,17 +127,17 @@
             onFileSelected(event)
             {
                 console.log(event);
-                this.movieimage = event.target.files[0];
-                console.log(this.movieimage)
+                this.movieImage = event.target.files[0];
+                console.log(this.movieImage)
             },
             uploadMovie()
             {
                 const analytics = firebase.analytics();
                 analytics.logEvent('create',"Event creation");
 
-                if(this.moviename !== " " || this.moviegenre !== " " || this.moviecast !== " " || this.movieplot !== " " || this.movieimagesres !== " ")
+                if(this.movieName !== " " || this.movieGenre !== " " || this.movieCast !== " " || this.moviePlot !== " " || this.movieImagesRes !== " ")
                 {
-                    this.$store.dispatch('editamovie',[this.movieid,this.movieurl,this.moviename, this.moviegenre,this.moviecast,this.movieplot,this.movieimagesres,this.movieSeason]);
+                    this.$store.dispatch('editamovie',[this.movieId,this.movieUrl,this.movieName, this.movieGenre,this.movieCast,this.moviePlot,this.movieImagesRes,this.movieSeason]);
                     this.moviename = " ";
                     this.moviegenre = " ";
                     this.moviecast = " ";
@@ -170,12 +170,13 @@
         created() {
             console.log("Edit has been called");
             this.movie = this.$route.params.movie;
-            this.moviename = this.$route.params.movie.moviename;
-            this.moviecast = this.$route.params.movie.moviecast;
-            this.movieplot = this.$route.params.movie.movieplot;
-            this.moviegenre = this.$route.params.movie.moviegenre;
-            this.movieimage = this.$route.params.movie.movieimage;
-            this.movieid = this.$route.params.movie.id;
+            this.movieName = this.$route.params.movie.moviename;
+            this.movieCast = this.$route.params.movie.moviecast;
+            this.moviePlot = this.$route.params.movie.movieplot;
+            this.movieGenre = this.$route.params.movie.moviegenre;
+            this.movieImage = this.$route.params.movie.movieimage;
+            this.movieId = this.$route.params.movie.id;
+            this.movieUrl=this.$route.params.movie.url;
 
         },
 

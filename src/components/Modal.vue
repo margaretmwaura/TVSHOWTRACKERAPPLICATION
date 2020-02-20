@@ -2,7 +2,7 @@
     <div>
         <transition name="modal">
             <div v-if="isOpen">
-                <div class="overlay" @click.self="closemodal">
+                <div class="overlay" @click.self="closeModal">
                     <div class="modal">
                         <h5>Search for your subscriptions</h5>
                         <div class="input-group">
@@ -20,7 +20,7 @@
             </div>
         </transition>
         <button @click="isOpen = !isOpen">
-            {{ isOpen ? "Close" : "Open" }} Suscriptions
+            {{ isOpen ? "Close" : "Open" }} subscriptions
         </button>
     </div>
 </template>
@@ -33,7 +33,7 @@
             return {
                 isOpen: false,
                 email: ' ',
-                subscritpions : [],
+                subscriptions : [],
 
             };
         },
@@ -45,7 +45,7 @@
                 this.$store.dispatch('getsubscribed',this.email);
                 console.log("The email is " + this.email)
             },
-            closemodal()
+            closeModal()
             {
                 this.isOpen = false;
                 this.$store.dispatch('clearsubscribe');

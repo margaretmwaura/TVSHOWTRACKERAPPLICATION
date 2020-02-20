@@ -5,9 +5,9 @@
     "moviegenre": " Thriller-Fiction",
     "moviecast": " Joe-Morton , Suraj Sharma",
     "movieplot": "God Friended Me is an American comedy-drama television series created by Steven Lilien and Bryan Wynbrandt. It stars Brandon Micheal Hall, Violett Beane, Suraj Sharma, Javicia Leslie, Joe Morton and Erica Gimpel.[1] The series was ordered on May 11, 2018 and premiered on September 30, 2018 on CBS.[2] ",
-    "movieimag": "2020-02-07T07:10:36.376Zgodfriendedme.jpeg",
+    "movieimag": "2020-02-20T06:15:38.318Zgodfriended.jpg",
     "url": " https://www.youtube.com/watch?v=BTBaFCANKp0&vl=en",
-    "season": " 7"
+    "season": " 8"
   },
   {
     "id": "k6ascw3oac3vs7lvtqv",
@@ -15,19 +15,19 @@
     "moviegenre": " Comedy",
     "moviecast": " Zoe-Lister Jones, Kevin Connoly",
     "movieplot": " Friends with Better Lives is an American sitcom television series created by Dana Klein. The multi-camera series premiered on CBS on March 31, 2014, as part of the 2013–14 American television season.[1]  On May 10, 2014, CBS canceled the series after only five episodes had aired.[2",
-    "movieimag": "2020-02-07T07:11:38.480Zfwbl.jpg",
+    "movieimag": "2020-02-20T06:16:42.850Zfwbl.jpg",
     "url": " https://www.youtube.com/watch?v=9awX2lSGpso",
-    "season": " 8"
+    "season": "4 "
   },
   {
     "id": "k6asebuiwndv2g5x3x",
     "moviename": " How to get away with Murder",
-    "moviegenre": " Legal Thriller",
+    "moviegenre": " Legal Thriller Fiction",
     "moviecast": " Annalise Keating , Jack Falahee",
     "movieplot": " How to Get Away with Murder is an American legal thriller television series that premiered on ABC on September 25, 2014.[1] The series was created by Peter Nowalk, and produced by Shonda Rhimes and ABC Studios. The series airs on ABC as part of a night of programming, all under Rhimes's Shondaland production company.[2]",
-    "movieimag": "2020-02-07T07:08:12.635Zhowtogetaway.jpeg",
     "url": " https://www.youtube.com/watch?v=oUJoUVou4-U",
-    "season": " 7"
+    "season": "8 ",
+    "movieimag": "2020-02-20T06:06:34.716Zhowtogetaway.jpg"
   },
   {
     "id": "k6ayh8qqzc0wp4ad54",
@@ -36,8 +36,8 @@
     "moviegenre": " Comedy",
     "moviecast": " Alison Jane",
     "movieplot": " Mom is an American sitcom television series that premiered on CBS on September 23, 2013. The series was created by Chuck Lorre, Eddie Gorodetsky, and Gemma Baker, while the former two also serve as executive producers on the series, along with Nick Bakay. [1]",
-    "movieimag": "2020-02-07T07:11:58.914Zmom2.jpeg",
-    "season": " 4"
+    "movieimag": "2020-02-20T06:19:19.022Zmom.jpg",
+    "season": "3 "
   },
   {
     "id": "k6bu7103lo7ptxatd2s",
@@ -46,7 +46,7 @@
     "moviegenre": " Fiction - Thriller",
     "moviecast": "Mike Jugde , Dave , Samuel ",
     "movieplot": " Silicon Valley is an American comedy television series created by Mike Judge, John Altschuler and Dave Krinsky, that premiered on April 6, 2014, on HBO.[1] The series focuses on five young men who found a startup company in Silicon Valley.[2][3]",
-    "movieimag": "2020-02-07T07:15:19.584Zsiliconvalley.jpg",
-    "season": "9 "
+    "movieimag": "2020-02-20T06:17:49.071Zsiliconvalley.jpg",
+    "season": " 2"
   }
 ]

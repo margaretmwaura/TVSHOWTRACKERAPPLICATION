@@ -11,13 +11,13 @@
                     hat will be competing for your attention for the remainder of the year. From superhero action
                     thrillers to down-to-earth dramas and everything in between, here are all the movies and TV shows
                     that will blow you away in 2019
-                    <input type="text" v-model="search" placeholder="Seach Movie">
+                    <input type="text" v-model="search" placeholder="Search Movie">
                 </p>
             </div>
             <div class="cell medium-1 large-1 small-0"></div>
         </div>
         <ul :style="this.gridStyle" class="card-list">
-            <li v-for="(card, index) in filtertedmovies" class="card-item">
+            <li v-for="(card, index) in filteredMovies" class="card-item">
                 <div class="grid-x grid-container" v-on:click="moveToFullInfo(card)">
                     <div class="cell medium-1 large-1 small-0">
 
@@ -29,7 +29,7 @@
                                 <p>{{card.moviename}} - {{card.moviegenre}}</p>
                             </div>
                             <div class="cell medium-10 large-10 small-10 " id="content_banner">
-                                <img :src="`../../public/images/${card.movieimag}`"/>
+                                <img :src="`/img/${card.movieimag}`"/>
                                 <div class="overlay">
                                     <div class="text" id="overFlowLinks">
                                         <p >Watch the Movie pal</p>
@@ -56,12 +56,12 @@
             </div>
             <div class="cell medium-12 large-6 small-12" id="video_dits_message">
                 <p>
-                    In the 1988 Tom Hanks film Big, a 12-year-old boy named Josh Baskin (David Moscow)
+                    In the 1988 Tom Hanks film Big, a 12-year-old boy named Josh Bas kin (David Moscow)
                     changes his life forever to impress an older girl. After being told that he’s too short for a
                     carnival ride, he enters a strange arcade machine and earnestly wishes to be “big.” The following
                     day,
                     Josh wakes up as a 30-year-old man (played by Hanks), whose initial confusion about the
-                    corporeal switch later gives way to comedic hijinks and wholesome reflection.
+                    corporeal switch later gives way to comedic hij inks and wholesome reflection.
                 </p>
             </div>
         </div>
@@ -95,9 +95,9 @@
                 'gettingcommentsandratings'
                 // ...
             ]),
-            filtertedmovies: function () {
+            filteredMovies: function () {
                 return this.gettingMovies.filter((movie) => {
-                        return movie.movieplot.match(this.search)
+                        return movie.moviename.toLowerCase().includes(this.search.toLowerCase());
                     }
                 )
             },
@@ -122,7 +122,7 @@
 
                 }
             },
-            booleandeterminant(one, two) {
+            booleanDeterminant(one, two) {
                 if (one === two) {
 
                     console.log("This two are very equal " + two + " " + one);

@@ -11,6 +11,7 @@
                 <br>
                 <p>Behold the cast :: {{moviecast}}</p>
                 <br>
+                <p>Currently at Season :: {{movieSeason}}</p>
                 <div id="comments_subscribe">
                     <p>Subscribe</p>
                     <div class="input-group">
@@ -20,8 +21,6 @@
                             <input type="submit" class="button" value="Submit" @click="subscribe">
                         </div>
                     </div>
-                    <router-link :to="{ name: 'Edit', params: { movie: this.movie } }" v-if="checkingtoken" tag="button"> Edit</router-link>
-                    <button @click="deletemovie" v-if="checkingtoken">Delete Movie</button>
                 </div>
             </div>
             <div class="grid-x grid-container grid-margin-x" id="moviedits">
@@ -34,9 +33,9 @@
                 <div class="cell medium-12 large-6 small-12" id="moviedits_comments_peoples">
                     <h6>Other peoples reviews</h6>
                     <div v-for="comment in gettingcommentsandratings" :key="comment.id">
-                        <div v-if="booleandeterminant(comment.id , movie.id)">
+                        <div v-if="booleanDeterminant(comment.id , movie.id)">
                             <li v-for="item in comment.comments" :key="item.id" style="list-style: none">
-                                <p>{{item.message}} sent one <span>{{item.time | date }}</span></p>
+                                <p>{{item.message}} sent on <span>{{item.time | date }}</span></p>
                             </li>
                             <div id="comments_input">
                                 <p> Give us your feedback </p>
@@ -44,19 +43,19 @@
                                     <span class="input-group-label"> </span>
                                     <input class="input-group-field" v-model="comments" placeholder="Place your comments" >
                                     <div class="input-group-button">
-                                        <input type="submit" class="button" value="Submit" v-on:click="addcomment">
+                                        <input type="submit" class="button" value="Submit" v-on:click="addComment">
                                     </div>
                                 </div>
                             </div>
-                            <p>Rating is :{{ratenum( comment.rate ,  comment.num  ) | truncate }} , you can rate below </p>
+                            <p>Rating is :{{rateNum( comment.rate ,  comment.num  ) | truncate }} , you can rate below </p>
                         </div>
                     </div>
                     <star-rating @rating-selected="getUserRating($event)" :rating="rating" :star-size="30"> </star-rating>
                 </div>
             </div>
-            <div class="grid-container" id="with_perms">
+            <div class="grid-container" id="with_perms" v-if="checkingToken">
                 <router-link :to="{ name: 'Edit', params: { movie: this.movie } }" class="button">Edit Movie</router-link>
-                <button @click="deletemovie" class="button" id="with_perms_delete">Delete Movie</button>
+                <button @click="deleteMovie" class="button" id="with_perms_delete">Delete Movie</button>
             </div>
 
         </div>
@@ -74,7 +73,6 @@
         name: "Movie",
         components : {
             CommentsAndRatings,
-
         },
         data() {
             return {
@@ -92,6 +90,7 @@
                 movieplot : ' ',
                 movieimagesres : ' ',
                 movieUrl:" ",
+                movieSeason:" ",
                 rate: ' ',
                 num:' ',
                 rating: 0,
@@ -104,7 +103,7 @@
                 'gettingcommentsandratings'
                 // ...
             ]),
-            checkingtoken()
+            checkingToken()
             {
                 if(this.currentuser !== ' ')
                 {
@@ -132,19 +131,20 @@
             this.movieplot = this.$route.params.movie.movieplot;
             this.movieimagesres = this.$route.params.movie.movieimag;
             this.movieUrl=this.$route.params.movie.url.replace("watch?v=", "embed/");
+            this.movieSeason= this.$route.params.movie.season;
         },
         methods :{
-            addcomment()
+            addComment()
             {
                console.log("The comment you have added " + this.comments);
                 this.$store.dispatch('addcomment',[this.movie.id,this.comments]);
             },
-            addrating()
+            addRating()
             {
                console.log("The rating you have added " + this.rating);
                 this.$store.dispatch('addrating',[this.movie.id,this.rating]);
             },
-            booleandeterminant(one , two) {
+            booleanDeterminant(one , two) {
                 if(one === two)
                 {
 
@@ -158,7 +158,7 @@
                     return false;
                 }
             },
-            deletemovie()
+            deleteMovie()
             {
                 this.$store.dispatch('deletemoviecommentsandratings',this.movie.id);
                 this.$router.push({
@@ -172,7 +172,7 @@
                 analytics.logEvent('subscribe',"subscribed");
                 this.$store.dispatch('addSubscriber',[this.movie.id, this.email]);
             },
-            editamovie()
+            editMovie()
             {
                 console.log("We want to edit the movie");
                 this.$router.push({
@@ -183,7 +183,7 @@
                     }
                 });
             },
-            ratenum : function ( num , numtwo)
+            rateNum : function ( num , numtwo)
             {
                 if(num !==0){
                     return (num/numtwo)

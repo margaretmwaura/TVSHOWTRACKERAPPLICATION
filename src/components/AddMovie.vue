@@ -3,7 +3,6 @@
         <div>
 
             <form v-on:submit.prevent="create" enctype="multipart/form-data">
-
                 <p> Add a new Movie to the list of movies</p>
                 <div class="grid-container">
                     <div class="grid-x grid-padding-x">
@@ -24,27 +23,27 @@
                     <div class="grid-x grid-padding-x">
                         <div class="cell medium-12 large-12 small-12">
                             <label>Movie URL
-                                <input type="text" v-model="movieurl">
+                                <input type="text" v-model="movieUrl">
                             </label>
                         </div>
                         <div class="cell medium-12 large-12 small-12">
                             <label>Movie Name
-                                <input type="text" v-model="moviename">
+                                <input type="text" v-model="movieName">
                             </label>
                         </div>
                         <div class="cell medium-12 large-12 small-12">
                             <label>Movie Cast
-                                <input type="text" v-model="moviecast">
+                                <input type="text" v-model="movieCast">
                             </label>
                         </div>
                         <div class="cell medium-12 large-12 small-12">
                             <label>Movie genre
-                                <input type="text" v-model="moviegenre">
+                                <input type="text" v-model="movieGenre">
                             </label>
                         </div>
                         <div class="cell medium-12 large-12 small-12">
                             <label>Movie Plot
-                                <input type="text" v-model="movieplot">
+                                <input type="text" v-model="moviePlot">
                             </label>
                         </div>
                         <div class="cell medium-12 large-12 small-12">
@@ -75,13 +74,13 @@
 
         data() {
             return {
-                moviename : " ",
-                moviecast : " ",
-                movieplot : " ",
-                moviegenre : " ",
-                movieimage : " ",
-                movieimagesres : " ",
-                movieurl:" ",
+                movieName : " ",
+                movieCast : " ",
+                moviePlot : " ",
+                movieGenre : " ",
+                movieImage : " ",
+                movieImagesRes : " ",
+                movieUrl:" ",
                 movieSeason:" ",
                 disabled : true
             }
@@ -94,9 +93,9 @@
         },
         methods: {
             create() {
-                console.log("The data i am passing : " + this.moviename + this.moviecast + this.movieplot + this.moviegenre);
+                console.log("The data i am passing : " + this.movieName + this.movieCast + this.moviePlot + this.movieGenre);
                 const fb = new FormData();
-                fb.append('image',this.movieimage);
+                fb.append('image',this.movieImage);
                 axios
                     .post('http://localhost:4000/addmovie',fb,
                         {
@@ -109,8 +108,8 @@
                         if(code === 200)
                         {
                             console.log("The response " + response.data);
-                            this.movieimagesres = response.data;
-                            console.log("This is the image name stored " + this.movieimagesres)
+                            this.movieImagesRes = response.data;
+                            console.log("This is the image name stored " + this.movieImagesRes);
                             this.disabled = false
                         }
                         else
@@ -125,17 +124,17 @@
             onFileSelected(event)
             {
                 console.log(event);
-                this.movieimage = event.target.files[0];
-                console.log(this.movieimage)
+                this.movieImage = event.target.files[0];
+                console.log(this.movieImage)
             },
             uploadMovie()
             {
                 const analytics = firebase.analytics();
                 analytics.logEvent('create',"Event creation");
 
-                if(this.moviename !== " " || this.moviegenre !== " " || this.moviecast !== " " || this.movieplot !== " " || this.movieimagesres !== " ")
+                if(this.movieName !== " " || this.movieGenre !== " " || this.movieCast !== " " || this.moviePlot !== " " || this.movieImagesRes !== " ")
                 {
-                    this.$store.dispatch('createmovie',[this.movieurl,this.moviename, this.moviegenre,this.moviecast,this.movieplot,this.movieimagesres,this.movieSeason]);
+                    this.$store.dispatch('createmovie',[this.movieUrl,this.movieName, this.movieGenre,this.movieCast,this.moviePlot,this.movieImagesRes,this.movieSeason]);
                     this.moviename = " ";
                     this.moviegenre = " ";
                     this.moviecast = " ";

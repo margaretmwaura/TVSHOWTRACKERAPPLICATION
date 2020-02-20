@@ -68,11 +68,17 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|svg|jpg|gif|mp3|mp4|jpeg)$/,
-                use: [
-                    'file-loader',
-                ],
+            test: /\.(png|svg|jpg|gif|webp|jpeg)$/,
+            use: {
+                loader: "file-loader",
+                options: {
+                    name: `[name].[ext]`,
+                    // Output into parent folder's directory
+                    outputPath: "./img",
+                }
+            }
             },
+
         ]
     },
 

@@ -38,15 +38,14 @@
 
                      <div id="direction">
 
-                             <p>Scroll down <span>
+                             <p>Scroll down<span>
                                   <i class="fas fa-arrow-right" style="color: white "> </i>
                              </span></p>
                      </div>
                  </div>
               </div>
     </div>
-<!--        <button v-if="checkingtoken" id="app_sanitycheck">You are Logged in</button>-->
-<!--        <button v-if="!checkingtoken" id="app_sanitychecknot">You are not Logged in</button>-->
+
     <router-view>
 
     </router-view>
@@ -223,9 +222,8 @@
                 }
             }
 
-            &_arrows
+            &_arrow
             {
-
                 #direction
                 {
                     float: right;
