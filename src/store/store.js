@@ -93,7 +93,7 @@ export default new Vuex.Store({
         getAllMoviesmut()
         {
             axios
-                .get('http://localhost:4000/allmovies')
+                .get('http://localhost:4000/all_movies')
                 .then(response => {
                     var code = response.status;
                     if(code === 200)

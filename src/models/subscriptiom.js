@@ -1,12 +1,12 @@
 module.exports = class subscriptiom
 {
 
-    constructor(id , subdetails) {
+    constructor(id , subscribers_details) {
         this.id = id;
-        this.subdetails = subdetails;
+        this.subscribers_details = subscribers_details;
     }
 
     display() {
-        console.log(this.id + this.subdetails);
+        console.log(this.id + this.subscribers_details);
     }
 };

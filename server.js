@@ -8,11 +8,11 @@ const express = require('express'),
 const user = require('./src/models/user');
 const movie = require('./src/models/movie');
 const comment = require('./src/models/comment');
-const comentnra = require('./src/models/moviecomenra');
-const subscripobject = require('./src/models/subscriptiom');
+const coments_and_ratings = require('./src/models/moviecomenra');
+const subscription_object = require('./src/models/subscriptiom');
 const subscription = require('./src/models/subscriptiondits');
 const webpush = require('web-push');
-let userfile = require('fs');
+let user_file = require('fs');
 const app = express();
 
 app.use(express.static('public'));
@@ -61,37 +61,37 @@ webpush.setVapidDetails('mailto:mwauramargaret1@gmail.com',publicVapidKey,privat
 
 app.listen(port, () => console.log('Hello world app listening on port ${port}!'));
 
-let fileread = userfile.readFileSync('./src/database/userdata.json');
-let allusers = JSON.parse(fileread);
+let file_read = user_file.readFileSync('./src/database/userdata.json');
+let all_users = JSON.parse(file_read);
 
-let filemovie = userfile.readFileSync('./src/database/moviedata.json');
-let allmovies = JSON.parse(filemovie);
+let file_movie = user_file.readFileSync('./src/database/moviedata.json');
+let all_movies = JSON.parse(file_movie);
 
-let filecommentsnra = userfile.readFileSync('./src/database/commentsandratings.json');
-let allcommentsnra = JSON.parse(filecommentsnra);
+let file_comments_n_ra = user_file.readFileSync('./src/database/commentsandratings.json');
+let all_comments_n_ra = JSON.parse(file_comments_n_ra);
 
-let filesubscrip = userfile.readFileSync('./src/database/subscribers.json');
-let allsubscrip= JSON.parse(filesubscrip);
+let file_subscribers = user_file.readFileSync('./src/database/subscribers.json');
+let all_subscribers= JSON.parse(file_subscribers);
 
-console.log("This are all the users " + allusers);
+console.log("This are all the users " + all_users);
 app.post('/signup', (req, res) =>
 {
-    const userdits = req.body;
-    let userfromnet = userdits[1];
-    console.log(userfromnet[0]);
-    console.log(userfromnet[1]);
-    console.log(userfromnet[2]);
+    const user_details = req.body;
+    let user_data = user_details[1];
+    console.log(user_data[0]);
+    console.log(user_data[1]);
+    console.log(user_data[2]);
 
-   let userob = new user(userfromnet[0] , userfromnet[1] , userfromnet[2]);
-   allusers.push(userob);
-   console.log("This is the created user : " + userob.display());
-    if(userob !== null)
+   let user_object = new user(user_data[0] , user_data[1] , user_data[2]);
+   all_users.push(user_object);
+   console.log("This is the created user : " + user_object.display());
+    if(user_object !== null)
     {
-             jwt.sign({userob},'secretkey' , (error,token)=>
+             jwt.sign({user_object},'secretkey' , (error,token)=>
              {
 
-                let userdata = JSON.stringify(allusers , null , 2);
-                userfile.writeFile('./src/database/userdata.json' , userdata , finished);
+                let userdata = JSON.stringify(all_users , null , 2);
+                user_file.writeFile('./src/database/userdata.json' , userdata , finished);
                 function finished(error)
                 {
                     if(error)
@@ -119,24 +119,24 @@ app.post('/signup', (req, res) =>
 
 app.post('/login', (req, res) =>
 {
-    const userdits = req.body;
-    let userfromnet = userdits[1];
-    console.log(userfromnet);
-    console.log(userfromnet[0]);
-    console.log(userfromnet[1]);
+    const user_details = req.body;
+    let user_data = user_details[1];
+    console.log(user_data);
+    console.log(user_data[0]);
+    console.log(user_data[1]);
 
     let flag = 0;
     let user = ' ';
-   // allusers.forEach( function (item)
+   // all_users.forEach( function (item)
 
-   for(let i = 0 ; i<allusers.length ; i++)
+   for(let i = 0 ; i<all_users.length ; i++)
     {
-        let storedemail = allusers[i].email.trim();
-        let email = userfromnet[0].trim();
-        console.log("Within the loop " + email + "and the comparing one " + storedemail);
-        if(storedemail === email)
+        let saved_email = all_users[i].email.trim();
+        let email = user_data[0].trim();
+        console.log("Within the loop " + email + "and the comparing one " + saved_email);
+        if(saved_email === email)
         {
-            user = allusers[i];
+            user = all_users[i];
             console.log("User exists");
             flag = 1;
             break;
@@ -184,21 +184,21 @@ app.post('/addmovie',upload.single('image'), (req, res) =>
     }
 
 });
-app.post('/moviedits',verifyToken, (req, res) =>
+app.post('/movie_details',verifyToken, (req, res) =>
 {
-    const moviedits = req.body;
-    let movied = moviedits[1];
-    console.log(movied[0]);
-    console.log(movied[1]);
-    console.log(movied[2]);
-    console.log(movied[3]);
-    console.log(movied[4]);
+    const movie_details = req.body;
+    let movie_instance = movie_details[1];
+    console.log(movie_instance[0]);
+    console.log(movie_instance[1]);
+    console.log(movie_instance[2]);
+    console.log(movie_instance[3]);
+    console.log(movie_instance[4]);
     //The fourth attribute I am retrieving it using the file name because it is an object from the uploading of image response
-    console.log(movied[5].file);
+    console.log(movie_instance[5].file);
     //generate id
     let id  = generate_unique_ids();
-    let newmovie = new movie(id,movied[0] , movied[1] , movied[2] , movied[3] ,movied[4], movied[5].file,movied[6]);
-    allmovies.push(newmovie);
+    let new_movie = new movie(id,movie_instance[0] , movie_instance[1] , movie_instance[2] , movie_instance[3] ,movie_instance[4], movie_instance[5].file,movie_instance[6]);
+    all_movies.push(new_movie);
 
     jwt.verify(req.token,'secretkey',(err,auth) =>
     {
@@ -209,8 +209,8 @@ app.post('/moviedits',verifyToken, (req, res) =>
             console.log("There was an error");
         }
         else {
-            let datastr = JSON.stringify(allmovies , null , 2);
-            userfile.writeFile('./src/database/moviedata.json' , datastr , finished);
+            let data_string = JSON.stringify(all_movies , null , 2);
+            user_file.writeFile('./src/database/movie_instanceata.json' , data_string , finished);
             function finished(error)
             {
                 if(error)
@@ -222,10 +222,10 @@ app.post('/moviedits',verifyToken, (req, res) =>
                 {
                     // Since now a movie has been created create its comments object
                     let arr = [];
-                    let comenra = new comentnra(id , 0 ,0, arr);
-                    allcommentsnra.push(comenra);
-                    let datacomment = JSON.stringify(allcommentsnra , null , 2);
-                    userfile.writeFile('./src/database/commentsandratings.json' , datacomment , finished);
+                    let comments_and_ratings = new coments_and_ratings(id , 0 ,0, arr);
+                    all_comments_n_ra.push(comments_and_ratings);
+                    let datacomment = JSON.stringify(all_comments_n_ra , null , 2);
+                    user_file.writeFile('./src/database/commentsandratings.json' , datacomment , finished);
                     function finished(error) {
                         if (error) {
                             res.sendStatus(403);
@@ -235,11 +235,11 @@ app.post('/moviedits',verifyToken, (req, res) =>
                     }
 
                     // Creating a subscription object now that a movie has been added
-                    let subarr = [];
-                    let subscrobject = new subscripobject(id , subarr);
-                    allsubscrip.push(subscrobject);
-                    let datasubscrp = JSON.stringify(allsubscrip , null , 2);
-                    userfile.writeFile('./src/database/subscribers.json' , datasubscrp , finished);
+                    let subscription_array = [];
+                    let subscription_object = new subscription_object(id , subscription_array);
+                    all_subscribers.push(subscription_object);
+                    let datasubscrp = JSON.stringify(all_subscribers , null , 2);
+                    user_file.writeFile('./src/database/subscribers.json' , datasubscrp , finished);
                     function finished(error) {
                         if (error) {
                             res.sendStatus(403);
@@ -256,7 +256,7 @@ app.post('/moviedits',verifyToken, (req, res) =>
                         }
                     });
                     console.log("There was no error encountereed we are all set");
-                    var myJson = JSON.stringify(allmovies);
+                    var myJson = JSON.stringify(all_movies);
                     res.status(200).json({param : myJson});
 
                 }
@@ -275,12 +275,12 @@ app.post('/subscribe' , (req,res) => {
     webpush.sendNotification(subscription,payload).catch(error => console.error());
 });
 
-app.get('/allmovies',(req,res) =>
+app.get('/all_movies',(req,res) =>
 {
-    if(allmovies !== null)
+    if(all_movies !== null)
     {
-        console.log(allmovies);
-        var myJson = JSON.stringify(allmovies);
+        console.log(all_movies);
+        var myJson = JSON.stringify(all_movies);
         res.status(200).json({param : myJson});
     }
     else {
@@ -290,30 +290,30 @@ app.get('/allmovies',(req,res) =>
 
 app.post('/comments' , (req,res) =>
 {
-    const moviecomments = req.body;
-    let commenting = moviecomments[1];
+    const movie_comments = req.body;
+    let commenting = movie_comments[1];
 
     //This details should get me the id and the comment respectively
     console.log(commenting[0]);
     console.log(commenting[1]);
 
-    let movieid = commenting[0];
-    let commentnew = new comment(commenting[1]);
+    let movie_id = commenting[0];
+    let new_comment = new comment(commenting[1]);
 
-    // allcommentsnra.push(commentnew);
+    // all_comments_n_ra.push(new_comment);
 
     // For this to work get the commentsnra object in the file that matches the id of the comment
     // edit it and then write to file
 
-    for(let i = 0 ; i<allcommentsnra.length ; i++)
+    for(let i = 0 ; i<all_comments_n_ra.length ; i++)
     {
-        let comnrdetails  = allcommentsnra[i].id;
-        console.log("Within the loop " + movieid + " and the comparing one " + comnrdetails);
-        if(comnrdetails === movieid)
+        let comments_and_rating_details  = all_comments_n_ra[i].id;
+        console.log("Within the loop " + movie_id + " and the comparing one " + comments_and_rating_details);
+        if(comments_and_rating_details === movie_id)
         {
-            allcommentsnra[i].comments.push(commentnew);
-            let usercomments = JSON.stringify(allcommentsnra , null , 2);
-            userfile.writeFile('./src/database/commentsandratings.json' , usercomments , finished);
+            all_comments_n_ra[i].comments.push(new_comment);
+            let user_comments = JSON.stringify(all_comments_n_ra , null , 2);
+            user_file.writeFile('./src/database/commentsandratings.json' , user_comments , finished);
             function finished(error)
             {
                 if(error)
@@ -322,7 +322,7 @@ app.post('/comments' , (req,res) =>
                 }
                 else
                 {
-                    var myJson = JSON.stringify(allcommentsnra);
+                    var myJson = JSON.stringify(all_comments_n_ra);
                     res.status(200).json({param : myJson});
                     console.log("There was no error encountereed we are all set")
                 }
@@ -344,24 +344,24 @@ app.post('/comments' , (req,res) =>
 
 app.post('/ratings' , (req,res) =>
 {
-    const movieratings = req.body;
-    let ratings = movieratings[1];
+    const movie_ratings = req.body;
+    let ratings = movie_ratings[1];
 
     //This details should get me the id and the rating to put
     console.log(ratings[0]);
     console.log(ratings[1]);
 
-    let movieid = ratings[0];
-    for(let i = 0 ; i<allcommentsnra.length ; i++)
+    let movie_id = ratings[0];
+    for(let i = 0 ; i<all_comments_n_ra.length ; i++)
     {
-        let comnrdetails  = allcommentsnra[i].id;
-        console.log("Within the loop " + movieid + " and the comparing one " + comnrdetails);
-        if(comnrdetails === movieid)
+        let comments_and_rating_details  = all_comments_n_ra[i].id;
+        console.log("Within the loop " + movie_id + " and the comparing one " + comments_and_rating_details);
+        if(comments_and_rating_details === movie_id)
         {
-            allcommentsnra[i].rate += parseInt(ratings[1], 10);
-            allcommentsnra[i].num += 1;
-            let usercomments = JSON.stringify(allcommentsnra , null , 2);
-            userfile.writeFile('./src/database/commentsandratings.json' , usercomments , finished);
+            all_comments_n_ra[i].rate += parseInt(ratings[1], 10);
+            all_comments_n_ra[i].num += 1;
+            let user_comments = JSON.stringify(all_comments_n_ra , null , 2);
+            user_file.writeFile('./src/database/commentsandratings.json' , user_comments , finished);
             function finished(error)
             {
                 if(error)
@@ -370,7 +370,7 @@ app.post('/ratings' , (req,res) =>
                 }
                 else
                 {
-                    var myJson = JSON.stringify(allcommentsnra);
+                    var myJson = JSON.stringify(all_comments_n_ra);
                     res.status(200).json({param : myJson});
                     console.log("There was no error encountereed we are all set");
                 }
@@ -390,10 +390,10 @@ app.post('/ratings' , (req,res) =>
 
 app.get('/commentsandratings' , (req,res) =>
 {
-    if(allcommentsnra !== null)
+    if(all_comments_n_ra !== null)
     {
-        console.log(allcommentsnra);
-        var myJson = JSON.stringify(allcommentsnra);
+        console.log(all_comments_n_ra);
+        var myJson = JSON.stringify(all_comments_n_ra);
         res.status(200).json({param : myJson});
     }
     else {
@@ -403,24 +403,24 @@ app.get('/commentsandratings' , (req,res) =>
 
 app.post('/newsubsriber' ,(req,res) =>
 {
-    const subscriptiondits = req.body;
-    let newsubriber = subscriptiondits[1];
+    const subscription_details = req.body;
+    let new_subscriber = subscription_details[1];
 
     //This details should get me the id and the rating to put
-    console.log(newsubriber[0]);
-    console.log(newsubriber[1]);
+    console.log(new_subscriber[0]);
+    console.log(new_subscriber[1]);
 
-    let subid = newsubriber[0];
-    for(let i = 0 ; i<allsubscrip.length ; i++)
+    let subid = new_subscriber[0];
+    for(let i = 0 ; i<all_subscribers.length ; i++)
     {
-        let subscriptionid  = allsubscrip[i].id;
-        console.log("Within the loop " + subid + " and the comparing one " + subscriptionid);
-        if(subscriptionid === subid)
+        let subscription_id  = all_subscribers[i].id;
+        console.log("Within the loop " + subid + " and the comparing one " + subscription_id);
+        if(subscription_id === subid)
         {
-            let newsubscrib = new subscription(newsubriber[1]);
-            allsubscrip[i].subdetails.push(newsubscrib);
-            let subscribersleg = JSON.stringify(allsubscrip , null , 2);
-            userfile.writeFile('./src/database/subscribers.json' , subscribersleg , finished);
+            let new_subscription = new subscription(new_subscriber[1]);
+            all_subscribers[i].subscribers_details.push(new_subscription);
+            let subscribers_string = JSON.stringify(all_subscribers , null , 2);
+            user_file.writeFile('./src/database/subscribers.json' , subscribers_string , finished);
             function finished(error)
             {
                 if(error)
@@ -447,59 +447,59 @@ app.post('/newsubsriber' ,(req,res) =>
 
 app.delete('/deletemovie/:id',verifyToken,(req,res) => {
 
-    const movieiddits = req.params.id;
-    console.log("Data that has been sent " + movieiddits);
+    const movie_params = req.params.id;
+    console.log("Data that has been sent " + movie_params);
 
     jwt.verify(req.token,'secretkey',(err,auth) => {
-        for (let i = 0; i < allmovies.length; i++) {
-            let current_movieid = allmovies[i].id;
-            console.log("The real ids " + movieiddits + " " + " the comparing ud " + current_movieid);
-            if (movieiddits === current_movieid) {
-                const index = allmovies.indexOf(allmovies[i]);
+        for (let i = 0; i < all_movies.length; i++) {
+            let current_movie_id = all_movies[i].id;
+            console.log("The real ids " + movie_params + " " + " the comparing ud " + current_movie_id);
+            if (movie_params === current_movie_id) {
+                const index = all_movies.indexOf(all_movies[i]);
                 console.log("This is the index of the movie to be deleted " + index);
                 console.log("A match has been found for the movies");
-                console.log("The real ids " + movieiddits + " " + " the comparing ud " + current_movieid);
+                console.log("The real ids " + movie_params + " " + " the comparing ud " + current_movie_id);
                 if (index > -1) {
-                    allmovies.splice(index, 1);
-                    for (let i = 0; i < allcommentsnra.length; i++) {
-                        let current_mommentraid = allcommentsnra[i].id;
-                        console.log("The real ids " + movieiddits + " " + " the comparing ud " + current_mommentraid);
-                        if (movieiddits === current_mommentraid) {
+                    all_movies.splice(index, 1);
+                    for (let i = 0; i < all_comments_n_ra.length; i++) {
+                        let current_mommentraid = all_comments_n_ra[i].id;
+                        console.log("The real ids " + movie_params + " " + " the comparing ud " + current_mommentraid);
+                        if (movie_params === current_mommentraid) {
                             console.log("A match has been found for the comments");
-                            const index = allcommentsnra.indexOf(allcommentsnra[i]);
+                            const index = all_comments_n_ra.indexOf(all_comments_n_ra[i]);
                             console.log("This is the index of the movie to be deleted " + index);
                             if (index > -1) {
-                                allcommentsnra.splice(index, 1);
+                                all_comments_n_ra.splice(index, 1);
 
-                                for (let i = 0; i < allsubscrip.length; i++) {
-                                    let current_subscription = allsubscrip[i].id;
-                                    console.log("The real ids " + movieiddits + " " + " the comparing ud " + current_subscription);
-                                    if (movieiddits === current_subscription) {
-                                        const index = allsubscrip.indexOf(allsubscrip[i]);
+                                for (let i = 0; i < all_subscribers.length; i++) {
+                                    let current_subscription = all_subscribers[i].id;
+                                    console.log("The real ids " + movie_params + " " + " the comparing ud " + current_subscription);
+                                    if (movie_params === current_subscription) {
+                                        const index = all_subscribers.indexOf(all_subscribers[i]);
                                         console.log("A match has been found for the subscribers");
                                         if (index > -1) {
-                                            allsubscrip.splice(index, 1);
+                                            all_subscribers.splice(index, 1);
                                             // Rewritting the file
                                             //There are two files
-                                            let datastr = JSON.stringify(allmovies, null, 2);
-                                            userfile.writeFile('./src/database/moviedata.json', datastr, finished);
+                                            let data_string = JSON.stringify(all_movies, null, 2);
+                                            user_file.writeFile('./src/database/movie_instanceata.json', data_string, finished);
 
                                             function finished(error) {
                                                 if (!error) {
                                                     console.log("Movie removed from the file");
-                                                    let usercomments = JSON.stringify(allcommentsnra, null, 2);
-                                                    userfile.writeFile('./src/database/commentsandratings.json', usercomments, finished);
+                                                    let user_comments = JSON.stringify(all_comments_n_ra, null, 2);
+                                                    user_file.writeFile('./src/database/commentsandratings.json', user_comments, finished);
 
                                                     function finished(error) {
                                                         if (!error) {
-                                                            let datasub = JSON.stringify(allsubscrip, null, 2);
-                                                            userfile.writeFile('./src/database/subscribers.json', datasub, finished);
+                                                            let datasub = JSON.stringify(all_subscribers, null, 2);
+                                                            user_file.writeFile('./src/database/subscribers.json', datasub, finished);
 
                                                             function finished(error) {
                                                                 if (!error) {
                                                                     console.log("Comments has been removed from the file");
-                                                                    let mymovies = JSON.stringify(allmovies);
-                                                                    let mycomments = JSON.stringify(allcommentsnra);
+                                                                    let mymovies = JSON.stringify(all_movies);
+                                                                    let mycomments = JSON.stringify(all_comments_n_ra);
                                                                     res.status(200).json({
                                                                         commnra: mycomments,
                                                                         movies: mymovies
@@ -528,35 +528,35 @@ app.delete('/deletemovie/:id',verifyToken,(req,res) => {
 });
 
 
-app.post('/movieditsedit', verifyToken,(req, res) =>
+app.post('/movie_detailsedit', verifyToken,(req, res) =>
 {
-    const moviecomments = req.body;
-    let moviedits = moviecomments[1];
-    console.log("These are the parameters we have gotten " + moviedits);
-    let id = moviedits[0];
-    let url = moviedits[1];
-    let name = moviedits[2];
-    let genre = moviedits[3];
-    let cast = moviedits[4];
-    let plot = moviedits[5];
-    let mimage = moviedits[6].file;
-    let season = moviedits[7];
+    const movie_comments = req.body;
+    let movie_details = movie_comments[1];
+    console.log("These are the parameters we have gotten " + movie_details);
+    let id = movie_details[0];
+    let url = movie_details[1];
+    let name = movie_details[2];
+    let genre = movie_details[3];
+    let cast = movie_details[4];
+    let plot = movie_details[5];
+    let mimage = movie_details[6].file;
+    let season = movie_details[7];
     console.log("The updating dits " + id + " " + name + " " + genre + " " + cast + " " + plot + " " + mimage);
 
     jwt.verify(req.token,'secretkey',(err,auth) => {
-        for (let i = 0; i < allmovies.length; i++) {
-            let readmovieid = allmovies[i].id;
-            console.log("The real ids " + readmovieid + " " + " the comparing ud " + id);
-            if (readmovieid === id) {
-                allmovies[i].url = url;
-                allmovies[i].movie_name = name;
-                allmovies[i].movie_genre = genre;
-                allmovies[i].movie_cast = cast;
-                allmovies[i].movie_plot = plot;
-                allmovies[i].movie_image = mimage;
-                allmovies[i].season = season;
-                let datastr = JSON.stringify(allmovies, null, 2);
-                userfile.writeFile('./src/database/moviedata.json', datastr, finished);
+        for (let i = 0; i < all_movies.length; i++) {
+            let readmovie_id = all_movies[i].id;
+            console.log("The real ids " + readmovie_id + " " + " the comparing ud " + id);
+            if (readmovie_id === id) {
+                all_movies[i].url = url;
+                all_movies[i].movie_name = name;
+                all_movies[i].movie_genre = genre;
+                all_movies[i].movie_cast = cast;
+                all_movies[i].movie_plot = plot;
+                all_movies[i].movie_image = mimage;
+                all_movies[i].season = season;
+                let data_string = JSON.stringify(all_movies, null, 2);
+                user_file.writeFile('./src/database/movie_instanceata.json', data_string, finished);
 
                 function finished(error) {
                     if (error) {
@@ -564,11 +564,11 @@ app.post('/movieditsedit', verifyToken,(req, res) =>
                         console.log("There was an error , no data added to the file");
                     } else {
                         console.log("Comparing time");
-                        for (let i = 0; i < allsubscrip.length; i++) {
-                            let compid = allsubscrip[i].id;
+                        for (let i = 0; i < all_subscribers.length; i++) {
+                            let compid = all_subscribers[i].id;
                             if (id === compid) {
                                 console.log("Matching ids " + id + " " + compid);
-                                let emails = allsubscrip[i].subdetails;
+                                let emails = all_subscribers[i].subscribers_details;
                                 for (let i = 0; i < emails.length; i++) {
                                     let emailname = emails[i].email;
                                     var mailOptions = {
@@ -591,7 +591,7 @@ app.post('/movieditsedit', verifyToken,(req, res) =>
 
                         }
 
-                        let mymovies = JSON.stringify(allmovies);
+                        let mymovies = JSON.stringify(all_movies);
                         res.status(200).json({movies: mymovies});
                     }
                 }
@@ -605,27 +605,27 @@ app.get('/usersubscriptions/:email' , (req,res) =>
 {
     let email =  req.params.email;
     console.log("The email " + email);
-    let subscriptiondits = [];
-    for (let i = 0; i < allsubscrip.length; i++)
+    let subscription_details = [];
+    for (let i = 0; i < all_subscribers.length; i++)
     {
-        let id = allsubscrip[i].id;
+        let id = all_subscribers[i].id;
         console.log("The id of the first subscrition " + id);
-        let subdetails = allsubscrip[i].subdetails;
-        console.log("To iterate " + subdetails);
-        for(let j=0 ; j<subdetails.length ; j++)
+        let subscribers_details = all_subscribers[i].subscribers_details;
+        console.log("To iterate " + subscribers_details);
+        for(let j=0 ; j<subscribers_details.length ; j++)
         {
-            console.log("The email of a subscription object " + subdetails[j].email);
-            let compareone = email.trim();
-            let comparetwo = subdetails[j].email.trim();
-                if(compareone === comparetwo)
+            console.log("The email of a subscription object " + subscribers_details[j].email);
+            let compare_one = email.trim();
+            let compare_two = subscribers_details[j].email.trim();
+                if(compare_one === compare_two)
                 {
                     console.log("The emailas are similar");
-                    for(let k = 0 ; k<allmovies.length ; k++)
+                    for(let k = 0 ; k<all_movies.length ; k++)
                     {
-                        if(id === allmovies[k].id)
+                        if(id === all_movies[k].id)
                         {
-                            subscriptiondits.push(allmovies[k].moviename);
-                            console.log("The id pushed is " + allmovies[k].moviename);
+                            subscription_details.push(all_movies[k].movie_name);
+                            console.log("The id pushed is " + all_movies[k].movie_name);
                         }
                     }
 
@@ -634,7 +634,7 @@ app.get('/usersubscriptions/:email' , (req,res) =>
 
 
     }
-    var myJson = JSON.stringify(subscriptiondits);
+    var myJson = JSON.stringify(subscription_details);
     res.status(200).json({param: myJson});
 });
 function verifyToken(req,res,next)
