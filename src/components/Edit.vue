@@ -155,11 +155,11 @@
         created() {
             console.log("Edit has been called");
             this.movie = this.$route.params.movie;
-            this.movieName = this.$route.params.movie.moviename;
-            this.movieCast = this.$route.params.movie.moviecast;
-            this.moviePlot = this.$route.params.movie.movieplot;
-            this.movieGenre = this.$route.params.movie.moviegenre;
-            this.movieImage = this.$route.params.movie.movieimage;
+            this.movieName = this.$route.params.movie.movie_name;
+            this.movieCast = this.$route.params.movie.movie_cast;
+            this.moviePlot = this.$route.params.movie.movie_plot;
+            this.movieGenre = this.$route.params.movie.movie_genre;
+            this.movieImage = this.$route.params.movie.movie_image;
             this.movieId = this.$route.params.movie.id;
             this.movieUrl=this.$route.params.movie.url;
 

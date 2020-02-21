@@ -68,7 +68,7 @@ export default new Vuex.Store({
         create_movie_mut(url,movie_name, movie_genre,movie_cast,movie_plot,movie_image,movieSeason)
         {
             axios
-                .post('http://localhost:4000/moviedits',[url,movie_name, movie_genre,movie_cast,movie_plot,movie_image,movieSeason],{
+                .post('http://localhost:4000/movie_details',[url,movie_name, movie_genre,movie_cast,movie_plot,movie_image,movieSeason],{
                     headers: {
                         'Authorization': 'Bearer ' + this.state.token
                     }
@@ -221,7 +221,7 @@ export default new Vuex.Store({
         edit_movie_mut(movieid,url,movie_name, movie_genre,movie_cast,movie_plot,movie_image,movieSeason)
         {
             axios
-                .post('http://localhost:4000/movieditsedit' , [movieid,url,movie_name, movie_genre,movie_cast,movie_plot,movie_image,movieSeason],{
+                .post('http://localhost:4000/movie_details_edit' , [movieid,url,movie_name, movie_genre,movie_cast,movie_plot,movie_image,movieSeason],{
                     headers: {
                         'Authorization': 'Bearer ' + this.state.token
                     }

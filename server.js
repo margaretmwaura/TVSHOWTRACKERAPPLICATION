@@ -9,8 +9,8 @@ const user = require('./src/models/user');
 const movie = require('./src/models/movie');
 const comment = require('./src/models/comment');
 const coments_and_ratings = require('./src/models/moviecomenra');
-const subscription_object = require('./src/models/subscriptiom');
-const subscription = require('./src/models/subscriptiondits');
+const subscription_object = require('./src/models/subscription_object');
+const subscription = require('./src/models/subscription_details');
 const webpush = require('web-push');
 let user_file = require('fs');
 const app = express();
@@ -236,8 +236,8 @@ app.post('/movie_details',verifyToken, (req, res) =>
 
                     // Creating a subscription object now that a movie has been added
                     let subscription_array = [];
-                    let subscription_object = new subscription_object(id , subscription_array);
-                    all_subscribers.push(subscription_object);
+                    let subscription_object_instance = new subscription_object(id , subscription_array);
+                    all_subscribers.push(subscription_object_instance);
                     let datasubscrp = JSON.stringify(all_subscribers , null , 2);
                     user_file.writeFile('./src/database/subscribers.json' , datasubscrp , finished);
                     function finished(error) {
@@ -392,7 +392,6 @@ app.get('/commentsandratings' , (req,res) =>
 {
     if(all_comments_n_ra !== null)
     {
-        console.log(all_comments_n_ra);
         var myJson = JSON.stringify(all_comments_n_ra);
         res.status(200).json({param : myJson});
     }
@@ -528,7 +527,7 @@ app.delete('/deletemovie/:id',verifyToken,(req,res) => {
 });
 
 
-app.post('/movie_detailsedit', verifyToken,(req, res) =>
+app.post('/movie_details_edit', verifyToken,(req, res) =>
 {
     const movie_comments = req.body;
     let movie_details = movie_comments[1];
