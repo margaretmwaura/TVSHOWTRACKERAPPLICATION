@@ -5,17 +5,7 @@ import Login from "../../src/components/Login";
 import MovieList from "../../src/components/MovieList";
 import Modal from "../../src/components/Modal";
 import { mount } from '@vue/test-utils'
-
 import { shallowMount} from '@vue/test-utils'
-describe('Signup.vue', () => {
-    it(`testing text`, () => {
-        // Extend the component to get the constructor, which we can then initialize directly.
-        const wrapper = mount(Singup);
-        expect(wrapper.find('button').text()).to.equal("Create account")
-    });
-});
-
-
 
 describe('Login.vue', () => {
     it(`testing text`, () => {

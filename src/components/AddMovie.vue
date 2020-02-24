@@ -142,7 +142,7 @@
                 }
                 else
                 {
-                    this.informwithnotification("Error" , "The details entered are insufficient");
+                    this.infor_with_notification("Error" , "The details entered are insufficient");
                 }
 
             },

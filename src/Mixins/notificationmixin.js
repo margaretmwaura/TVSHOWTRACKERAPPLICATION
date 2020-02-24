@@ -2,7 +2,7 @@ export default {
 
     methods : {
 
-        informwithnotification(title , message)
+        infor_with_notification(title , message)
         {
             console.log("The mixin function has arrived");
             this.$notify({

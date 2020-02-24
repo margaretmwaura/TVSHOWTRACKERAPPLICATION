@@ -52,7 +52,7 @@
 
                 if(this.firstname === " " || this.email === " " || this.password === " ")
                 {
-                    this.informwithnotification("Error" , "Enter all details");
+                    this.infor_with_notification("Error" , "Enter all details");
                 }
                 else
                 {
