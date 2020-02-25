@@ -120,10 +120,10 @@ app.post('/signup', (req, res) =>
 app.post('/login', (req, res) =>
 {
     const user_details = req.body;
-    let user_data = user_details[1];
-    console.log(user_data);
-    console.log(user_data[0]);
-    console.log(user_data[1]);
+    let user_data = req.body;
+    console.log("This is what I have received " , user_data);
+    console.log(user_data.email);
+    console.log(user_data.password);
 
     let flag = 0;
     let user = ' ';
@@ -132,7 +132,7 @@ app.post('/login', (req, res) =>
    for(let i = 0 ; i<all_users.length ; i++)
     {
         let saved_email = all_users[i].email.trim();
-        let email = user_data[0].trim();
+        let email = user_data.email.trim();
         console.log("Within the loop " + email + "and the comparing one " + saved_email);
         if(saved_email === email)
         {

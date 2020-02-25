@@ -40,6 +40,7 @@
     "css-loader": "^3.4.0",
     "file-loader": "^5.0.2",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^25.1.0",
     "karma": "^4.4.1",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^3.1.0",

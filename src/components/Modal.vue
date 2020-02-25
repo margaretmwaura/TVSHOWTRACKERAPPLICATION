@@ -34,7 +34,6 @@
                 isOpen: false,
                 email: ' ',
                 subscriptions : [],
-
             };
         },
         props: {

@@ -73,7 +73,8 @@
 
     import Movie from "./Movie.vue";
     import CommentsAndRatings from "./CommentsAndRatings";
-    import {mapGetters, mapState} from 'vuex'
+    import {mapGetters, mapState} from 'vuex';
+    import axios from "axios";
 
     export default {
         components: {
@@ -138,12 +139,24 @@
             }
         },
         mounted() {
-            this.$store.dispatch('getAllMovies');
-            this.$store.dispatch('getAllCommentsAndRatings');
-            window.addEventListener('resize', this.onResize)
-        },
-        created() {
+            axios.get('http://localhost:4000/all_movies')
+              .then(response => {
+                  var code = response.status;
+                  if(code === 200)
+                  {
+                      let passed = JSON.parse(response.data.param);
 
+                      this.$store.state.movies = [];
+                      this.$store.state.movies = passed;
+                      console.log("The movies from store" + this.$store.state.movies);
+                  }
+              })
+              .catch(error =>
+              {
+
+              });
+            // this.$store.dispatch('getAllCommentsAndRatings');
+            window.addEventListener('resize', this.onResize)
         },
 
         beforeDestroy() {
