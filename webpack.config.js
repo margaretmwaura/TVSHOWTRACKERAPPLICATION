@@ -103,5 +103,6 @@ module.exports = {
             minSize: 30000,
             name: true
         }
-    }
+    },
+    node: { fs: 'empty' }
 };

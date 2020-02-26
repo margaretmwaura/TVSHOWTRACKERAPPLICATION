@@ -68,36 +68,36 @@ localVue.use(Vuex)
 
 
 // This will work if there is state
-describe('Login.vue', () => {
-    it('button click triggers submit event another',(done)=> {
-        const wrapper = shallowMount(Login,{store})
-        wrapper.setData({
-                form:
-                    {
-                        email: "mag@gmail.com",
-                        password: "Aswift07"
-                    }
-            }
-        );
-        wrapper.vm.create().then(()=>
-        {
-            console.log("Logging form test " , wrapper.vm.form.password);
-            expect(wrapper.vm.form.password).to.equal(" ")
-            done()
-        })
-})
-
-});
+// describe('Login.vue', () => {
+//     it('button click triggers submit event another',(done)=> {
+//         const wrapper = shallowMount(Login,{store})
+//         wrapper.setData({
+//                 form:
+//                     {
+//                         email: "mag@gmail.com",
+//                         password: "Aswift07"
+//                     }
+//             }
+//         );
+//         wrapper.vm.create().then(()=>
+//         {
+//             console.log("Logging form test " , wrapper.vm.form.password);
+//             expect(wrapper.vm.form.password).to.equal(" ")
+//             done()
+//         })
+// })
+//
+// });
 
 describe('MovieList.vue', () => {
 
     it('Movies are displayed', done =>
     {
-        const comp = new vue(MovieList).$mount();
+        const wrapper = shallowMount(MovieList,{store})
 
-        comp.$nextTick(() => {
-            console.log(store.state.movies);
-            // expect(store.state.movies).to.equal(5)
+        wrapper.vm.$nextTick(() => {
+            console.log("Test log " , store.state.movies);
+            expect(store.state.movies).to.equal(5)
             done();
         });
     })

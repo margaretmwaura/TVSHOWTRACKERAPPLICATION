@@ -43,7 +43,7 @@
                                     <span class="input-group-label"> </span>
                                     <input class="input-group-field" v-model="comments" placeholder="Place your comments" >
                                     <div class="input-group-button">
-                                        <input type="submit" class="button" value="Submit" v-on:click="addComment">
+                                        <input type="submit" class="button" value="Submit" v-on:click="getColor">
                                     </div>
                                 </div>
                             </div>
@@ -69,6 +69,7 @@
     import CommentsAndRatings from "./CommentsAndRatings.vue";
     import notificationmixin from "../Mixins/notificationmixin";
     import firebase from "firebase";
+    var ColorThief = require('color-thief');
     export default {
         name: "Movie",
         components : {
@@ -88,6 +89,7 @@
                 movie_cast : ' ',
                 movie_genre : ' ',
                 movie_plot : ' ',
+                movie_image: ' ',
                 movie_images_res : ' ',
                 movieUrl:" ",
                 movieSeason:" ",
@@ -121,7 +123,6 @@
         },
         created() {
             console.log("Info has been called");
-
             this.movie = this.$route.params.movie;
             console.log("Details recevied " + this.movie);
             this.id = this.$route.params.movie.id;
@@ -132,6 +133,12 @@
             this.movie_images_res = this.$route.params.movie.movie_image;
             this.movieUrl=this.$route.params.movie.url.replace("watch?v=", "embed/");
             this.movieSeason= this.$route.params.movie.season;
+
+
+        },
+        mounted() {
+            console.log("Getting all the comments");
+            this.$store.dispatch('getAllCommentsAndRatings');
         },
         methods :{
             addComment()
@@ -196,6 +203,18 @@
                 this.rating = $event;
                 console.log("This is the rating selected by the use " + this.rating);
                 this.$store.dispatch('add_rating',[this.movie.id,this.rating]);
+            },
+            getColor()
+            {
+                alert(this.movie_images_res);
+                let colorThief = new ColorThief();
+
+                let imgPath = './img/' + this.movie_images_res;
+                let img = new Image();
+                img.src = imgPath;
+                let color = colorThief.getColor(img);
+                console.log("This is the color " + color);
+
             }
         },
         mixins: [notificationmixin],

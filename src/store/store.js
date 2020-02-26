@@ -165,6 +165,7 @@ export default new Vuex.Store({
                 })
                 .catch(error =>
                 {
+                    console.log("There was an error in getting the comments and the ratings")
                 })
         },
         delete_movie_comments_and_ratings_mut({context},id)

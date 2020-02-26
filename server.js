@@ -392,10 +392,13 @@ app.get('/commentsandratings' , (req,res) =>
 {
     if(all_comments_n_ra !== null)
     {
+        console.log(all_comments_n_ra)
         var myJson = JSON.stringify(all_comments_n_ra);
+        console.log("The json to send " + myJson);
         res.status(200).json({param : myJson});
     }
     else {
+        console.log("There was an error getting the comments and the ratings ");
         res.status(403).json({error:"there was an error"})
     }
 });
