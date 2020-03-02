@@ -47,11 +47,14 @@
                   .then(response =>{
                       console.log("This is the token " + response.data.token);
                       this.$store.state.token = response.data.token;
-
                       this.form.email = " ";
                       this.form.password = " ";
                       console.log("The value after the function " + this.form.email + " " + this.form.password + " Gal did it");
-                  });
+                      this.infor_with_notification("Success" , "You have successfully logged in");
+                  }).catch(e =>{
+                        this.infor_with_notification("Error" , "You have not logged in");
+                    })
+
 
             }
         },

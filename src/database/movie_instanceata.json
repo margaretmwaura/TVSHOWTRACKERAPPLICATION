@@ -11,5 +11,57 @@
     "red": 189,
     "green": 184,
     "blue": 199
+  },
+  {
+    "id": "k7a359xwugd4uq17xbh",
+    "url": " https://www.youtube.com/watch?v=9awX2lSGpso",
+    "movie_name": " Friends with Better Lives",
+    "movie_genre": " Comedy",
+    "movie_cast": " Zoe-Lister Jones, Kevin Connoly",
+    "movie_plot": " Friends with Better Lives is an American sitcom television series created by Dana Klein. The multi-camera series premiered on CBS on March 31, 2014, as part of the 2013–14 American television season.[1]  On May 10, 2014, CBS canceled the series after only five episodes had aired.[2",
+    "movie_image": "2020-03-02T06:30:37.733Zfwbl.jpg",
+    "season": " 3",
+    "red": 41,
+    "green": 44,
+    "blue": 54
+  },
+  {
+    "id": "k7a38ywj8yl3l2bllcu",
+    "url": "  https://www.youtube.com/watch?v=oUJoUVou4-U",
+    "movie_name": " How to get away with Murder",
+    "movie_genre": " Legal Thriller Fiction",
+    "movie_cast": " Annalise Keating , Jack Falahee",
+    "movie_plot": " How to Get Away with Murder is an American legal thriller television series that premiered on ABC on September 25, 2014.[1] The series was created by Peter Nowalk, and produced by Shonda Rhimes and ABC Studios. The series airs on ABC as part of a night of programming, all under Rhimes's Shondaland production company.[2]",
+    "movie_image": "2020-03-02T06:33:44.694Zhowtogetaway.jpg",
+    "season": " 4",
+    "red": 13,
+    "green": 12,
+    "blue": 12
+  },
+  {
+    "id": "k7a3b42r3muxvopx56n",
+    "url": " https://www.youtube.com/watch?v=djVLKxWcDsc",
+    "movie_name": " Mom",
+    "movie_genre": " Comedy",
+    "movie_cast": " Alison Jane",
+    "movie_plot": " Mom is an American sitcom television series that premiered on CBS on September 23, 2013. The series was created by Chuck Lorre, Eddie Gorodetsky, and Gemma Baker, while the former two also serve as executive producers on the series, along with Nick Bakay. [1]",
+    "movie_image": "2020-03-02T06:35:19.039Zmom.jpg",
+    "season": " 3",
+    "red": 23,
+    "green": 189,
+    "blue": 245
+  },
+  {
+    "id": "k7a3ctwt929fsb888me",
+    "url": " https://www.youtube.com/watch?v=qYHp-5h1y5o",
+    "movie_name": " Silicon Valley",
+    "movie_genre": " Fiction-Thriller",
+    "movie_cast": " Mike Jugde , Dave , Samuel",
+    "movie_plot": " Silicon Valley is an American comedy television series created by Mike Judge, John Altschuler and Dave Krinsky, that premiered on April 6, 2014, on HBO.[1] The series focuses on five young men who found a startup company in Silicon Valley.[2][3",
+    "movie_image": "2020-03-02T06:36:53.608Zsiliconvalley.jpg",
+    "season": "3 ",
+    "red": 60,
+    "green": 63,
+    "blue": 51
   }
 ]
