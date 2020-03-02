@@ -1,18 +1,18 @@
 <template>
     <div class="grid-frame">
-        <div class="grid-container">
-            <div class="grid-container" id="top">
+        <div class="grid-container" id="begin">
+            <div class="grid-container" id="begin_top">
                 {{movie_name}} - {{movie_genre}}
                 <br>
             </div>
-            <div class="grid-container" id="moviedits_n">
+            <div class="grid-container" id="begin_movie">
                 {{movie_plot}}
                 <br>
                 <br>
                 <p>Behold the cast :: {{movie_cast}}</p>
                 <br>
                 <p>Currently at Season :: {{movieSeason}}</p>
-                <div id="comments_subscribe">
+                <div id="begin_movie_comments_subscribe">
                     <p>Subscribe</p>
                     <div class="input-group">
                         <span class="input-group-label"> </span>
@@ -23,21 +23,21 @@
                     </div>
                 </div>
             </div>
-            <div class="grid-x grid-container grid-margin-x" id="moviedits">
-                <div class="cell medium-12 large-6 small-12" id="moviedits_im">
+            <div class="grid-x grid-container grid-margin-x" id="begin_movie_movie_dits">
+                <div class="cell medium-12 large-6 small-12" id="begin_movie_movie_dits_video">
                     <iframe width="100%" height="515" :src="movieUrl"
                             frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
                     </iframe>
                 </div>
-                <div class="cell medium-12 large-6 small-12" id="moviedits_comments_peoples">
+                <div class="cell medium-12 large-6 small-12" id="begin_movie_movie_dits_comments">
                     <h6>Other peoples reviews</h6>
                     <div v-for="comment in getting_comments_and_ratings" :key="comment.id">
                         <div v-if="booleanDeterminant(comment.id , movie.id)">
                             <li v-for="item in comment.comments" :key="item.id" style="list-style: none">
                                 <p>{{item.message}} sent on <span>{{item.time | date }}</span></p>
                             </li>
-                            <div id="comments_input">
+                            <div id="begin_movie_movie_dits_comments_input">
                                 <p> Give us your feedback </p>
                                 <div class="input-group">
                                     <span class="input-group-label"> </span>
@@ -57,10 +57,7 @@
                 <router-link :to="{ name: 'Edit', params: { movie: this.movie } }" class="button">Edit Movie</router-link>
                 <button @click="deleteMovie" class="button" id="with_perms_delete">Delete Movie</button>
             </div>
-
         </div>
-
-
     </div>
 </template>
 
@@ -218,22 +215,19 @@
     @import "../../foundation/css/app.css";
     @import "../../foundation/css/foundation.css";
 
-    #top
-    {
-        padding-top: 5%;
-        letter-spacing: 0.4em;
-        font-weight: bold;
-        font-size: 18px;
-        text-align: center;
-    }
-    #moviedits
+    #begin
     {
 
-       &_im
-       {
+        &_top
+        {
+            padding-top: 5%;
+            letter-spacing: 0.4em;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+        }
 
-       }
-        &_n
+        &_movie
         {
             padding-top: 3%;
             text-align: center;
@@ -241,75 +235,59 @@
             font-weight: bold;
             font-size: 16px;
 
-            star-rating{
+            &_movie_dits
+            {
+                &_video
+                {
 
+                }
+
+                &_comments
+                {
+                    p{
+                        font-family:Serif;
+                        font-weight: bold;
+                        font-size: 16px;
+                    }
+                    h6
+                    {
+
+                        padding-top: 3%;
+                        font-weight: bold;
+                        font-size: 18px;
+                    }
+
+                    span{
+                        font-weight: normal;
+                        font-size: 12px;
+                        font-style: italic;
+                    }
+                    &_input
+                    {
+                        text-align: center;
+                        padding-top: 3%;
+                        padding-left: 3%;
+
+                        p{
+                            font-weight: bold;
+                        }
+
+                        button
+                        {
+                            margin-top: 3%;
+                            color: white;
+                            background-color: indianred;
+                            padding: 10px;
+                        }
+
+                        #indigo{
+                            color : indigo;
+                        }
+                    }
+                }
             }
         }
 
-        &_comments
-        {
-            &_peoples
-            {
-                p{
-                    font-family:Serif;
-                    font-weight: bold;
-                    font-size: 16px;
-                }
-                h6
-                {
-
-                    padding-top: 3%;
-                    font-weight: bold;
-                    font-size: 18px;
-                }
-
-                span{
-                    font-weight: normal;
-                    font-size: 12px;
-                    font-style: italic;
-                }
-            }
-
-            &_input
-            {
-                text-align: center;
-                padding-top: 3%;
-                padding-left: 3%;
-
-                p{
-                    font-weight: bold;
-                }
-
-                button
-                {
-                    margin-top: 3%;
-                    color: white;
-                    background-color: indianred;
-                    padding: 10px;
-                }
-
-                #indigo{
-                    color : indigo;
-                }
-            }
-            &_subscribe
-            {
-                padding-left: 3%;
-                text-align: center;
-                p{
-                    font-weight: bold;
-                }
-
-                button
-                {
-                    margin-top: 3%;
-                    color: white;
-                    background-color: indianred;
-                    padding: 10px;
-                }
-
-            }
-        }
     }
 
     #with_perms
