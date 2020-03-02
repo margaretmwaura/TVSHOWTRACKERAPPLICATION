@@ -69,7 +69,7 @@
     import axios from "axios";
     import firebase from "firebase";
     import notificationmixin from "../Mixins/notificationmixin";
-
+    let ColorThief = require('color-thief');
     export default {
 
         data() {
@@ -92,6 +92,7 @@
             ]),
         },
         methods: {
+
             create() {
                 console.log("The data i am passing : " + this.movieName + this.movieCast + this.moviePlot + this.movieGenre);
                 const fb = new FormData();
@@ -110,7 +111,7 @@
                             console.log("The response " + response.data);
                             this.movieImagesRes = response.data;
                             console.log("This is the image name stored " + this.movieImagesRes);
-                            this.disabled = false
+                            this.disabled = false;
                         }
                         else
                         {

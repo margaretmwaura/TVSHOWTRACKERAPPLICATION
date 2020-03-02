@@ -1,6 +1,6 @@
 module.exports = class movie
 {
-    constructor(id,url,movie_name, movie_genre,movie_cast,movie_plot,movie_image,season) {
+    constructor(id,url,movie_name, movie_genre,movie_cast,movie_plot,movie_image,season,red,green,blue) {
         this.id = id;
         this.url= url;
         this.movie_name = movie_name;
@@ -9,7 +9,9 @@ module.exports = class movie
         this.movie_plot = movie_plot;
         this.movie_image = movie_image;
         this.season = season;
-
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
     }
 
     display() {

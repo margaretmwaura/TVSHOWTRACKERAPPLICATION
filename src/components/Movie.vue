@@ -130,14 +130,12 @@
             this.movie_cast = this.$route.params.movie.movie_cast;
             this.movie_genre = this.$route.params.movie.movie_genre;
             this.movie_plot = this.$route.params.movie.movie_plot;
-            this.movie_images_res = this.$route.params.movie.movie_image;
             this.movieUrl=this.$route.params.movie.url.replace("watch?v=", "embed/");
             this.movieSeason= this.$route.params.movie.season;
 
-
+            this.init();
         },
         mounted() {
-            console.log("Getting all the comments");
             this.$store.dispatch('getAllCommentsAndRatings');
         },
         methods :{
@@ -204,17 +202,12 @@
                 console.log("This is the rating selected by the use " + this.rating);
                 this.$store.dispatch('add_rating',[this.movie.id,this.rating]);
             },
-            getColor()
+            getColor(movie)
             {
-                alert(this.movie_images_res);
-                let colorThief = new ColorThief();
-
-                let imgPath = './img/' + this.movie_images_res;
-                let img = new Image();
-                img.src = imgPath;
-                let color = colorThief.getColor(img);
-                console.log("This is the color " + color);
-
+                let one = this.movie.color[0];
+                let two = this.movie.color[1];
+                let three = this.movie.color[2];
+                console.log("These are the rgb values " + one + " " + two + " " + three );
             }
         },
         mixins: [notificationmixin],

@@ -14,6 +14,8 @@ const subscription = require('./src/models/subscription_details');
 const webpush = require('web-push');
 let user_file = require('fs');
 const app = express();
+var ColorThief = require('color-thief'),
+    colorThief     = new ColorThief();
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -64,7 +66,7 @@ app.listen(port, () => console.log('Hello world app listening on port ${port}!')
 let file_read = user_file.readFileSync('./src/database/userdata.json');
 let all_users = JSON.parse(file_read);
 
-let file_movie = user_file.readFileSync('./src/database/moviedata.json');
+let file_movie = user_file.readFileSync('./src/database/movie_instanceata.json');
 let all_movies = JSON.parse(file_movie);
 
 let file_comments_n_ra = user_file.readFileSync('./src/database/commentsandratings.json');
@@ -176,7 +178,7 @@ app.post('/addmovie',upload.single('image'), (req, res) =>
     const movie = req.body;
     if(movie != null)
     {
-       res.status(200).json({file : req.file.filename});
+        res.status(200).json({file : req.file.filename});
     }
     else
     {
@@ -196,9 +198,18 @@ app.post('/movie_details',verifyToken, (req, res) =>
     //The fourth attribute I am retrieving it using the file name because it is an object from the uploading of image response
     console.log(movie_instance[5].file);
     //generate id
+
+    console.log("The image " + movie_instance[5].file);
+    let imgPath = './public/images/' + movie_instance[5].file;
+    console.log("This is the image path " + imgPath);
+    let image = user_file.readFileSync(imgPath);
+    let rgb = colorThief.getColor(image);
+    console.log("This is the most dorminat color " + rgb[0] + " " + rgb[1] + " " + rgb[2]);
+
     let id  = generate_unique_ids();
-    let new_movie = new movie(id,movie_instance[0] , movie_instance[1] , movie_instance[2] , movie_instance[3] ,movie_instance[4], movie_instance[5].file,movie_instance[6]);
+    let new_movie = new movie(id,movie_instance[0] , movie_instance[1] , movie_instance[2] , movie_instance[3] ,movie_instance[4], movie_instance[5].file,movie_instance[6],rgb[0],rgb[1],rgb[2]);
     all_movies.push(new_movie);
+
 
     jwt.verify(req.token,'secretkey',(err,auth) =>
     {

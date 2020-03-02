@@ -18,7 +18,7 @@
         </div>
         <ul :style="this.gridStyle" class="card-list">
             <li v-for="(card, index) in filteredMovies" class="card-item">
-                <div class="grid-x grid-container" v-on:click="moveToFullInfo(card)">
+                <div class="grid-x grid-container" v-on:click="moveToFullInfo(card)" >
                     <div class="cell medium-1 large-1 small-0">
 
                     </div>
@@ -26,14 +26,16 @@
                     <div class="cell medium-12 large-10 small-12">
                         <div class="grid-y" id="content">
                             <div class="cell medium-2 large-2 small-2 " id="content_title">
-                                <p>{{card.movie_name}} - {{card.movie_genre}}</p>
+                                <p>{{card.movie_name}} - {{card.movie_genre}} </p>
                             </div>
+<!--                            ${card.red},${card.green}),${card.blue}-->
                             <div class="cell medium-10 large-10 small-10 " id="content_banner">
                                 <img :src="`/img/${card.movie_image}`"/>
-                                <div class="overlay">
+                                <div class="overlay" v-bind:style="{'backgroundColor' : `rgb(${card.red},${card.green},${card.blue})`}">
                                     <div class="text" id="overFlowLinks">
                                         <p >Watch the Movie pal</p>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -73,8 +75,9 @@
 
     import Movie from "./Movie.vue";
     import CommentsAndRatings from "./CommentsAndRatings";
+    var ColorThief = require('color-thief');
     import {mapGetters, mapState} from 'vuex';
-   import axios from 'axios';
+    import axios from 'axios';
     export default {
         components: {
             Movie,
@@ -85,7 +88,8 @@
                 search: '',
                 cards: [1, 2, 3, 4],
                 numberOfColumns: 3,
-                img:''
+                img:'',
+                color : "45,33,33"
             }
         },
         computed: {
@@ -131,10 +135,12 @@
                     }
                 });
             },
-            getImgUrl(image) {
-                var images = require.context('../../public/images', false, /\.jpg$/);
-                console.log("Image is " + images);
-                return images('./' + image)
+            getColor(movie)
+            {
+                let one = movie.red;
+                let two = movie.green;
+                let three = movie.blue;
+                console.log("These are the rgb values " + one + " " + two + " " + three );
             }
         },
         mounted() {
@@ -153,7 +159,6 @@
               });
             window.addEventListener('resize', this.onResize)
         },
-
         beforeDestroy() {
             window.addEventListener('resize', this.onResize)
         },
@@ -225,7 +230,7 @@
                 width: 100%;
                 opacity: 0;
                 transition: .5s ease;
-                background-color: #FFF0F5;
+                /*background-color: #FFF0F5;*/
             }
 
             .text {
